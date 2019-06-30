@@ -1,0 +1,135 @@
+.about-me{
+    position: relative;
+}
+
+
+.about-me__container{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.about-me__content{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    @include phones{
+        flex-direction: column;
+    }
+
+}
+
+.about-me__left_col{
+    width:45%;
+    margin-right:180px;
+    @include tablets{
+        margin-right:100px;
+    }
+    @include phones{
+        width:90%;
+        margin-right:0;
+        margin-bottom:30px;
+    }
+}
+
+.avatar{
+    width:170px;
+    height:170px;
+    margin-bottom:60px;
+    border-radius:50%;
+    overflow: hidden;
+    @include phones{
+        width:110px;
+        height:110px;
+        margin:0 auto 10px;
+    }
+}
+
+
+
+.my_data{
+    width:100%;
+    font-weight:600;
+}
+
+.my_data__item:not(:last-child){
+    margin-bottom:25px;
+    @include phones{
+        margin-bottom: 5px;
+    }
+
+}
+
+.key{
+    
+    width:50%;
+    display: inline-block;
+    vertical-align: top;
+    color:$text-white-opacity;
+}
+
+.value{
+    width:50%;
+    display: inline-block;
+}
+
+
+.about-me__right_col{
+    width:55%;
+    color: $text-white-opacity;
+    @include phones{
+        width:90%;
+    }
+}
+
+
+.hello{
+    margin-bottom:30px;
+    @include phones{
+         margin-bottom:5px;
+    }
+}
+
+.about-me__right_col span{
+    display: block;
+    color: $text-white;
+    margin-bottom:40px;
+    font-size: 36px;
+    font-weight: 700;
+    @include tablets{
+        font-size: 30px;
+    }
+    @include phones{
+        margin-bottom:5px;
+        font-size: 24px;
+    }
+}
+
+.about-me__text{
+   margin-bottom:100px;
+   @include tablets{
+       margin-bottom:50px;
+   }
+    @include phones{
+        margin-bottom:20px;
+    }
+}
+
+.about-me__ps{
+    position: relative;
+    font-weight: 400;
+    font-style: italic;
+    &::before{
+        content: '*';
+        font-size: 48px;
+        font-style: italic;
+        position:absolute;
+        color:rgba(red, .1);
+        line-height: 0.63;
+        left:-50px;
+        
+    }
+}

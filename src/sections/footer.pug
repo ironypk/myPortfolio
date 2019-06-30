@@ -1,0 +1,21 @@
+section.footer.fullscreen-section
+    .container.footer__container
+        .footer__left_col
+            .footer__date &copy 2019
+            .footer__author
+                .author__name Бульба Константин
+                .author__text Личный сайт веб-разработчика
+        .footer__right_col
+                nav.nav.nav_footer
+                    +test('nav', ['Главная', 'Обо мне', 'Навыки', 'Работы', 'Отзывы', 'Связаться'])
+                .footer_under_nav
+                    .footer__social
+                        p.footer__social_text Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool
+                        ul.social__list.footer__social_list
+                            each social in ['insta', 'vk', 'github']
+                                li.social__item.footer__social_item
+                                    a(class=`social__link social__link_${social} href="#"`)
+                                        +icon(`${social}`,`social__pic social__pic_${social} social__footer_pic`)
+                    .footer__ps
+                        p.ps__text Всегда пишите код так, будто сопровождать его будет склонный к насилию психопат, который знает где вы живете
+                        .ps__author Martin Golding

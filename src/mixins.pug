@@ -5,3 +5,38 @@ mixin icon(name, className)
 
 mixin image(path, className)
   img(src=require(`images/${path}`) class=className)
+
+
+mixin test (className, items)
+  ul(class=`${className}__list`)
+    each item in items
+      li(class=`${className}__item`)
+        a(class=`${className}__link` href='#')= item
+
+
+mixin circle(name, percent)
+  li.graphic__item #{name}
+    svg(class="percentage" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" version="1.1")
+      defs
+        linearGradient(id="linear" x1="0%" y1="0%" x2="100%" y2="0%")
+          stop(offset="0%"   stop-color="#003dea")
+          stop(offset="100%" stop-color="#0089f2")
+      circle(cx="50" cy="50" r="40" class="circle circle_under")
+      circle(cx="50" cy="50" r="40" class="circle circle_above" style=`animation-delay: -${percent}s`)
+
+
+
+mixin mainSlider(className, items, activeItem)
+  ul(class=`${className}__main_list`) 
+    each item, ndx in items
+      li(class=`${className}__main_item` + ( (ndx === activeItem) ? ` ${className}__main_item--active` : '' ))
+          img(class=`${className}__main_pic` src=require(`images/${item}`))
+
+mixin sliderControl(className, items, activeItem)
+  div(class=`${className}__content`)
+    ul(class=`${className}__list`)
+      each item, ndx in items
+        li(class=`${className}__item` + ( (ndx === activeItem) ? ` ${className}__item--active` : '' ) )
+          img(class=`${className}__pic` src=require(`images/${item}`))
+
+

@@ -4,12 +4,45 @@ include ./mixins.pug
 html(lang="en")
   head
     meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, shink-to-fit=no")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title Portfolio | main page
   body
     .wrapper
       .maincontent
-        +image('content/user.jpg', 'user-pic')
-        +icon('link', 'link-class')
-        .icon-bg
+        .section-wrapper.first-wrapper
+          section.main.fullscreen-section
+            .container.main__container
+              include ./sections/header
+
+              .main__author
+                span.main__description Личный сайт<br>веб разработчика
+                .main__my_name Константин<br>Бульба
+              
+              span.scroll Скролл
+          section.about-me.fullscreen-section
+            .container.about-me__container
+              include ./sections/about-me
+        section.skills.fullscreen-section
+          .container.skills__container
+            include ./sections/skills
+        section.myworks.fullscreen-section
+          .container.myworks__container
+            include ./sections/myworks
+        .section-wrapper.third-wrapper
+          section.rewiews.fullscreen-section
+            .container.rewiews__container
+              include ./sections/rewiews
+          section.contacts.fullscreen-section
+            .container.contacts__container
+              include ./sections/contacts
+        include ./sections/footer
+
+
+
+            
+            
+
+
+
+
