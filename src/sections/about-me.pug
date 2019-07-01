@@ -13,20 +13,20 @@
             value:'25 сентября 1992'
         }
     ]
-
-.about-me__content
-    .about-me__left_col
-        .avatar
-            +image('content/user.jpg', 'avatar__pic')
-        ul.my_data
+section.about-me.fullscreen-section
+    .container.about-me__container
+        .about-me__hero
+            .about-me__avatar
+                +image('content/user.jpg', 'about-me__pic')
+            ul.about-me__data
             each item in myData
-                li.my_data__item
-                    .key= item.key
-                    .value= item.value
-    .about-me__right_col
-       .hello Привет,меня зовут
-       
-       span Бульба Константин
-
-       p.about-me__text Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
-       p.about-me__ps Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+                li.about-me__item
+                    .about-me__key= item.key
+                    .about-me__value= item.value
+        .about-me__content
+            .about-me__welcome Привет,меня зовут
+            .about-me__name Бульба Константин
+            .about-me__text
+                p Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
+            .about-me__ps
+                p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!

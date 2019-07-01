@@ -1,0 +1,20 @@
+.form__wrapper
+    form.form
+        .form__row_above
+            label.form__label.form__label_name
+                .form__label_title Введите ваше имя
+                .form__input_wrapper.form__input_wrapper-name
+                    input(class="form__input form__input_name" name="name" type="text" required placeholder="Ковальчук Дмитрий")
+                .error
+            label.form__label.form__label_email
+                .form__label_title Введите ваш email
+                .form__input_wrapper.form__input_wrapper-email
+                    input(class="form__input form__input_email" name="email" type="email" required placeholder="loftschool@study.com")
+                .error
+        .form__row_under
+            label.form__label.form__label_email
+                .form__label_title Сообщение к письму
+                .form__input_wrapper.form__input_wrapper-textarea
+                    textarea(class="form__input form__input_textarea" name="textarea" placeholder="Требуется ваша помощь в создании сайта.Интересуют сроки и цена вопроса")
+                .error
+        button.button.form__button ОТПРАВИТЬ

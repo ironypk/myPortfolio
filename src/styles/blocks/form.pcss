@@ -1,0 +1,175 @@
+.form {
+  max-width: 960px;
+}
+
+.form__label {
+  width: 100%;
+}
+.form__label:not(:last-child) {
+  margin-right: 50px;
+}
+
+.form__label_title {
+  font-size: 16px;
+  font-weight: 600;
+  color: $text-white-opacity;
+  padding-left: 50px;
+  @include phones {
+    font-size: 14px;
+  }
+}
+
+.form__row_above {
+  display: flex;
+  margin-bottom: 40px;
+  @include phones {
+    flex-direction: column;
+  }
+  .form__label {
+    width: calc(100% / 2);
+    @include phones {
+      width: 100%;
+    }
+  }
+}
+
+.form__row_under {
+  margin-bottom: 60px;
+  @include tablets {
+    margin-bottom: 30px;
+  }
+}
+
+.form__input_wrapper {
+    position: relative;
+  border-bottom: 2px solid $text-white;
+  &:focus-within{
+      border-color:$blue;
+  }
+  &::before {
+    position: absolute;
+    content: "";
+    width: 26px;
+    height: 30px;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+  }
+}
+
+/* .form__input_wrapper:focus-within::before{
+    background: svg-load(
+        fill=$blue
+      )
+      center / contain no-repeat;   
+} */
+
+.form__input {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 20px 0 20px 50px;
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  color: $text-white;
+  &::placeholder {
+    color: $text-white;
+  }
+
+  @include phones {
+    font-size: 14px;
+  }
+}
+
+.form__input_wrapper-name {
+  @include phones {
+    margin-bottom: 35px;
+  }
+}
+
+.form__input_wrapper-name {
+  &::before {
+    background: svg-load(
+        "user.svg",
+        fill=$text-white-opacity,
+        width=100%,
+        height=100%
+      )
+      center / contain no-repeat;
+  }
+  &:focus-within::before{
+        background: svg-load(
+        "user.svg",
+        fill=$blue,
+        width=100%,
+        height=100%
+      )
+      center / contain no-repeat;
+  }
+}
+
+.form__input_wrapper-email {
+  &::before {
+    background: svg-load(
+        "envelope.svg",
+        fill=$text-white-opacity,
+        width=100%,
+        height=100%
+      )
+      center / contain no-repeat;
+  }
+    &:focus-within::before{
+        background: svg-load(
+        "envelope.svg",
+        fill=$blue,
+        width=100%,
+        height=100%
+      )
+      center / contain no-repeat;
+  }
+}
+
+.form__input_wrapper-textarea {
+  &::before {
+    transform: translate(0, -100%);
+    background: svg-load(
+        "message.svg",
+        fill=$text-white-opacity,
+        width=100%,
+        height=100%
+      )
+      center / contain no-repeat;
+  }
+     &:focus-within::before{
+        background: svg-load(
+        "message.svg",
+        fill=$blue,
+        width=100%,
+        height=100%
+      )
+      center / contain no-repeat;
+  } 
+}
+
+.form__input_textarea {
+  resize: none;
+  padding-right: 0;
+  line-height: 2;
+  @include phones {
+    line-height: 1.7;
+  }
+}
+
+.form__button {
+  display: block;
+  color: $text-white;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 30px 120px;
+  border: none;
+  border-radius: 60px;
+  background: linear-gradient(to right, #0056ed, #0089f2);
+  @include tablets {
+    margin: 0 auto;
+  }
+}

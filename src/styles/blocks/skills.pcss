@@ -17,16 +17,11 @@
     @include tablets{
       top:auto;
       left:30%;
-      width: 300px;
       height: 650px;
-      background-position-x: center;
-      background-position-y: center;
       transform: rotate(90deg);
       bottom: -300px;
     }
     @include phones{
-      display: none;
-      width: 300px;
       height: 400px;
       bottom: -150px;
     }
@@ -34,6 +29,8 @@
 }
 
 .skills__container {
+  padding-top:140px;
+  padding-bottom:140px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -47,13 +44,12 @@
   margin-bottom: 100px;
   @include tablets{
     text-align: center;
-    margin-bottom: 60px;
     width:70%;
   }
   @include phones{
+    margin-bottom: 60px;
     width:85%;
     text-align: left;
-    margin-bottom: 15px;
   }
 }
 
@@ -61,12 +57,8 @@
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 60px;
-   @include tablets{
-    margin-bottom: 30px;
-  }
   @include phones{
-    font-size: 20px;
-    margin-bottom: 10px;
+    margin-bottom:30px;
   }
 }
 
@@ -74,12 +66,9 @@
   line-height: 1.88;
   font-weight: 600;
   color: $text-black-opacity;
-  @include phones{
-    line-height: 1.5;
-  }
 }
 
-.circle_wrapper {
+.skills__graphic{
   margin: 0 0 0 auto;
   @include tablets{
     margin:0;
@@ -88,61 +77,89 @@
   }
 }
 
-.graphic__title {
+.skills__name {
   font-size: 24px;
   font-weight: 700;
   color: $text-black;
   margin-bottom: 40px;
   @include phones{
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-size: 18px;
   }
 }
 
-.graphic__list {
+.skills__frontend{
+  margin-bottom: 50px;
+}
+
+.skills__list {
   display: grid;
-  grid-template-columns:repeat(4, 130px);
+  grid-template-columns:repeat(4, 150px);
   grid-template-rows: auto;
   grid-column-gap:40px;
   justify-content: center;
   @include tablets{
-    grid-template-columns:repeat(4, 130px);
+    grid-template-columns:repeat(4, 150px);
     grid-template-rows: auto;
     grid-column-gap:20px;
   }
   @include phones{
-    grid-template-columns:repeat(2, 12vmax);
+    grid-template-columns:repeat(2, 150px);
     grid-template-rows: auto auto;
-    grid-column-gap:5px;
-    margin-bottom:5px;
+    margin-bottom:30px;
   }
 }
 
-.graphic__item:not(:last-child) {
+.skills__item:not(:last-child) {
   margin-right: 50px;
-  @include tablets{
-    margin-right: 0;
-  }
 }
 
-.graphic__item {
+.skills__item {
   position: relative;
-  width: 130px;
-  height: 130px;
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding:0 20px;
   text-align: center;
   color: $text-black-opacity;
-  font-size: 18px;
   font-weight: 700;
-  @include tablets{
-    width:12vmax;
-    height:12vmax;
-    font-size: 16px;
-  }
-  @include phones{
-    font-size: 10px;
-  }
+}
+
+
+.skills__percentage{
+    position:absolute;
+    display:inline-block;
+    transform:rotate(-180deg);
+}
+
+.skills__circle{
+    fill: transparent;
+    stroke-width:10px;
+    stroke:#eaeaea;
+}
+
+.skills__circle_above{
+    stroke-width:15px;
+    stroke:url(#linear);
+    stroke-dasharray:276;
+    stroke-dashoffset:276; 
+    animation: fill 100s linear infinite;
+    animation-play-state:paused;
+}
+
+.skills__circle_above[style="animation-delay: -100s"]{
+    animation: initial;
+    stroke-dashoffset:0;
+}
+
+@keyframes fill{
+    from{
+        stroke-dashoffset:301;
+    }
+
+    to{
+        stroke-dashoffset:0;
+    }
 }

@@ -1,13 +1,9 @@
 header.header
-    a.mylogo(href="#") КН
-    nav.nav.nav_header
-        +test('nav', ['Главная', 'Обо мне', 'Навыки', 'Работы', 'Отзывы', 'Связаться'])
-    ul.social__list
-        each social in ['insta', 'vk', 'github']
-            li.social__item
-                a(class=`social__link social__link_${social} href="#"`)
-                    +icon(`${social}`,`social__pic social__pic_${social}`)
-    
+    include logo
+    include menu
+    +menu('header')
+    include socials  
+    +socials('header')  
     a.hamburger-menu-link(href="#")
         .hamburger-menu-link__bars
 

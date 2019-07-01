@@ -3,11 +3,13 @@
 }
 
 .myworks__container {
+  padding-top:150px;
+  padding-bottom:150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   @include phones {
-    padding: 0;
+   padding:100px 0;
   }
 }
 
@@ -17,116 +19,7 @@
   margin-bottom: 50px;
   @include phones {
     font-size: 24px;
-    margin-bottom: 20px;
     text-align: center;
   }
 }
 
-.myworks__content {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  @include tablets {
-    display: block;
-  }
-}
-
-.myworks_col {
-  flex-grow: 1;
-}
-
-.myworks__left_col {
-  width:52%;
-  margin-right: 100px;
-  @include tablets {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
-}
-
-.myworks__right_col {
-  flex: 1;
-  @include tablets {
-    width: auto;
-    text-align: center;
-  }
-  @include phones {
-    text-align: left;
-    padding: 0 30px;
-  }
-}
-
-.myworks-right_col__list {
-  display: flex;
-  color: $text-black-opacity;
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 50px;
-  @include tablets {
-    justify-content: center;
-  }
-  @include phones {
-    margin-bottom: 10px;
-    justify-content: flex-start;
-    text-align: left;
-  }
-}
-
-.myworks-right_col__item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 83px;
-  height: 45px;
-  border-radius: 22.5px;
-  background-color: rgba(#7aa0c5, 0.1);
-}
-
-.myworks-right_col__item:not(:last-child) {
-  margin-right: 15px;
-}
-
-.myworks-right_col__title {
-  font-size: 30px;
-  font-weight: 700;
-  margin-bottom: 40px;
-  padding-right: 20px;
-  @include phones {
-    font-size: 24px;
-    margin-bottom: 10px;
-    line-height: 1.25;
-  }
-}
-
-.myworks-right_col__text {
-  color: $text-black-opacity;
-  font-weight: 600;
-  line-height: 1.88;
-  margin-bottom: 45px;
-  @include phones {
-    line-height: 1.6;
-    margin-bottom: 10px;
-  }
-}
-
-.loftschool_link {
-  position: relative;
-  font-size: 18px;
-  font-weight: 700;
-  color: #4b6fd7;
-  margin-left: 30px;
-
-  &:before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    left: -15px;
-    content: "";
-    width: 30px;
-    height: 15px;
-    background: svg-load("link.svg", fill=#4b6fd7, width=100%, height=100%) left
-      center no-repeat;
-  }
-}

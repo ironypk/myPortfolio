@@ -10,7 +10,15 @@
 	@include tablets {
 		display: inline-flex;
 	}
+
+	&:hover .hamburger-menu-link__bars,
+	&:hover .hamburger-menu-link__bars::before,
+	&:hover .hamburger-menu-link__bars::after {
+		background-color:$blue;
+	}
 }
+
+
 
 .hamburger-menu-link__bars {
 	&, &:before, &:after {
@@ -32,5 +40,4 @@
 	&:after {
 		bottom: 0;
 	}
-
 }

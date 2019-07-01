@@ -4,25 +4,18 @@
 
 
 .about-me__container{
+    padding-top:130px;
+    padding-bottom:130px;
     display: flex;
     position: relative;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.about-me__content{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    @include phones{
+      @include phones{
         flex-direction: column;
     }
 
 }
 
-.about-me__left_col{
+
+.about-me__hero{
     width:45%;
     margin-right:180px;
     @include tablets{
@@ -31,53 +24,59 @@
     @include phones{
         width:90%;
         margin-right:0;
-        margin-bottom:30px;
+        margin-bottom:50px;
     }
 }
 
-.avatar{
+.about-me__avatar{
+    margin: 0 0 0 auto;
     width:170px;
     height:170px;
     margin-bottom:60px;
     border-radius:50%;
     overflow: hidden;
     @include phones{
-        width:110px;
-        height:110px;
-        margin:0 auto 10px;
+
+        margin:0 auto 30px;
     }
+}
+
+.about-me__pic{
+    object-fit: cover;
 }
 
 
 
-.my_data{
+.about-me__data{
     width:100%;
     font-weight:600;
 }
 
-.my_data__item:not(:last-child){
+.about-me__item:not(:last-child){
     margin-bottom:25px;
     @include phones{
-        margin-bottom: 5px;
+        margin-bottom:15px;
     }
-
 }
 
-.key{
-    
+.about-me__item{
+    display: flex;
+}
+
+.about-me__key{
     width:50%;
     display: inline-block;
     vertical-align: top;
     color:$text-white-opacity;
 }
 
-.value{
+.about-me__value{
     width:50%;
     display: inline-block;
 }
 
 
-.about-me__right_col{
+.about-me__content{
     width:55%;
     color: $text-white-opacity;
     @include phones{
@@ -86,26 +85,16 @@
 }
 
 
-.hello{
+.about-me__welcome{
     margin-bottom:30px;
-    @include phones{
-         margin-bottom:5px;
-    }
 }
 
-.about-me__right_col span{
+.about-me__name{
     display: block;
     color: $text-white;
     margin-bottom:40px;
     font-size: 36px;
     font-weight: 700;
-    @include tablets{
-        font-size: 30px;
-    }
-    @include phones{
-        margin-bottom:5px;
-        font-size: 24px;
-    }
 }
 
 .about-me__text{
@@ -113,9 +102,6 @@
    @include tablets{
        margin-bottom:50px;
    }
-    @include phones{
-        margin-bottom:20px;
-    }
 }
 
 .about-me__ps{

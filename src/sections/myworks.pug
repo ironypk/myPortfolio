@@ -1,21 +1,4 @@
-h2.myworks__title Мои работы
-
-.myworks__content
-    .myworks__left_col.myworks_col
-        .slider
-            +mainSlider('slider', ['content/1.jpg', 'content/2.jpg', 'content/3.jpg', 'content/4.jpg', 'content/5.jpg'], 0)
-            +sliderControl('slider', ['content/1.jpg', 'content/2.jpg', 'content/3.jpg', 'content/4.jpg', 'content/5.jpg'], 0)
-            .slider__controls
-                a(class="slider__arrow arrow-left")
-                a(class="slider__arrow arrow-right")
-
-            
-    .myworks__right_col.myworks_col
-        ul.myworks-right_col__list
-            li.myworks-right_col__item HTML
-            li.myworks-right_col__item CSS
-            li.myworks-right_col__item Javascript
-        .myworks-right_col__title Cайт школы образования
-        p.myworks-right_col__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
-
-        a.loftschool_link(href="https://loftschool.com") Посмотреть сайт
+section.myworks.fullscreen-section
+    .container.myworks__container
+        h2.myworks__title Мои работы
+        include slider
