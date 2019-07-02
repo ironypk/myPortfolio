@@ -1,4 +1,4 @@
-.slider{
+.slider {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -7,19 +7,135 @@
   }
 }
 
-.slider_block {
+/* .slider_block {
   flex-grow: 1;
-}
+} */
 
 .slider__img {
-  width:52%;
+  min-width: 975px;
+  height: 550px;
   margin-right: 100px;
+  @include desktop{
+    min-width:630px;
+    height:350px;
+  }
   @include tablets {
     width: 100%;
     margin-right: 0;
     margin-bottom: 20px;
   }
 }
+
+.slider__img_content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+////MAIN SLIDER
+
+.slider__img_list {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slider__img_item {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.slider__img_item--active {
+  display: block;
+}
+
+.slider__img_pic {
+  width: 100%;
+  height: 100%;
+}
+
+///////SLIDER CONTROLS
+
+.slider__controls {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: calc(180 * 4)px;
+  padding:3px;
+  right: 0;
+  bottom: 30px;
+  overflow: hidden;
+  @include desktop{
+    width: calc(180 * 3)px;
+  }
+  @include phones {
+    display: none;
+  }
+}
+
+.slider__controls_list {
+  display: flex;
+}
+
+.slider__controls_item {
+  width: 180px;
+  height: 100px;
+  &:hover{
+    outline: solid 3px #f29400;
+    z-index: 2;
+  }
+}
+
+.slider__controls_pic {
+  width: 100%;
+  height: 100%;
+}
+
+.slider__controls_item--active {
+  outline: solid 3px #f29400;
+  z-index: 1;
+}
+
+.slider__buttons {
+  position: absolute;
+  right: -50px;
+  bottom: 33px;
+  background-color: #2d3c4e;
+  @include phones {
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.slider__button {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background: svg-load(
+      "arrow-down.svg",
+      fill=$text-white-opacity,
+      width=12px,
+      height=20px
+    )
+    center center no-repeat;
+  &:hover {
+    background: svg-load(
+        "arrow-down.svg",
+        fill=$text-white,
+        width=12px,
+        height=20px
+      )
+      center center no-repeat;
+    background-color: $blue;
+  }
+}
+
+.slider__next {
+  transform: rotate(180deg);
+}
+
+//slider description
 
 .slider__description {
   flex: 1;
@@ -33,7 +149,7 @@
   }
 }
 
-.slider__description_list{
+.slider__description_list {
   display: flex;
   color: $text-black-opacity;
   font-size: 15px;
@@ -89,6 +205,10 @@
   font-weight: 700;
   color: #4b6fd7;
   margin-left: 30px;
+  &:hover{
+     border-bottom:1px solid #4b6fd7;
+  }
+ 
 
   &:before {
     position: absolute;
@@ -102,102 +222,4 @@
     background: svg-load("link.svg", fill=#4b6fd7, width=100%, height=100%) left
       center no-repeat;
   }
-}
-
-
-
-.slider__img_content{
-    position: relative;
-    width:100%;
-    max-width:620px;
-}
-
-
-////MAIN SLIDER
-
-.slider__img_list{
-    width:100%;
-    height:100%;
-    max-height:350px;
-    overflow:hidden;
-}
-
-.slider__img_item{
-    width:100%;
-    height:100%;
-    display: none;
-}
-
-.slider__img_item--active{
-    display: block;
-}
-
-.slider__img_pic{
-    width:100%;
-    height:100%;
-}
-
-
-
-///////SLIDER CONTROLS
-
-.slider__controls{
-   position: absolute;
-    width:87%;
-    right:0;
-    bottom:30px;
-    overflow: hidden;
-    @include phones{
-        display: none;
-    }
-}
-
-.slider__controls_list{
-    height: 100px;
-    position: relative;
-    width: calc(33.3% * 5)px;
-}
-
-
-.slider__controls_item{
-    position:relative;
-    display: inline-block;
-    width:33.3%;
-    height:inherit;
-}
-
-.slider__controls_pic{
-    width:100%;
-    height:100%;
-}
-
-.slider__controls_item--active{
-    border: solid 3px #f29400;
-}
-
-
-.slider__buttons{
-    position:absolute;
-    right:-50px;
-    bottom:30px;
-    background-color: #2d3c4e;
-    @include phones{
-        right:0;
-        bottom:0;
-    }
-}
-
-.slider__button{
-    display:block;
-    width:50px;
-    height:50px;
-    background: svg-load('arrow-down.svg', fill=$text-white-opacity, width=12px, height=20px) center center no-repeat;
-    &:hover {
-    background: svg-load('arrow-down.svg', fill=$text-white, width=12px, height=20px) center center no-repeat;
-    background-color: $blue;
-  }
-}
-
-.slider__next{
-    transform: rotate(180deg);
 }

@@ -10,7 +10,7 @@
             div.slider__controls
                 ul(class='slider__controls_list')
                     each item, ndx in images
-                        li(class='slider__controls_item' + ( (ndx === 0) ? ' slider__controls_item--active' : '' ) )
+                        li(class='slider__controls_item' + ( (ndx === 2) ? ' slider__controls_item--active' : '' ) )
                             img(class='slider__controls_pic' src=require(`images/${item}`))
             .slider__buttons
                 button(type="button" class="slider__button slider__prev")
