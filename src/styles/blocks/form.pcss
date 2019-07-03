@@ -43,7 +43,7 @@
 .form__input_wrapper {
     position: relative;
   border-bottom: 2px solid $text-white;
-  &:focus-within{
+   &:hover, &:focus-within{
       border-color:$blue;
   }
   &::before {
@@ -91,7 +91,7 @@
       )
       center / contain no-repeat;
   }
-  &:focus-within::before{
+   &:hover::before, &:focus-within::before{
         background: svg-load(
         "user.svg",
         fill=$blue,
@@ -112,7 +112,7 @@
       )
       center / contain no-repeat;
   }
-    &:focus-within::before{
+     &:hover::before, &:focus-within::before{
         background: svg-load(
         "envelope.svg",
         fill=$blue,
@@ -134,7 +134,7 @@
       )
       center / contain no-repeat;
   }
-     &:focus-within::before{
+     &:hover::before, &:focus-within::before{
         background: svg-load(
         "message.svg",
         fill=$blue,

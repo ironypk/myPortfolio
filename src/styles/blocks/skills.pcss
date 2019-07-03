@@ -84,7 +84,7 @@
   font-size: 24px;
   font-weight: 700;
   color: $text-black;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   @include phones {
     margin-bottom: 20px;
     font-size: 18px;
@@ -92,12 +92,16 @@
 }
 
 .skills__frontend {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
+
+
+$itemWidth: 160px;
+$itemHeight:160px;
 
 .skills__list {
   display: grid;
-  grid-template-columns: repeat(4, 160px);
+  grid-template-columns: repeat(4, $itemWidth);
   grid-template-rows: auto;
   grid-column-gap: 40px;
   justify-content: center;
@@ -105,12 +109,12 @@
     grid-column-gap: 30px;
   }
   @include tablets {
-    grid-template-columns: repeat(4, 160px);
+    grid-template-columns: repeat(4, $itemWidth);
     grid-template-rows: auto;
     grid-column-gap: 20px;
   }
   @include phones {
-    grid-template-columns: repeat(2, 160px);
+    grid-template-columns: repeat(2, $itemWidth);
     grid-template-rows: auto auto;
     margin-bottom: 30px;
   }
@@ -122,8 +126,8 @@
 
 .skills__item {
   position: relative;
-    width: 160px;
-    height: 160px;
+  width:$itemWidth;
+  height:$itemHeight;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -146,7 +150,7 @@
 }
 
 .skills__circle_above {
-  stroke-width: 15px;
+  stroke-width: 12px;
   stroke: url(#linear);
   stroke-dasharray: 276;
   stroke-dashoffset: 276;
