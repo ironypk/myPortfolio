@@ -75,17 +75,30 @@
   max-width:calc(180 * 3)px;
   position: relative;
   display: flex;
-  left:-180px;
+  left:0;
 }
 
 .slider__controls_item {
+  position: relative;
   min-width: 180px;
   max-height: 100px;
   cursor: pointer;
-  &:hover{
-  background-color: $blue;
-  outline: solid 3px $blue;
-  z-index:2;
+  z-index: 20;
+   &--first-visible{
+    border-left: 3px solid transparent;
+  }
+  &::before{
+    content: '';
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: $blue;
+    display: none;
+  }
+  &:hover::before{
+    display: block;
   }
 }
 
@@ -98,12 +111,13 @@
 }
 
 .slider__controls_item--active {
+  background-color: $blue;
   outline: solid 3px $blue;
-  z-index: 2;
+  z-index: 99;
 }
 
 .slider__buttons {
-  z-index:1;
+  z-index:50;
   background-color: #2d3c4e;
   @include phones {
     right: 0;
