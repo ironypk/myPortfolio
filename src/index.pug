@@ -1,15 +1,31 @@
 include ./mixins.pug
 
 <!DOCTYPE html>
-html(lang="en")
+html(lang="ru")
   head
     meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, shink-to-fit=no")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title Portfolio | main page
   body
     .wrapper
       .maincontent
-        +image('content/user.jpg', 'user-pic')
-        +icon('link', 'link-class')
-        .icon-bg
+        .rockfest_bg
+          include ./sections/welcome
+          include ./sections/about-me
+        include ./sections/skills
+        include ./sections/myworks
+        .musician_bg
+          include ./sections/rewiews
+          include ./sections/contacts
+        include ./sections/footer
+    include ./sections/popup
+
+
+
+            
+            
+
+
+
+

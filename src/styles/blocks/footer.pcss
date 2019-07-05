@@ -1,0 +1,140 @@
+.footer{
+width:100%;
+background-color:#0a001d;
+}
+
+.footer__container{
+    padding-top:100px;
+    padding-bottom:100px;
+    display: flex;
+    justify-content: space-between;
+    @include phones{
+            padding-top:50px;
+    padding-bottom:50px;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+}
+
+.footer__signature{
+    display: flex;
+    justify-content: space-between;
+    margin-right:50px;
+    @include desktop{
+        margin-right:30px;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    @include phones{
+        margin-right:0;
+        margin-bottom:50px;
+    }
+}
+
+.footer__author{
+        width:140px;
+        @include tablets{
+            width:100%;
+        }
+}
+
+.footer__date{
+    margin-right: 60px;
+    font-size:48px;
+    font-weight: 600;
+    color:$text-white-opacity;
+    white-space: nowrap;
+        @include desktop{
+        margin-right:0;
+        margin-bottom:20px;
+    }
+}
+
+.author__name{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    @include phones{
+        margin-bottom:10px;
+    }
+}
+
+.author__text{
+    font-size: 16px;
+    line-height: 1.88;
+    color:$text-white-opacity;
+}
+
+.footer__under{
+    display: flex;
+    line-height: 1.88;
+    color:$text-white-opacity;
+    @include tablets{
+        flex-direction: column;
+    }
+}
+
+.menu--footer{
+    white-space: nowrap;
+    font-size: 16px;
+    margin-bottom: 60px;
+}
+
+.menu__list--footer{
+    @include tablets{
+        flex-wrap:wrap;
+        justify-content: flex-start !important;
+    }
+}
+
+.menu__item--footer{
+    @include tablets{
+        margin-right:60px;
+        margin-bottom:20px;
+    }
+    @include phones{
+        width:50%;
+        margin-right:0;
+        margin-bottom:20px;
+    }
+}
+
+
+
+.footer__social{
+    margin-right:50px;
+     @include tablets{
+        margin-right: 0;
+        margin-bottom:50px;
+    }
+}
+
+.social__link--footer{
+    min-width:50px;
+    min-height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    border:1px solid $text-white-opacity;
+    &:hover{
+        border-color:$blue;
+    }
+}
+
+.footer__social_text{
+    margin-bottom: 25px;
+}
+
+.ps__text{
+    margin-bottom: 25px;
+    @include phones{
+        margin-bottom:10px;
+    }
+}
+
+.ps__author {
+    color:$text-white;
+    font-style: italic;
+}
+

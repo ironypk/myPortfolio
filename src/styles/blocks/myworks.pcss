@@ -1,0 +1,25 @@
+.myworks {
+  color: $text-black;
+}
+
+.myworks__container {
+  padding-top:150px;
+  padding-bottom:150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include phones {
+   padding:100px 0;
+  }
+}
+
+.myworks__title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  @include phones {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+

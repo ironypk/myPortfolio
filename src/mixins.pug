@@ -5,3 +5,15 @@ mixin icon(name, className)
 
 mixin image(path, className)
   img(src=require(`images/${path}`) class=className)
+
+
+mixin graphic(percent, className)
+  svg(class=`${className}__percentage` xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" version="1.1")
+    defs
+      linearGradient(id="linear" x1="0%" y1="0%" x2="100%" y2="0%")
+        stop(offset="0%"   stop-color="#003dea")
+        stop(offset="100%" stop-color="#0089f2")
+    circle(cx="50" cy="50" r="40" class=`${className}__circle` + ` ${className}__circle_under`)
+    circle(cx="50" cy="50" r="40" class=`${className}__circle` + ` ${className}__circle_above` style=`animation-delay: -${percent}s`)
+
+
