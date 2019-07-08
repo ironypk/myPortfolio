@@ -31,7 +31,6 @@ function moveLayersDependsOnMove(scroll, layers, speed){
 
 window.addEventListener('scroll', e=>{
     const wScroll = window.pageYOffset;
-    console.log(wScroll)
     moveLayersDependsOnScroll(wScroll, paralaxRockLayers, 14);
 })
 

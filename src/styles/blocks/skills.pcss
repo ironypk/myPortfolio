@@ -71,7 +71,7 @@
   color: $text-black-opacity;
 }
 
-.skills__graphic {
+.graphics{
   margin: 0 0 0 auto;
   @include tablets {
     margin: 0;
@@ -80,7 +80,7 @@
   }
 }
 
-.skills__name {
+.graphics__name {
   font-size: 24px;
   font-weight: 700;
   color: $text-black;
@@ -91,7 +91,7 @@
   }
 }
 
-.skills__frontend {
+.graphics__item:not(:last-child){
   margin-bottom: 40px;
 }
 
@@ -99,7 +99,7 @@
 $itemWidth: 160px;
 $itemHeight:160px;
 
-.skills__list {
+.graphics_row__list {
   display: grid;
   grid-template-columns: repeat(4, $itemWidth);
   grid-template-rows: auto;
@@ -120,11 +120,8 @@ $itemHeight:160px;
   }
 }
 
-.skills__item:not(:last-child) {
-  margin-right: 50px;
-}
 
-.skills__item {
+.graphic {
   position: relative;
   width:$itemWidth;
   height:$itemHeight;
@@ -137,38 +134,23 @@ $itemHeight:160px;
   font-weight: 700;
 }
 
-.skills__percentage {
+.graphic__circle_shape {
   position: absolute;
   display: inline-block;
   transform: rotate(-180deg);
 }
 
-.skills__circle {
+.graphic__circle {
   fill: transparent;
   stroke-width:5px;
   stroke: #eaeaea;
 }
 
-.skills__circle_above {
+.graphic__circle_above {
   stroke-width: 12px;
   stroke: url(#linear);
   stroke-dasharray: 276;
-  stroke-dashoffset: 276;
-  animation: fill 100s linear infinite;
-  animation-play-state: paused;
-}
-
-.skills__circle_above[style="animation-delay: -100s"] {
-  animation: initial;
   stroke-dashoffset: 0;
 }
 
-@keyframes fill {
-  from {
-    stroke-dashoffset: 301;
-  }
 
-  to {
-    stroke-dashoffset: 0;
-  }
-}
