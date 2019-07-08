@@ -1,0 +1,35 @@
+section.skills.fullscreen-section
+    .container.skills__container
+        .skills__text
+            h3.skills__title Чем я могу быть вам полезен
+            p.skills__text_description Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+        #graphics_container
+
+        
+script(type="text/x-template")#graphics
+    ul.graphics
+        li.graphics__item(v-for="graphic in skills")
+            row(
+                :graphic="graphic"
+            )
+                
+script(type="text/x-template")#graphics_row
+    .graphics_row
+        h4.graphics__name {{graphic.skillsGroup}}
+        ul.graphics_row__list
+            li.graphics_row__item(v-for="(graphicPercent, graphicName) in graphic.skills")
+                graphic(
+                    :graphicName="graphicName",
+                    :graphicPercent="graphicPercent"
+                )
+                                
+script(type="text/x-template")#graphic
+    .graphic
+        svg(viewBox="0 0 100 100").graphic__circle_shape
+            defs
+                linearGradient(id="linear" x1="0%" y1="0%" x2="100%" y2="0%")
+                    stop(offset="0%"   stop-color="#003dea")
+                    stop(offset="100%" stop-color="#0089f2")
+            circle(cx="50" cy="50" r="40").graphic__circle.graphic__circle_under
+            circle(cx="50" cy="50" r="40" ref="circle").graphic__circle.graphic__circle_above
+        .graphic__circle_text {{graphicName}}

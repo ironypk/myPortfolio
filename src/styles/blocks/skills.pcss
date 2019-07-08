@@ -1,0 +1,153 @@
+.skills {
+  position: relative;
+  color: $text-black;
+    &::after {
+    content: "";
+    position: absolute;
+    width: 480px;
+    height: 1100px;
+    top: -270px;
+    left: 160px;
+    background: url("../images/content/guitar.png") -35px -25px no-repeat;
+    background-size: contain;
+    @include desktop{
+      width:340px;
+      height:860px;
+      top:0;
+      left:0;
+      background-position-x: -45px;
+      background-position-y: -25px;
+    }
+    @include tablets {
+      top: auto;
+      left: 30%;
+      height: 650px;
+      transform: rotate(90deg);
+      bottom: -350px;
+      background-position-x:0;
+      background-position-y:0;
+    }
+    @include phones {
+    }
+  }
+}
+.skills__container {
+  padding-top: 140px;
+  padding-bottom: 140px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.skills__text {
+  width: 50%;
+  margin-bottom: 100px;
+  @include tablets {
+    text-align: center;
+    width: 70%;
+  }
+  @include phones {
+    margin-bottom: 60px;
+    width: 85%;
+    text-align: left;
+  }
+}
+
+.skills__title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  @include phones {
+    margin-bottom: 30px;
+  }
+}
+
+.skills__text_description {
+  line-height: 1.88;
+  font-weight: 600;
+  color: $text-black-opacity;
+}
+
+.graphics {
+  margin: 0 0 0 auto;
+  @include tablets {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.graphics__name {
+  font-size: 24px;
+  font-weight: 700;
+  color: $text-black;
+  margin-bottom: 30px;
+  @include phones {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+}
+
+.graphics__item:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+
+$itemWidth: 160px;
+$itemHeight:160px;
+
+.graphics_row__list {
+  display: grid;
+  grid-template-columns: repeat(4, $itemWidth);
+  grid-template-rows: auto;
+  grid-column-gap: 40px;
+  justify-content: center;
+  @include desktop{
+    grid-column-gap: 30px;
+  }
+  @include tablets {
+    grid-template-columns: repeat(4, $itemWidth);
+    grid-template-rows: auto;
+    grid-column-gap: 20px;
+  }
+  @include phones {
+    grid-template-columns: repeat(2, $itemWidth);
+    grid-template-rows: auto auto;
+    margin-bottom: 30px;
+  }
+}
+
+.graphic{
+  width:$itemWidth;
+  height:$itemHeight;
+  text-align: center;
+  color: $text-black-opacity;
+  font-weight: 700;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.graphic__circle_shape {
+  position: absolute;
+  display: inline-block;
+  transform: rotate(-180deg);
+}
+
+.graphic__circle {
+  fill: transparent;
+  stroke-width:5px;
+  stroke: #eaeaea;
+}
+
+.graphic__circle_above {
+  stroke-width: 12px;
+  stroke: url(#linear);
+  stroke-dasharray: 276;
+  stroke-dashoffset: 0;
+}

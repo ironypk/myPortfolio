@@ -1,0 +1,30 @@
+.socials{
+    display: flex;
+}
+
+.socials--header{
+      @include phones{
+        display: none;
+    }
+}
+
+.socials__item:not(:last-child){
+    margin-right:40px;
+}
+
+
+.socials__link{
+    width:25px;
+    height:25px;
+    &:hover .socials__pic{
+        fill:blue !important;
+    }
+}
+
+
+.socials__pic{
+    width:inherit;
+    height:inherit;
+    fill: #fff;
+    opacity: .5;
+}

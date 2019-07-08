@@ -1,5 +1,9 @@
 {
-  "text-color": "#414c63",
+  "text-white": "#fff",
+  "text-white-opacity": "rgba(#fff, .5)",
+  "text-black": "#0a001d",
+  "text-black-opacity": "rgba(10, 0, 29, 0.5)",
+  "blue": "#008bff",
   "links-color": "#4b6fd7",
   "bp-desktop-hd": "1800px",
   "bp-desktop": "1200px",

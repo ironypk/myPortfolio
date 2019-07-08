@@ -1,0 +1,123 @@
+.about-me{
+    position: relative;
+}
+
+
+.about-me__container{
+    padding-top:130px;
+    padding-bottom:130px;
+    display: flex;
+    position: relative;
+      @include phones{
+        flex-direction: column;
+    }
+
+}
+
+
+.about-me__hero{
+    width:45%;
+    margin-right:180px;
+    @include tablets{
+        margin-right:100px;
+    }
+    @include phones{
+        width:90%;
+        margin-right:0;
+        margin-bottom:50px;
+    }
+}
+
+.about-me__avatar{
+    margin: 0 0 0 auto;
+    width:170px;
+    height:170px;
+    margin-bottom:60px;
+    border-radius:50%;
+    overflow: hidden;
+    @include phones{
+
+        margin:0 auto 30px;
+    }
+}
+
+.about-me__pic{
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+.about-me__data{
+    width:100%;
+    font-weight:600;
+}
+
+.about-me__item:not(:last-child){
+    margin-bottom:25px;
+    @include phones{
+        margin-bottom:15px;
+    }
+}
+
+.about-me__item{
+    display: flex;
+}
+
+.about-me__key{
+    width:50%;
+    display: inline-block;
+    vertical-align: top;
+    color:$text-white-opacity;
+}
+
+.about-me__value{
+    width:50%;
+    display: inline-block;
+}
+
+
+.about-me__content{
+    width:55%;
+    color: $text-white-opacity;
+    @include phones{
+        width:90%;
+    }
+}
+
+
+.about-me__welcome{
+    margin-bottom:30px;
+}
+
+.about-me__name{
+    display: block;
+    color: $text-white;
+    margin-bottom:40px;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.about-me__text{
+   margin-bottom:100px;
+   @include tablets{
+       margin-bottom:50px;
+   }
+}
+
+.about-me__ps{
+    position: relative;
+    font-weight: 400;
+    font-style: italic;
+    &::before{
+        content: '*';
+        font-size: 48px;
+        font-style: italic;
+        position:absolute;
+        color:rgba(red, .1);
+        line-height: 0.63;
+        left:-50px;
+        
+    }
+}

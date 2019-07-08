@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode=development --hot",
-    "build": "rm -rf dist && webpack --mode=production --progress",
+    "build": "webpack --mode=production --progress",
     "reg": "node reg-util.js"
   },
   "keywords": [],
@@ -50,6 +50,7 @@
     "last 2 versions"
   ],
   "dependencies": {
+    "live-server": "^1.2.1",
     "normalize.css": "^8.0.1",
     "promptly": "^3.0.3",
     "pug": "^2.0.3",
