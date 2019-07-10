@@ -2,9 +2,12 @@ import Vue from "vue";
 
 const btns = {
   template: "#slider_btns",
+  props: {
+    works: Array
+  },
   methods: {
-    slide(direction) {
-      this.$emit("slide", direction);
+    secondSlide(direction) {
+      this.$emit("secondSlide", direction);
     }
   }
 };
@@ -25,38 +28,33 @@ const controls = {
   data() {
     return {
       activeSlide: 1,
-      firstSlide : 1
     };
   },
   components: {
     btns
   },
   methods: {
-    clickCurrentSlide(num) {
-      this.activeSlide = num;
-    },
     handleSlide(direction) {
       const list = this.$refs["list"];
+      const worksLength = this.works.length;
       switch (direction) {
         case "next":
-          if (
-            parseInt(getComputedStyle(list).left) >
-            180 - parseInt(getComputedStyle(list).width)
+          if(this.activeSlide < worksLength){
+            this.activeSlide++;
+          }
+          if (this.activeSlide == worksLength - 1
           ) {
             list.style.left =
-              parseInt(getComputedStyle(list).left) - 180 + "px";
-          }
-          if (this.firstSlide < this.works.length -2){
-            this.firstSlide++;
+              parseInt(getComputedStyle(list).left) - 360 + "px";
           }
           break;
         case "prev":
-          if (parseInt(getComputedStyle(list).left) < 0) {
+            if(this.activeSlide > 1){
+              this.activeSlide--;
+            }
+          if (this.activeSlide == 2) {
             list.style.left =
-              parseInt(getComputedStyle(list).left) + 180 + "px";
-          }
-          if (this.firstSlide > 1){
-            this.firstSlide--;
+              parseInt(getComputedStyle(list).left) + 360 + "px";
           }
           break;
       }
@@ -105,11 +103,9 @@ new Vue({
     display,
     info
   },
-  data() {
-    return {
+  data:{
       works: [],
       currentIndex: 0
-    };
   },
   computed: {
     currentWork() {
@@ -126,9 +122,20 @@ new Vue({
         return item;
       });
     },
-    changeSlide(num) {
-      this.currentIndex = num - 1;
+    clickSlide(direction){
+      switch(direction){
+        case "next":
+          if(this.currentIndex < this.works.length - 1){
+            this.currentIndex++
+          }
+          break;
+        case "prev":
+            if(this.currentIndex > 0){
+              this.currentIndex--
+         }
+      }
     }
+    
   },
   created() {
     const data = require("../data/slider.json");

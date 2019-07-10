@@ -18,6 +18,8 @@
   }
   @include tablets {
     width: 100%;
+    min-width:100%;
+    height: auto;
     margin-right: 0;
     margin-bottom: 20px;
   }
@@ -47,6 +49,10 @@
   position: absolute;
   right:-50px;
   bottom: 30px;
+  @include phones{
+    right: 0;
+    bottom: 0;
+  }
 }
 
 .slider__wrapper{
@@ -55,13 +61,23 @@
   overflow: hidden;
   width:calc(180 * 3 + 50)px;
   height: 106px;
+   @include phones{
+    width:auto;
+    height:auto;
+    overflow: initial;
+  }
 }
 
 .slider__controls_list {
-  max-width:calc(180 * 3)px;
+  width:calc(180 * 3)px;
   position: relative;
   display: flex;
   left:0;
+  @include phones{
+    width:0;
+    height:0;
+    overflow: hidden;
+  }
 }
 
 .slider__controls_item {
@@ -122,7 +138,10 @@
       height=20px
     )
     center center no-repeat;
-  &:hover {
+}
+
+.slider__button_active{
+    &:hover {
     background: svg-load(
         "arrow-down.svg",
         fill=$text-white,
@@ -134,7 +153,7 @@
   }
 }
 
-.slider__next {
+.slider__prev{
   transform: rotate(180deg);
 }
 
