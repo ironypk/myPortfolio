@@ -28,6 +28,8 @@ const controls = {
   data() {
     return {
       activeSlide: 1,
+      activeSlideOther: 1,
+      firstPosition: 1,
     };
   },
   components: {
@@ -37,24 +39,36 @@ const controls = {
     handleSlide(direction) {
       const list = this.$refs["list"];
       const worksLength = this.works.length;
+      const item = this.$refs.item[0];
+      const listWidth = parseInt(getComputedStyle(list).width);
+      const slideWidth = parseInt(getComputedStyle(item).width);
+      const slideStep = parseInt(getComputedStyle(list).left);
       switch (direction) {
         case "next":
           if(this.activeSlide < worksLength){
             this.activeSlide++;
           }
-          if (this.activeSlide == worksLength - 1
+          if(this.activeSlideOther <= worksLength){
+            this.activeSlideOther++
+          }
+          if (this.activeSlide > listWidth / slideWidth && this.activeSlideOther <= worksLength
           ) {
             list.style.left =
-              parseInt(getComputedStyle(list).left) - 360 + "px";
+              slideStep - slideWidth + "px";
+              this.firstPosition++
           }
           break;
         case "prev":
             if(this.activeSlide > 1){
               this.activeSlide--;
             }
-          if (this.activeSlide == 2) {
+            if(this.activeSlideOther > 1){
+              this.activeSlideOther--
+            }
+            if (this.firstPosition > this.activeSlide) {
             list.style.left =
-              parseInt(getComputedStyle(list).left) + 360 + "px";
+              slideStep  + slideWidth + "px";
+              this.firstPosition--
           }
           break;
       }

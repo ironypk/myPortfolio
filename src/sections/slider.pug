@@ -31,7 +31,7 @@ script(type="text/x-template")#slider_controls
     div.slider__controls
         .slider__wrapper
             ul(class='slider__controls_list' ref="list")
-                li(class='slider__controls_item' v-for="(work, index) in works" :class="{slider__controls_item_active: work.id === activeSlide, slider__controls_item_first_visible: work.id === firstSlide}")
+                li(class='slider__controls_item' v-for="(work, index) in works" :class="{slider__controls_item_active: work.id === activeSlide}" ref="item")
                     img(:src="work.photo" alt="").slider__controls_pic
             btns(
                 :works="works"
