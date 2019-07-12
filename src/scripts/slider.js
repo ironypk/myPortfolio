@@ -7,9 +7,22 @@ const btns = {
   },
   methods: {
     secondSlide(direction) {
-      this.$emit("secondSlide", direction);
-    }
+      this.$emit("secondSlide", direction);  
+      this.checkArrows()
+    },
+    checkArrows(){
+      let prevButton = this.$refs["prevButton"];
+      let nextButton = this.$refs["nextButton"];
+      if (this.$parent.activeSlide == 1) {
+        prevButton.disabled = true;
+      } else if (this.$parent.activeSlide == this.works.length) {
+        nextButton.disabled = true;
+      } else {
+        prevButton.disabled = false;
+        nextButton.disabled = false;
+      }
   }
+}
 };
 
 const slides = {
@@ -28,8 +41,7 @@ const controls = {
   data() {
     return {
       activeSlide: 1,
-      activeSlideOther: 1,
-      firstPosition: 1,
+      firstVisible: 1
     };
   },
   components: {
@@ -45,30 +57,24 @@ const controls = {
       const slideStep = parseInt(getComputedStyle(list).left);
       switch (direction) {
         case "next":
-          if(this.activeSlide < worksLength){
+          if (this.activeSlide < worksLength) {
             this.activeSlide++;
           }
-          if(this.activeSlideOther <= worksLength){
-            this.activeSlideOther++
-          }
-          if (this.activeSlide > listWidth / slideWidth && this.activeSlideOther <= worksLength
+          if (
+            this.activeSlide > listWidth / slideWidth &&
+            listWidth - slideStep < slideWidth * worksLength
           ) {
-            list.style.left =
-              slideStep - slideWidth + "px";
-              this.firstPosition++
+            list.style.left = slideStep - slideWidth + "px";
+            this.firstVisible++;
           }
           break;
         case "prev":
-            if(this.activeSlide > 1){
-              this.activeSlide--;
-            }
-            if(this.activeSlideOther > 1){
-              this.activeSlideOther--
-            }
-            if (this.firstPosition > this.activeSlide) {
-            list.style.left =
-              slideStep  + slideWidth + "px";
-              this.firstPosition--
+          if (this.activeSlide > 1) {
+            this.activeSlide--;
+          }
+          if (-slideStep / slideWidth + 1 > this.activeSlide) {
+            list.style.left = slideStep + slideWidth + "px";
+            this.firstVisible--;
           }
           break;
       }
@@ -117,9 +123,9 @@ new Vue({
     display,
     info
   },
-  data:{
-      works: [],
-      currentIndex: 0
+  data: {
+    works: [],
+    currentIndex: 0
   },
   computed: {
     currentWork() {
@@ -136,20 +142,19 @@ new Vue({
         return item;
       });
     },
-    clickSlide(direction){
-      switch(direction){
+    clickSlide(direction) {
+      switch (direction) {
         case "next":
-          if(this.currentIndex < this.works.length - 1){
-            this.currentIndex++
+          if (this.currentIndex < this.works.length - 1) {
+            this.currentIndex++;
           }
           break;
         case "prev":
-            if(this.currentIndex > 0){
-              this.currentIndex--
-         }
+          if (this.currentIndex > 0) {
+            this.currentIndex--;
+          }
       }
     }
-    
   },
   created() {
     const data = require("../data/slider.json");

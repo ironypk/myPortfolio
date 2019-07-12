@@ -31,7 +31,7 @@ script(type="text/x-template")#slider_controls
     div.slider__controls
         .slider__wrapper
             ul(class='slider__controls_list' ref="list")
-                li(class='slider__controls_item' v-for="(work, index) in works" :class="{slider__controls_item_active: work.id === activeSlide}" ref="item")
+                li(class='slider__controls_item' v-for="(work, index) in works" :class="{slider__controls_item_active: work.id === activeSlide, slider__controls_item_first_visible :work.id === firstVisible }" ref="item")
                     img(:src="work.photo" alt="").slider__controls_pic
             btns(
                 :works="works"
@@ -42,8 +42,8 @@ script(type="text/x-template")#slider_controls
 
 script(type="text/x-template")#slider_btns
     .slider__buttons
-        button(@click="$emit('slide', 'next'), secondSlide('next')" type="button" class="slider__button slider__next" :class="{slider__button_active: this.$parent.activeSlide < works.length}")
-        button(@click="$emit('slide', 'prev'), secondSlide('prev')" type="button" class="slider__button slider__prev" :class="{slider__button_active: this.$parent.activeSlide > 1}")
+        button(@click="$emit('slide', 'next'), secondSlide('next')" type="button" class="slider__button slider__next" :disabled='false' ref="nextButton")
+        button(@click="$emit('slide', 'prev'), secondSlide('prev')" type="button" class="slider__button slider__prev" :disabled='true' ref="prevButton")
 
 script(type="text/x-template")#slider_info
     .slider__description.slider_block
