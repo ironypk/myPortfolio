@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -
     var rewiews = [
         {
@@ -15,10 +16,14 @@
     ]
 
 section.rewiews
+=======
+section.rewiews#rewiews(@click="checkArrows" @touchend="checkArrows")
+>>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
     .container.rewiews__container
         .rewiews__head
             h2.rewiews__title Что обо мне говорят
             .rewiews__controls
+<<<<<<< HEAD
                 a(class="rewiews__arrow rewiews__prev")
                 a(class="rewiews__arrow rewiews__next")
         .rewiews__slider
@@ -32,4 +37,17 @@ section.rewiews
                             .rewiews__slider_description      
                                 .rewiews__slider_name= item.name
                                 .rewiews__slider_about= item.about
+=======
+                button.rewiews__arrow.rewiews__prev(@click="previous" :disabled='true')
+                button.rewiews__arrow.rewiews__next(@click="next" :disabled='false')
+        flickity(ref="flickity" :options="flickityOptions").rewiews__slider
+                .rewiews__slider_item(v-for="rewiew in rewiews")
+                    p.rewiwes__slider_text {{rewiew.rewiew}}
+                    .rewiews__slider_author
+                        .rewiews__slider_img
+                            img(:src="rewiew.photo", alt="").rewiews__slider_pic
+                        .rewiews__slider_description      
+                            .rewiews__slider_name {{rewiew.name}}
+                            .rewiews__slider_about {{rewiew.about}}
+>>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
 
