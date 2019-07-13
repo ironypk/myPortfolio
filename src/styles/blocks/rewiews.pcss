@@ -1,9 +1,12 @@
+.rewiews {
+  position: relative;
+}
 .rewiews__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top:150px;
-  padding-bottom:150px;
+  padding-top: 150px;
+  padding-bottom: 150px;
 }
 
 .rewiews__head {
@@ -31,7 +34,7 @@
   width: 50px;
   height: 50px;
   border-radius: 100%;
-  border: solid 1px #2d3c4e;
+  border: solid 1px $text-white;
   background: svg-load(
       "arrow-down.svg",
       fill=$text-white,
@@ -39,33 +42,46 @@
       height=20px
     )
     center center no-repeat;
-  &:hover{
+  &:hover {
     background-color: $blue;
+  }
+  &:disabled{
+    border-color: #2d3c4e;
+       background: svg-load(
+      "arrow-down.svg",
+      fill=#2d3c4e,
+      width=12px,
+      height=20px
+    )
+    center center no-repeat;
   }
 }
 
-.rewiews__prev{
+.rewiews__prev {
   transform: rotate(-180deg);
   margin-right: 30px;
 }
 
-.rewiews__slider {
-    height:30%;
-  display: flex;
+
+//////СЛАЙДЕР
+
+///ФЛИКИТИ
+.flickity-viewport {
+   width: 100%;
 }
 
-.rewiews__slider_list {
+///
+.rewiews__slider {
+  width:85%;
   display: flex;
-  width:965px;
-  overflow: hidden;
 }
 
 .rewiews__slider_item {
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding-left: 90px;
-  width:50%;
+  width: 45%;
   @include tablets {
     padding-left: 35px;
   }
@@ -74,14 +90,8 @@
   }
 }
 
-.rewiews__slider_item:not(:last-child) {
-  margin-right: 75px;
-  @include tablets {
-    margin-right: 40px;
-  }
-  @include phones {
-    margin-rignt: 0;
-  }
+.rewiews__slider_item:not(:first-child){
+margin-left:50px;
 }
 
 .rewiwes__slider_text {
@@ -99,7 +109,7 @@
     left: -90px;
     background: svg-load(
         "quote.svg",
-        fill=rgba($text-white,0.05),
+        fill=rgba($text-white, 0.05),
         width=100%,
         height=100%
       )
@@ -125,11 +135,7 @@
   margin-right: 30px;
 }
 
-/* .rewiews__slider_pic{
-    object-fit: cover;
-} */
-
-.rewiews__slider_name{
+.rewiews__slider_name {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 20px;

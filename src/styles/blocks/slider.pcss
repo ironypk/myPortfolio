@@ -3,56 +3,44 @@
   justify-content: space-between;
   width: 100%;
   @include tablets {
-    display: block;
+   flex-direction: column;
+
   }
 }
 
-/* .slider_block {
-  flex-grow: 1;
-} */
 
 .slider__img {
-  min-width: 975px;
-  height: 550px;
-  margin-right: 100px;
+    width:975px;
+    min-width: 720px;
   @include desktop{
-    min-width:630px;
-    height:350px;
+    width:630px;
+    min-width:540px;
   }
   @include tablets {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 20px;
+    width: 95%;
+    margin-bottom: 60px;
+  }
+  @include phones{
+    width:100%;
+    min-width:initial;
   }
 }
 
 .slider__img_content {
   position: relative;
-  width: 100%;
+  width:100%;
+  height: 100%;
+}
+.slider__pic_container{
+  width:100%;
   height: 100%;
 }
 
 ////MAIN SLIDER
 
-.slider__img_list {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.slider__img_item {
-  width: 100%;
-  height: 100%;
-  display: none;
-}
-
-.slider__img_item--active {
-  display: block;
-}
-
-.slider__img_pic {
-  width: 100%;
-  height: 100%;
+.slider__pic {
+  max-width:100%;
+  max-height:100%;
 }
 
 ///////SLIDER CONTROLS
@@ -60,22 +48,50 @@
 .slider__controls {
   position: absolute;
   right:-50px;
-  bottom: 30px;
+  bottom: 10%;
+  @include phones{
+    right: 0;
+    bottom: 0;
+  }
 }
 
 .slider__wrapper{
   display: flex;
   align-items: center;
   overflow: hidden;
+  width:calc(180 * 4 + 50)px;
+  height: 106px;
+  @include desktop{
   width:calc(180 * 3 + 50)px;
-  height:106px;
+  }
+  @include tablets{
+  width:calc(180 * 3 + 50)px;
+  } 
+   @include phones{
+    width:auto;
+    height:auto;
+    overflow: initial;
+  }
 }
 
 .slider__controls_list {
-  max-width:calc(180 * 3)px;
+  font-size: 16px;
+  width:calc(180 * 4)px;
   position: relative;
   display: flex;
   left:0;
+   @include desktop{
+  min-width:calc(180 * 3)px;
+  }
+  @include tablets{
+  min-width:calc(180 * 3)px;
+  }
+  
+  @include phones{
+    width:0;
+    height:0;
+    overflow: hidden;
+  }
 }
 
 .slider__controls_item {
@@ -84,7 +100,7 @@
   max-height: 100px;
   cursor: pointer;
   z-index: 20;
-   &--first-visible{
+   &_first_visible{
     border-left: 3px solid transparent;
   }
   &::before{
@@ -102,6 +118,7 @@
   }
 }
 
+
 .slider__controls_pic {
   width: 100%;
   height: 100%;
@@ -110,7 +127,7 @@
   }
 }
 
-.slider__controls_item--active {
+.slider__controls_item_active {
   background-color: $blue;
   outline: solid 3px $blue;
   z-index: 99;
@@ -136,7 +153,7 @@
       height=20px
     )
     center center no-repeat;
-  &:hover {
+        &:hover {
     background: svg-load(
         "arrow-down.svg",
         fill=$text-white,
@@ -146,19 +163,32 @@
       center center no-repeat;
     background-color: $blue;
   }
+  &:disabled{
+    background-color: #2d3c4e;
+      background: svg-load(
+      "arrow-down.svg",
+      fill=$text-white-opacity,
+      width=12px,
+      height=20px
+    )
+    center center no-repeat;
+  }
 }
 
-.slider__next {
+.slider__prev{
   transform: rotate(180deg);
 }
 
 //slider description
 
 .slider__description {
+  max-width:30%;
   flex: 1;
+  padding-left:50px;
   @include tablets {
-    width: auto;
+    max-width: 95%;
     text-align: center;
+    padding-left:0;
   }
   @include phones {
     text-align: left;

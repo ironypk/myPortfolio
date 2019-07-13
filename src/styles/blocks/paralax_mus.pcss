@@ -1,0 +1,55 @@
+.musician_bg{
+    position: relative;
+    overflow: hidden;
+}
+
+.paralax_mus_list{
+    position: absolute;
+    top:0;
+    left:0;
+    width:140%;
+    height:100%;
+    z-index: -1;
+}
+.paralax_mus__item{
+  position: absolute;
+  left:0;
+  top:0;
+  width:inherit;
+  height:inherit;
+  background-repeat: no-repeat;
+  /* background-position: -20% 0; */
+  @include desktop{
+    background-position: 70% 0;
+  }
+  
+    &::after{
+    content:'';
+    top:0;
+    left:0;
+    width:inherit;
+    height:inherit;
+    position: absolute;
+    background: linear-gradient(to right, rgba(#0a001d, 0.5) 0%, rgba(0, 0, 0, 0.1) 100%);
+  }
+
+
+    &--1{
+      background-image: url('../images/content/paralax/mus/mus_back.png');
+      z-index:1;
+      background-size: cover;
+    }
+    &--2{
+    background-image: url('../images/content/paralax/mus/mus_smoke.png');
+      z-index:2;
+    }
+    &--3{
+      background-image: url('../images/content/paralax/mus/bong.png');
+      z-index:3;
+    }
+    &--4{
+      background-image: url('../images/content/paralax/mus/man.png');
+      z-index:4;
+    } 
+  }
+
