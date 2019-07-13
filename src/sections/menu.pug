@@ -1,7 +1,7 @@
 mixin menu(mod)  
   nav(class='menu menu--' +mod)
     ul(class='menu__list menu__list--' +mod)
-      - var items = [{key:'Главная', value:'#'}, {key:'Обо мне', value:'#'}, {key:'Навыки', value:'#'}, {key:'Работы', value:'#'}, {key:'Отзывы', value:'#'}, {key:'Связаться', value:'#'}]
+      - var items = [{key:'Главная', value:'#welcome'}, {key:'Обо мне', value:'#about-me'}, {key:'Навыки', value:'#skills'}, {key:'Работы', value:'#myworks'}, {key:'Отзывы', value:'#rewiews'}, {key:'Связаться', value:'#contacts'}]
       each item in items
         li(class='menu__item menu__item--' +mod)
           a(class='menu__link' href=`${item.value}`)= item.key

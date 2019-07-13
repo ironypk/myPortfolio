@@ -7,3 +7,4 @@ import "./scripts/skills";
 import "./scripts/parallax";
 import "./scripts/slider";
 import "./scripts/rewiews";
+import "./scripts/menu";

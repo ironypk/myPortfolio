@@ -25,12 +25,11 @@ new Vue({
   methods: {
     next() {
       this.$refs.flickity.next();
-      this.checkArrows();
+
     },
  
     previous() {
       this.$refs.flickity.previous();
-      this.checkArrows();
     },
     checkArrows(){
         let prevButton = this.$el.querySelector('.rewiews__prev');

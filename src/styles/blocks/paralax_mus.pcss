@@ -3,23 +3,28 @@
     overflow: hidden;
 }
 
-.paralax_mus{
+.paralax_mus_list{
     position: absolute;
     top:0;
     left:0;
-    width:100%;
+    width:140%;
     height:100%;
+    z-index: -1;
 }
-
-.paralax_mus__layer {
+.paralax_mus__item{
   position: absolute;
-  top:0;
   left:0;
-  width: 100%;
+  top:0;
+  width: 130%;
   height:100%;
-  will-change: transform;
-  //фиолетовая нашлепка
-  &::after{
+  background-repeat: no-repeat;
+  background-position: -20% 0;
+  @include desktop{
+    width: 130%;
+    background-position: 70% 0;
+  }
+  
+    &::after{
     content:'';
     top:0;
     left:0;
@@ -29,38 +34,22 @@
     background: linear-gradient(to right, rgba(#0a001d, 0.5) 0%, rgba(0, 0, 0, 0.1) 100%);
   }
 
-  //background
-    &:nth-child(1){
-    .paralax_mus__image {
-      top:-100px;
-  }
-}
-//smoke
-    &:nth-child(2){
-    .paralax_mus__image {
-      left:-50px;
-      bottom:-1200px;
-  }
-}
-//bong
-    &:nth-child(3){
-    .paralax_mus__image {
-      left:850px;
-      bottom:-300px;
-  }
-}
 
-//man
-    &:nth-child(4){
-    .paralax_mus__image{
-    bottom:-200px;
+    &--1{
+      background-image: url('../images/content/paralax/mus/mus_back.png');
+      z-index:1;
+    }
+    &--2{
+    background-image: url('../images/content/paralax/mus/mus_smoke.png');
+      z-index:2;
+    }
+    &--3{
+      background-image: url('../images/content/paralax/mus/bong.png');
+      z-index:3;
+    }
+    &--4{
+      background-image: url('../images/content/paralax/mus/man.png');
+      z-index:4;
+    } 
   }
-}  
-}
 
-  .paralax_mus__image {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-
-}

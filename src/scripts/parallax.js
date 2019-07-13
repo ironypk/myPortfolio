@@ -1,7 +1,7 @@
-const paralaxRock = document.querySelector('.paralax_rock');
+const paralaxRock = document.querySelector('.paralax_rock_list');
 const paralaxRockLayers = paralaxRock.children;
 
-const paralaxMus = document.querySelector('.paralax_mus');
+const paralaxMus = document.querySelector('.paralax_mus_list');
 const paralaxMusLayers = paralaxMus.children;
 
 
@@ -23,19 +23,34 @@ function moveLayersDependsOnMove(scroll, layers, speed){
 
         const divider = layer.dataset.speed;
         const strafe = scroll * divider / speed;
-
         layer.style.transform = `translateX(-${strafe}%)`;
+
     })
 
 }
 
 window.addEventListener('scroll', e=>{
     const wScroll = window.pageYOffset;
-    moveLayersDependsOnScroll(wScroll, paralaxRockLayers, 14);
+    let rockOffset= getOffsets('paralax_rock_list').bottom;
+    if(rockOffset > 0){
+        moveLayersDependsOnScroll(wScroll, paralaxRockLayers, 14);
+    }
+    
 })
 
 
 window.addEventListener('mousemove', e=>{
     const mScroll = e.clientX;
-    moveLayersDependsOnMove(mScroll, paralaxMusLayers, 20);
+    let musOffset = getOffsets('paralax_mus_list').top;
+    if(musOffset < 0){
+        moveLayersDependsOnMove(mScroll, paralaxMusLayers, 20);
+    }
+    
 })
+
+
+function getOffsets(block){
+    let element = document.querySelector('.'+block),
+    rect = element.getBoundingClientRect();
+    return rect;
+}
