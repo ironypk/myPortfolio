@@ -1,12 +1,21 @@
+<<<<<<< HEAD
 .rewiews{
+=======
+.rewiews {
+>>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
   position: relative;
 }
 .rewiews__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+<<<<<<< HEAD
   padding-top:150px;
   padding-bottom:150px;
+=======
+  padding-top: 150px;
+  padding-bottom: 150px;
+>>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
 }
 
 .rewiews__head {
@@ -34,7 +43,11 @@
   width: 50px;
   height: 50px;
   border-radius: 100%;
+<<<<<<< HEAD
   border: solid 1px #2d3c4e;
+=======
+  border: solid 1px $text-white;
+>>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
   background: svg-load(
       "arrow-down.svg",
       fill=$text-white,
@@ -42,16 +55,36 @@
       height=20px
     )
     center center no-repeat;
+<<<<<<< HEAD
   &:hover{
     background-color: $blue;
   }
 }
 
 .rewiews__prev{
+=======
+  &:hover {
+    background-color: $blue;
+  }
+  &:disabled{
+    border-color: #2d3c4e;
+       background: svg-load(
+      "arrow-down.svg",
+      fill=#2d3c4e,
+      width=12px,
+      height=20px
+    )
+    center center no-repeat;
+  }
+}
+
+.rewiews__prev {
+>>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
   transform: rotate(-180deg);
   margin-right: 30px;
 }
 
+<<<<<<< HEAD
 .rewiews__slider {
     height:30%;
   display: flex;
@@ -69,6 +102,28 @@
     justify-content: space-between;
   padding-left: 90px;
   width:50%;
+=======
+
+//////СЛАЙДЕР
+
+///ФЛИКИТИ
+.flickity-viewport {
+   width: 100%;
+}
+
+///
+.rewiews__slider {
+  width:85%;
+  display: flex;
+}
+
+.rewiews__slider_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 90px;
+  width: 45%;
+>>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
   @include tablets {
     padding-left: 35px;
   }
@@ -77,6 +132,7 @@
   }
 }
 
+<<<<<<< HEAD
 .rewiews__slider_item:not(:last-child) {
   margin-right: 75px;
   @include tablets {
@@ -85,6 +141,10 @@
   @include phones {
     margin-rignt: 0;
   }
+=======
+.rewiews__slider_item:not(:first-child){
+margin-left:50px;
+>>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
 }
 
 .rewiwes__slider_text {
@@ -102,7 +162,11 @@
     left: -90px;
     background: svg-load(
         "quote.svg",
+<<<<<<< HEAD
         fill=rgba($text-white,0.05),
+=======
+        fill=rgba($text-white, 0.05),
+>>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
         width=100%,
         height=100%
       )
@@ -128,11 +192,15 @@
   margin-right: 30px;
 }
 
+<<<<<<< HEAD
 /* .rewiews__slider_pic{
     object-fit: cover;
 } */
 
 .rewiews__slider_name{
+=======
+.rewiews__slider_name {
+>>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 20px;
