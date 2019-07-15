@@ -1,0 +1,32 @@
+script(type="text/x-template")#slider
+- var images = ['content/1.jpg', 'content/2.jpg', 'content/3.jpg', 'content/4.jpg', 'content/5.jpg']
+.slider
+    .slider__img.slider_block
+        .slider__img_content
+            ul.slider__img_list
+                each item, ndx in images
+                    li(class='slider__img_item' + ( (ndx === 0) ? ' slider__img_item--active' : '' ))
+                        img(class='slider__img_pic' src=require(`images/${item}`))
+
+            div.slider__controls
+                .slider__wrapper
+                    ul(class='slider__controls_list')
+                        each item, ndx in images
+                            li(class='slider__controls_item' + ( (ndx === 1) ? ' slider__controls_item--active' : '' ) + ( (ndx === 0) ? ' slider__controls_item--first-visible' : '' )  )
+                                img(class='slider__controls_pic' src=require(`images/${item}`))
+                    .slider__buttons
+                        button(type="button" class="slider__button slider__prev")
+                        button(type="button" class="slider__button slider__next")
+
+                    
+    .slider__description.slider_block
+        nav.slider__description_nav
+            ul.slider__description_list
+                - var descriptionItem = ['HTML', 'CSS', 'Javascript']
+                each item in descriptionItem
+                    li.slider__description_item
+                         a.slider__description_anchor= item
+            .slider__description_title Cайт школы образования
+            .slider__description_text
+                p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
+            a.slider__description_link(href="https://loftschool.com") Посмотреть сайт
