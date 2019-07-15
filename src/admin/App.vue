@@ -1,5 +1,4 @@
 <style lang="postcss">
-<<<<<<< HEAD
 @import "normalize.css";
 @import "../styles/mixins";
 @import "../styles/fonts";
@@ -573,19 +572,12 @@ body {
   }
 
 }
-=======
-  @import "../styles/mixins";
-  @import '../styles/fonts';
-  @import "../styles/layout/base";
-  @import 'normalize.css';
->>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
 </style>
 
 
 
 <template lang="pug">
   
-<<<<<<< HEAD
   .wrapper
     .maincontent
       header.admin_header
@@ -698,10 +690,6 @@ body {
             
         
       
-=======
-  h1 Welcome to the Vue App
-
->>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
 </template>
 
 

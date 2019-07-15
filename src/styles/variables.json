@@ -4,11 +4,8 @@
   "text-black": "#0a001d",
   "text-black-opacity": "rgba(10, 0, 29, 0.5)",
   "blue": "#008bff",
-<<<<<<< HEAD
   "admin-black": "#414c63",
   "admin-gray": "rgba(65, 76, 99, 0.51)",
-=======
->>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
   "links-color": "#4b6fd7",
   "bp-desktop-hd": "1800px",
   "bp-desktop": "1200px",
