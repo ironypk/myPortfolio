@@ -7,8 +7,6 @@ mixin image(path, className)
   img(src=require(`images/${path}`) class=className)
 
 
-<<<<<<< HEAD
-=======
 mixin graphic(percent, className)
   svg(class=`${className}__percentage` xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" version="1.1")
     defs
@@ -18,5 +16,4 @@ mixin graphic(percent, className)
     circle(cx="50" cy="50" r="40" class=`${className}__circle` + ` ${className}__circle_under`)
     circle(cx="50" cy="50" r="40" class=`${className}__circle` + ` ${className}__circle_above` style=`animation-delay: -${percent}s`)
 
->>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
 

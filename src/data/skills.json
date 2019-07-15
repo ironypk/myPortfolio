@@ -1,25 +1,4 @@
 [
-<<<<<<< HEAD
-  {
-    "skillsGroup": "Fronend",
-    "skills": {
-      "html5": 30,
-      "css3": 50,
-      "Javascript": 50,
-      "jQuery и Vue.js": 30
-    }
-  },
-  {
-    "skillsGroup": "Workflow",
-    "skills": {
-      "GIT": 15,
-      "Terminal": 25,
-      "Gulp": 100,
-      "Webpack": 40
-    }
-  }
-]
-=======
     {
         "skillGroup": "Frontend",
         "skills":{
@@ -39,4 +18,3 @@
         }
     }
 ]
->>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
