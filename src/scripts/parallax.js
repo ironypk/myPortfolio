@@ -53,8 +53,4 @@ function getOffsets(block){
     let element = document.querySelector('.'+block),
     rect = element.getBoundingClientRect();
     return rect;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab

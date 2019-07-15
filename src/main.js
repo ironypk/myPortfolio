@@ -7,8 +7,4 @@ import "./scripts/skills";
 import "./scripts/parallax";
 import "./scripts/slider";
 import "./scripts/rewiews";
-<<<<<<< HEAD
 import "./scripts/menu";
-=======
-import "./scripts/menu";
->>>>>>> 6b02373b03ee75a070f382bb4eaacd42f109beab
