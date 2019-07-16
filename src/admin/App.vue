@@ -8,6 +8,10 @@ body {
   color: $text-black;
 }
 
+.admin_panel__container{
+  position: relative;
+}
+
 .admin_header {
   width: 100%;
   height: 80px;
@@ -17,6 +21,8 @@ body {
 .header_admin__container {
   display: flex;
   align-items: center;
+  padding-top:15px;
+  padding-bottom:15px;
 }
 
 .avatar {
@@ -36,6 +42,9 @@ body {
   height: 30px;
   display: flex;
   justify-content: space-between;
+  @include phones{
+    display: block;
+  }
 }
 
 .header_admin__name {
@@ -46,6 +55,10 @@ body {
   align-items: center;
   text-align: center;
   color: $text-white;
+  @include phones{
+    text-align:left;
+    justify-content:flex-start;
+  }
   &::before {
     content: "Панель администрирования";
     position: absolute;
@@ -53,6 +66,9 @@ body {
     font-size: 14px;
     white-space: nowrap;
     left: 200px;
+    @include phones{
+      display: none;
+    }
   }
 }
 
@@ -103,13 +119,27 @@ body {
   align-items: center;
   text-align: center;
   color:#fff;
-  .add_works__btn{
+  padding:30px;
+  @include phones{
+    height:110px;
+    flex-direction:row;
+    justify-content: flex-start;
+    margin-left:-30px;
+    margin-right:-30px;
+  }
+  
+  .add_block__btn{
     width: 150px;
     height:150px;
     border-radius:50%;
     border:2px solid #fff;
     position: relative;
-    margin-bottom:30px;
+    margin:0 0 30px 0;
+    @include phones{
+      width:50px;
+      height:50px;
+      margin:0 30px 0 0;
+    }
     &::after{
       content: '';
       position:absolute;
@@ -120,12 +150,144 @@ body {
       left:50%;
       background: svg-load("remove.svg", fill=#fff, width=100%, height=100%)
         center center no-repeat;
+      @include phones{
+        width:12px;
+        height:12px;
+      }
     }
   }
-  .add_works__text {
+  .add_block__text {
   word-wrap: break-word;
   }
 }
+
+
+///Общие стили блоков
+.admin_edit__block{
+  padding:30px;
+  margin-bottom:30px;
+  @include phones{
+    padding:0;
+  }
+}
+
+.admin_edit__title{
+      width:100%;
+      padding: 0 10px 25px 10px;
+      border-bottom:1px solid $admin-gray;
+      color:$admin-black;
+      font-weight:700;
+      margin-bottom:50px;
+      @include phones{
+        width:calc(100% + 60px);
+        margin-left:-30px;
+      }
+    }
+
+.admin_edit__content{
+      width:100%;
+      display:flex;
+      @include tablets{
+    flex-direction:column;
+    align-items:center;
+  }
+    }
+.admin_form__row{
+      width:100%;
+      display: block;
+    }
+
+.admin_form__row:not(:last-child){
+      margin-bottom:30px;
+    }
+
+.admin_form__row-title{
+      color:$admin-gray;
+      margin-bottom:20px;
+    }
+    .admin_form__row-input{
+      width:100%;
+      border:none;
+      border-bottom:1px solid $admin-black;
+      padding-bottom:20px;
+    }
+
+    .admin_form__row-textarea{
+      resize: none;
+      height: 150px;
+      padding:20px 80px 20px 20px;
+      border:1px solid $admin-gray;
+    } 
+
+.admin_edit__button{
+    width:180px;
+    color:$text-white;
+    font-weight:700;
+    border-radius:25px;
+    padding:20px 45px;
+    background-image: linear-gradient(to right, #006aed, #3f35cb);
+  } 
+.admin_form__btns{
+      display: flex;
+      justify-content: flex-end;
+    }
+
+.form__reset{
+      color:$blue;
+      background-image:none;
+      background:#fff;
+    }
+.admin__item_btns{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .admin__item_btn{
+    position: relative;
+    display: flex;
+    align-items: center;
+    color:$admin-gray;
+    padding-right:30px;
+    padding-left:0;
+    &::after{
+      right:0;
+      position:absolute;
+      content:'';
+      width:15px;
+      height:15px;
+    }
+  }
+
+  .admin__item_remove{
+    &::after{
+       background: svg-load("remove.svg", fill=#c92e2e, width=100%, height=100%)
+        center center no-repeat;
+    }
+  }
+
+    .admin__item_change{
+    &::after{
+       background: svg-load("pencil.svg", fill=#383bcf, width=100%, height=100%)
+        center center no-repeat;
+    }
+  } 
+
+  .admin_block__list{
+    display: grid;
+    width:100%;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: auto;
+    grid-gap: 30px 30px;
+    @include tablets{
+      grid-template-columns: 50% 50%;
+    }
+     @include phones{
+      grid-template-columns:auto;
+    }
+  }
+
+
 /////////////#ADMIN_ABOUT
 #admin_about {
     display: none;
@@ -365,34 +527,28 @@ body {
 }
 /////////////#ADMIN_WORKS
 #admin_works{
+  display: none;
   font-weight: 600;
   color:$admin-black;
-  .works_edit__button{
-    width:180px;
-    color:$text-white;
-    font-weight:700;
-    border-radius:25px;
-    padding:20px 45px;
-    background-image: linear-gradient(to right, #006aed, #3f35cb);
-  }
-  .works_edit{
-    padding:30px;
-    margin-bottom:30px;
-    .works_edit__title{
-      width:100%;
-      padding: 0 10px 25px 10px;
-      border-bottom:1px solid $admin-gray;
-      color:$admin-black;
-      font-weight:700;
-      margin-bottom:50px;
-    }
+ 
+  
+    
     .works_edit__content{
       width:100%;
       display:flex;
+      @include tablets{
+        flex-direction:column;
+      }
     }
 
     .works_edit__content_block{
       width:49%;
+      @include tablets{
+        width:80%;
+      }
+      @include phones{
+        width:100%;
+      }
     }
 
     .works_edit__download{
@@ -405,7 +561,10 @@ body {
       align-items:center;
       text-align:center;
       background-color: #dee4ed;
-      margin-right:30px;
+      margin:0 30px 0 0;
+      @include tablets{
+        margin:0 0 55px 0;
+       }
     }
 
     .works_edit__download_text{
@@ -414,37 +573,8 @@ body {
       margin-bottom:25px;
     }
 
-
-    .works_form__row{
-      width:100%;
-      display: block;
-      margin-bottom:30px;
-    }
-
-    .works_form__row:not(:last-child){
-      margin-bottom:30px;
-    }
     .works_form__row(:last-child){
       margin-bottom:20px;
-    }
-
-    .works_form__row-title{
-      color:$admin-gray;
-      margin-bottom:20px;
-    }
-
-    .works_form__row-input{
-      width:100%;
-      border:none;
-      border-bottom:1px solid $admin-black;
-      padding-bottom:20px;
-    }
-
-    .works_form__row-textarea{
-      resize: none;
-      height: 150px;
-      padding:20px 80px 20px 20px;
-      border:1px solid $admin-gray;
     }
 
     .works_form__tag_list{
@@ -457,6 +587,7 @@ body {
       align-items: center;
       padding:20px 10px;
       color:$admin-gray;
+      cursor: pointer;
     }
 
     .tag_item__btn{
@@ -475,37 +606,19 @@ body {
       }
     }
 
-    .works_form_btns{
-      display: flex;
-      justify-content: flex-end;
+    .works_form__btns{
+      @include tablets{
+        justify-content:center;
+      }
     }
 
-    .works_form__reset{
-      color:$blue;
-      background-image:none;
-      background:#fff;
-    }
-
-
-
-
-
-
-
-
-
-  }
-
-  .admin_works__list{
-    display: grid;
-    width:100%;
-    grid-template-columns: 33% 33% 33%;
-    grid-template-rows: auto;
-    grid-gap: 30px 30px;
-  }
 
   .admin_works__item_img{
     margin-bottom:40px;
+    @include phones{
+      margin-right:-30px;
+      margin-left:-30px;
+    }
   }
 
   .admin_works__item_pic{
@@ -534,43 +647,126 @@ body {
     margin-bottom:45px;
   }
 
+}
 
-  .admin_works__item_btns{
-    width:100%;
-    display: flex;
-    justify-content: space-between;
+#admin_rewiews{
+  display:none;
+
+  .rewiews_edit__download{
+    margin:0 30px 0 0;
+    text-align:center;
+    color:$blue;
+    @include phones{
+      margin:0 0 40px 0;
+    }
   }
 
-  .admin_works__item_btn{
+  .rewiews_edit__download-img{
+    width:200px;
+    height:200px;
+    border-radius: 50%;
+    background-color: #dee4ed;
+    margin-bottom: 30px;
     position: relative;
     display: flex;
-    align-items: center;
-    color:$admin-gray;
-    padding-right:30px;
-    padding-left:0;
     &::after{
-      right:0;
-      position:absolute;
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
       content:'';
-      width:15px;
-      height:15px;
-    }
-  }
-
-  .admin_works__item_remove{
-    &::after{
-       background: svg-load("remove.svg", fill=#c92e2e, width=100%, height=100%)
+      width:100px;
+      height:100px;
+      background: svg-load("user.svg", fill=#fff, width=100%, height=100%)
         center center no-repeat;
     }
   }
 
-    .admin_works__item_change{
-    &::after{
-       background: svg-load("pencil.svg", fill=#383bcf, width=100%, height=100%)
-        center center no-repeat;
+  .rewiews_form{
+    width:50%;
+    @include tablets{
+      width:100%;
     }
   }
 
+  .rewiews__author{
+    width:100%;
+    display:flex;
+    @include tablets{
+      flex-direction:column;
+      padding-right:130px;
+      margin-bottom:40px;
+    }
+    @include tablets{
+      padding-right:0;
+    }
+  }
+
+
+  .rewiews_form__row:first-child{
+    margin:0 30px 0 0;
+    @include tablets{
+      margin:0 0 40px 0;
+    }
+  }
+
+  .rewiews_form__row-textarea{
+    padding-right:20px;
+    height:120px;
+
+  }
+
+  .admin_rewiews__item{
+    padding:30px;
+  }
+
+  .add_rewiew__author{
+    width:100%;
+    padding:0px 10px 30px 10px;
+    border-bottom:1px solid $admin-gray;
+    margin-bottom:30px;
+    display: flex;
+    @include phones{
+      width: calc(100% + 60px);
+      margin-left:-30px;
+    }
+  }
+
+  .add_rewiew__img{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    overflow: hidden;
+    margin-right:20px;
+  }
+
+  .add_rewiew__pic{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  .add_rewiew__name{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom:5px;
+  }
+
+  .add_rewiew__title{
+    color:$admin-gray;
+  }
+
+  .add_rewiew__inf{
+    padding:0px 10px;
+  }
+
+  .add_rewiew__description {
+    line-height: 1.88;
+    color:rgba(65, 76, 99, 0.7);
+    margin-bottom:60px;
+  }
+
+  
 }
 </style>
 
@@ -595,7 +791,7 @@ body {
               each item, ndx in menuItems
                 li(class='admin_menu__item' + ((ndx===0) ? ' admin_menu__item--active': ''))
                   a.admin_menu__link= item
-          section#admin_about
+          section#admin_about.admin_section
             .container.admin_section__container.admin_about__container
               .admin_about__head
                 h2.admin_about__title.admin_panel__title  Блок "Обо мне"
@@ -630,40 +826,40 @@ body {
                       .percent_wrap.description__percent_wrap
                         input.description_input.description_percent.about_form__input.about_form__percent(placeholder="100")
                       button.description__add_btn.admin_about__add_btn
-          section#admin_works
+          section#admin_works.admin_section
             .admin_section__container
-              .admin_panel__title.ad Блок "Работы"
-              .works_edit
-                .works_edit__title Редактирование работы
-                .works_edit__content
+              .admin_panel__title Блок "Работы"
+              .works_edit.admin_edit__block
+                .works_edit__title.admin_edit__title Редактирование работы
+                .works_edit__content.admin_edit__content
                   .works_edit__download.works_edit__content_block
                     .works_edit__download_text Перетащите или загрузите для загрузки изображения
-                    button(type="button").works_edit__button.works_edit__download_button Загрузить
+                    button(type="button").admin_edit__button.works_edit__download_button Загрузить
                   form.works_form.works_edit__content_block
-                    label.works_form__row
-                      .works_form__row-title Название
-                      input.works_form__row-input(value="Дизайн сайта для авто салона Porsche")
-                    label.works_form__row
-                      .works_form__row-title ССылка
-                      input.works_form__row-input(value="https://www.porsche-pulkovo.ru")
-                    label.works_form__row
-                      .works_form__row-title Описание
-                      textarea.works_form__row-input.works_form__row-textarea(placeholder="Порше Центр Пулково - является официальным дилером марки Порше в Санкт-Петербурге и предоставляет полный цикл услуг по продаже и сервисному обслуживанию автомобилей")
-                    label.works_form__row
-                      .works_form__row-title Добавление тэга
-                      input.works_form__row-input(value="Jquery, Vue.js, HTML5")
+                    label.works_form__row.admin_form__row
+                      .works_form__row-title.admin_form__row-title Название
+                      input.works_form__row-input.admin_form__row-input(value="Дизайн сайта для авто салона Porsche")
+                    label.works_form__row.admin_form__row
+                      .works_form__row-title.admin_form__row-title ССылка
+                      input.works_form__row-input.admin_form__row-input(value="https://www.porsche-pulkovo.ru")
+                    label.works_form__row.admin_form__row
+                      .works_form__row-title.admin_form__row-title Описание
+                      textarea.works_form__row-input.works_form__row-textarea.admin_form__row-textarea.admin_form__row-input(placeholder="Порше Центр Пулково - является официальным дилером марки Порше в Санкт-Петербурге и предоставляет полный цикл услуг по продаже и сервисному обслуживанию автомобилей")
+                    label.works_form__row.admin_form__row
+                      .works_form__row-title.admin_form__row-title Добавление тэга
+                      input.works_form__row-input.admin_form__row-input(value="Jquery, Vue.js, HTML5")
                     ul.works_form__tag_list
                       -for(i=0; i < 3; i++)
                         li.works_form__tag_item
                           .div HTML5
                           .tag_item__btn
-                    .works_form_btns
-                      button.works_edit__button.works_form__reset(type="reset") Отмена
-                      button.works_edit__button.works_form__save(type="submit") Сохранить
-              ul.admin_works__list
-                li.add_works.add_block.admin_works__item
-                  a(href="#").add_works__btn
-                  .add_works__text Добавить Работу
+                    .works_form__btns.admin_form__btns
+                      button.admin_edit__button.form__reset(type="reset") Отмена
+                      button.admin_edit__button.form__save(type="submit") Сохранить
+              ul.admin_works__list.admin_block__list
+                li.add_works.add_block.admin_works__item.admin_block__item
+                  a(href="#").add_block__btn
+                  .add_block__text Добавить Работу
                 - for(let i =0;i <4; i++)  
                   li.admin_works__item
                     .admin_works__item_img
@@ -672,9 +868,51 @@ body {
                       .admin_works__item_title Сайт школы образования
                       .admin_works__item_description Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
                       a.admin_works__item_link(href="http://loftschool.ru") http://loftschool.ru
-                      .admin_works__item_btns
-                        button(type="button").admin_works__item_change.admin_works__item_btn Править
-                        button(type="button").admin_works__item_remove.admin_works__item_btn Удалить
+                      .admin__item_btns
+                        button(type="button").admin__item_change.admin__item_btn Править
+                        button(type="button").admin__item_remove.admin__item_btn Удалить
+          section#admin_rewiews.admin_section
+            .admin_section__container
+              .admin_panel__title Блок "Работы"
+              .rewiews_edit.admin_edit__block
+                .rewiews_edit__title.admin_edit__title Новый отзыв
+                .rewiews_edit__content.admin_edit__content
+                  .rewiews_edit__download
+                    .rewiews_edit__download-img
+                    .rewiews_edit__download-title Добавить фото  
+
+                  form.rewiews_form
+                    .rewiews__author
+                      label.rewiews_form__row.admin_form__row
+                        .works_form__row-title.admin_form__row-title Имя Автора
+                        input.works_form__row-input.admin_form__row-input(value="Ковальчук Дмитрий")
+                      label.rewiews_form__row.admin_form__row
+                        .works_form__row-title.admin_form__row-title Титул автора
+                        input.works_form__row-input.admin_form__row-input(value="Основатель LoftSchool")
+                    label.rewiews_form__row.admin_form__row
+                      .rewiews_form__row-title.admin_form__row-title Описание
+                      textarea.rewiews_form__row-input.rewiews_form__row-textarea.admin_form__row-textarea.admin_form__row-input(placeholder="Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!")
+                    .rewiews_form__btns.admin_form__btns
+                      button.admin_edit__button.form__reset(type="reset") Отмена
+                      button.admin_edit__button.form__save(type="submit") Сохранить
+              ul.admin_rewiews__list.admin_block__list
+                li.add_rewiew.add_block.admin_rewiews__item.admin_block__item
+                  a(href="#").add_block__btn
+                  .add_block__text Добавить отзыв
+                - for(let i =0; i < 4; i++)
+                  li.add_rewiew.admin_rewiew__item.admin_block__item
+                    .add_rewiew__author
+                      .add_rewiew__img
+                        img(src="../images/content/rewiews-1.png").add_rewiew__pic
+                      .add_rewiew__init
+                        .add_rewiew__name Владимир Сабанцев
+                        .add_rewiew__title Преподователь
+                    .add_rewiew__inf
+                      .add_rewiew__description Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
+                      .admin__item_btns
+                          button(type="button").admin__item_change.admin__item_btn Править
+                          button(type="button").admin__item_remove.admin__item_btn Удалить
+
 
 
 
@@ -692,5 +930,8 @@ body {
       
 </template>
 
+
+<script>
+</script>
 
 
