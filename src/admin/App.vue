@@ -290,7 +290,6 @@ body {
 
 /////////////#ADMIN_ABOUT
 #admin_about {
-    display: none;
   //// BTN
   .admin_about__add_btn {
     position: relative;
@@ -325,6 +324,7 @@ body {
   }
 
   .admin_about__add {
+    font-size: 16px;
     display: flex;
     color: $blue;
   }
@@ -345,6 +345,9 @@ body {
     grid-template-columns: auto auto;
     grid-template-rows: auto;
     grid-gap: 30px 30px;
+    @include phones{
+      grid-template-columns: auto;
+    }
   }
   .admin_about__about_form {
     display: flex;
@@ -354,10 +357,9 @@ body {
     width: 100%;
     min-height: 390px;
     padding: 0 20px;
-  }
-
-  .admin_about__about_form:not(:last-child) {
-    margin-right: 30px;
+    @include phones{
+      padding:0;
+    }
   }
 
   .about_form__input {
@@ -375,6 +377,11 @@ body {
     padding: 15px 10px;
     border-bottom: 1px solid #999;
     margin-bottom: 20px;
+  @include phones{
+      width:calc(100% + 60px);
+      margin-left:-30px;
+      padding:15px 30px;
+    }
   }
 
   .name_input {
@@ -455,6 +462,9 @@ body {
     width: 100%;
     display: flex;
     padding: 0 10px;
+    @include phones{
+      padding:0;
+    }
   }
 
   .skill_name {
@@ -527,7 +537,6 @@ body {
 }
 /////////////#ADMIN_WORKS
 #admin_works{
-  display: none;
   font-weight: 600;
   color:$admin-black;
  
@@ -650,7 +659,6 @@ body {
 }
 
 #admin_rewiews{
-  display:none;
 
   .rewiews_edit__download{
     margin:0 30px 0 0;
@@ -792,9 +800,9 @@ body {
                 li(class='admin_menu__item' + ((ndx===0) ? ' admin_menu__item--active': ''))
                   a.admin_menu__link= item
           section#admin_about.admin_section
-            .container.admin_section__container.admin_about__container
-              .admin_about__head
-                h2.admin_about__title.admin_panel__title  Блок "Обо мне"
+            .admin_section__container.admin_about__container
+              .admin_about__head.admin_panel__title
+                .admin_about__title  Блок "Обо мне"
                 .admin_about__add
                   button.add_btn.admin_about__add_btn
                   .add__text Добавить группу

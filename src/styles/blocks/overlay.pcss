@@ -1,0 +1,31 @@
+.form__overlay{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    left:0;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(1, 1, 1, .8);
+    z-index: 9999;
+}
+
+.form__modal{
+    background-color: #fff;
+    width:500px;
+    height:300px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+
+.form__modal_text{
+    color:$text-black;
+    margin-bottom: 30px;
+}
