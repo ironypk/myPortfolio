@@ -241,6 +241,11 @@ body {
 
 .admin_panel__container {
   position: relative;
+  @include phones{
+    padding-left:0;
+    padding-right:0;
+  }
+  
 }
 
 .admin_welcome {
@@ -452,6 +457,9 @@ body {
 
 .admin_menu__list {
   display: flex;
+  @include phones{
+    justify-content:center;
+  }
 }
 
 .admin_menu__item {
@@ -476,6 +484,9 @@ body {
   font-weight: 700;
   color: $text-black;
   margin-bottom: 60px;
+  @include phones{
+    padding:0 30px;
+  }
 }
 
 .add_block {
@@ -491,8 +502,6 @@ body {
     height: 110px;
     flex-direction: row;
     justify-content: flex-start;
-    margin-left: -30px;
-    margin-right: -30px;
   }
 
   .add_block__btn {
@@ -545,9 +554,8 @@ body {
   color: $admin-black;
   font-weight: 700;
   margin-bottom: 50px;
-  @include phones {
-    width: calc(100% + 60px);
-    margin-left: -30px;
+  @include phones{
+    padding:0 30px 25px 30px;
   }
 }
 
@@ -557,6 +565,9 @@ body {
   @include tablets {
     flex-direction: column;
     align-items: center;
+  }
+  @include phones{
+    padding:30px;
   }
 }
 .admin_form__row {
@@ -745,8 +756,6 @@ body {
     border-bottom: 1px solid #999;
     margin-bottom: 20px;
     @include phones {
-      width: calc(100% + 60px);
-      margin-left: -30px;
       padding: 15px 30px;
     }
   }
@@ -819,6 +828,9 @@ body {
   .about_form__skills {
     width: 100%;
     height: 60%;
+    @include phones{
+      padding:0 30px;
+    }
   }
 
   .about_form__skills:not(:last-child) {
@@ -865,6 +877,9 @@ body {
 
   .about_form__description {
     justify-content: flex-end;
+    @include phones{
+      justify-content:center;
+    }
   }
 
   .description_input {
@@ -990,6 +1005,7 @@ body {
 
   .admin_works__item{
     box-shadow: 4.1px 2.9px 20px 0 rgba(0, 0, 0, 0.07);
+    padding-bottom:40px;
   }
 
   .admin_works__item--active{
@@ -999,10 +1015,6 @@ body {
   .admin_works__item_img {
     position:relative;
     margin-bottom: 40px;
-    @include phones {
-      margin-right: -30px;
-      margin-left: -30px;
-    }
   }
 
   .admin_works__item_pic {
@@ -1120,17 +1132,17 @@ body {
 
   .admin_rewiew__item {
     box-shadow: 4.1px 2.9px 20px 0 rgba(0, 0, 0, 0.07);
+    padding:30px 0;
   }
 
   .add_rewiew__author {
     width: 100%;
-    padding: 0px 10px 30px 10px;
+    padding: 0px 30px 30px 30px;
     border-bottom: 1px solid $admin-gray;
     margin-bottom: 30px;
     display: flex;
-    @include phones {
-      width: calc(100% + 60px);
-      margin-left: -30px;
+    @include phones{
+      padding: 0 30px 30px 30px;
     }
   }
 
@@ -1159,7 +1171,7 @@ body {
   }
 
   .add_rewiew__inf {
-    padding: 0px 10px;
+    padding: 0px 30px;
   }
 
   .add_rewiew__description {
