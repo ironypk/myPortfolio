@@ -733,9 +733,9 @@ body {
     box-shadow: 4.1px 2.9px 20px 0 rgba(0, 0, 0, 0.07);
     width: 100%;
     min-height: 390px;
-    padding: 0 20px;
-    @include phones {
-      padding: 0;
+    padding: 30px;
+    @include phones{
+      padding: 30px 0;
     }
   }
 
@@ -752,11 +752,11 @@ body {
   }
 
   .about_form__name {
-    padding: 15px 10px;
+    padding: 0 10px 15px 10px;
     border-bottom: 1px solid #999;
     margin-bottom: 20px;
     @include phones {
-      padding: 15px 30px;
+      padding: 0 30px 15px 30px;
     }
   }
 
