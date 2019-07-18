@@ -1,3 +1,146 @@
+<template lang="pug">
+  .wrapper
+    .maincontent
+      header.admin_header
+        .container.header_admin__container
+          .avatar
+            img(src="../images/content/user.jpg").avatar_pic
+          .header_admin__content
+            .header_admin__name Константин Бульба
+            a.header__admin_btn Выйти
+      .admin_panel
+        .container.admin_panel__container
+          nav.admin_menu
+            ul.admin_menu__list
+              - var menuItems = ['Обо мне', 'Работы', 'Отзывы']
+              each item, ndx in menuItems
+                li(class='admin_menu__item' + ((ndx===0) ? ' admin_menu__item--active': ''))
+                  a.admin_menu__link= item
+          section#admin_about.admin_section
+            .admin_section__container.admin_about__container
+              .admin_about__head.admin_panel__title
+                .admin_about__title  Блок "Обо мне"
+                .admin_about__add
+                  button.add_btn.admin_about__add_btn
+                  .add__text Добавить группу
+              .admin_about__content
+                - for(let i =0; i < 3; i++)
+                  form.admin_about__about_form
+                    label.about_form__row.about_form__name.form_row--active
+                      input.name_input.about_form__input(placeholder="Название новой группы")
+                      .form_buttons
+                        button.about_form__buttons.change.about_form__btn(type="button")
+                      .form_buttons--active.about_form__btns
+                        button.about_form__buttons.accept.about_form__btn(type="button")
+                        button.about_form__buttons.decline.about_form__btn(type="button")
+                    ul.about_form__skills
+                      -for(let i=0; i< 4; i++)
+                        li.about_form__skill
+                          label.skill_wrap.about_form__row
+                            input.skill_input.skill_name.about_form__input(placeholder="Git")
+                            .percent_wrap.skill__percent_wrap
+                              input.skill_input.skill_percent.about_form__percent.about_form__input(type="number" min="0" max="100")
+                            .form_buttons
+                              button.about_form__buttons.change.about_form__btn(type="button")
+                              button.about_form__buttons.remove.about_form__btn(type="button")
+                            .form_buttons--active.about_form__btns
+                              button.about_form__buttons.accept.about_form__btn(type="button")
+                              button.about_form__buttons.decline.about_form__btn(type="button")
+                    label.about_form__description.about_form__row
+                      input.description_input.description_name.about_form__input(placeholder="Новый навык")
+                      .percent_wrap.description__percent_wrap
+                        input.description_input.description_percent.about_form__input.about_form__percent(type="number" min="0" max="100")
+                      button.description__add_btn.admin_about__add_btn
+          section#admin_works.admin_section
+            .admin_section__container
+              .admin_panel__title Блок "Работы"
+              .works_edit.admin_edit__block
+                .works_edit__title.admin_edit__title Редактирование работы
+                .works_edit__content.admin_edit__content
+                  .works_edit__download.works_edit__content_block
+                    .works_edit__download_text Перетащите или загрузите для загрузки изображения
+                    button(type="button").admin_edit__button.works_edit__download_button Загрузить
+                  form.works_form.works_edit__content_block
+                    label.works_form__row.admin_form__row
+                      .works_form__row-title.admin_form__row-title Название
+                      input.works_form__row-input.admin_form__row-input(value="Дизайн сайта для авто салона Porsche")
+                    label.works_form__row.admin_form__row
+                      .works_form__row-title.admin_form__row-title ССылка
+                      input.works_form__row-input.admin_form__row-input(value="https://www.porsche-pulkovo.ru")
+                    label.works_form__row.admin_form__row
+                      .works_form__row-title.admin_form__row-title Описание
+                      textarea.works_form__row-input.works_form__row-textarea.admin_form__row-textarea.admin_form__row-input(placeholder="Порше Центр Пулково - является официальным дилером марки Порше в Санкт-Петербурге и предоставляет полный цикл услуг по продаже и сервисному обслуживанию автомобилей")
+                    label.works_form__row.admin_form__row
+                      .works_form__row-title.admin_form__row-title Добавление тэга
+                      input.works_form__row-input.admin_form__row-input(value="Jquery, Vue.js, HTML5")
+                    ul.works_form__tag_list
+                      -for(i=0; i < 3; i++)
+                        li.works_form__tag_item
+                          .div HTML5
+                          .tag_item__btn
+                    .works_form__btns.admin_form__btns
+                      button.admin_edit__button.form__reset(type="reset") Отмена
+                      button.admin_edit__button.form__save(type="submit") Сохранить
+              ul.admin_works__list.admin_block__list
+                li.add_works.add_block.admin_works__item.admin_block__item
+                  a(href="#").add_block__btn
+                  .add_block__text Добавить Работу
+                - for(let i =0;i <4; i++)  
+                  li.admin_works__item
+                    .admin_works__item_img
+                      img(src="../images/content/2.jpg").admin_works__item_pic
+                    .admin_works_item_inf
+                      .admin_works__item_title Сайт школы образования
+                      .admin_works__item_description Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+                      a.admin_works__item_link(href="http://loftschool.ru") http://loftschool.ru
+                      .admin__item_btns
+                        button(type="button").admin__item_change.admin__item_btn Править
+                        button(type="button").admin__item_remove.admin__item_btn Удалить
+          section#admin_rewiews.admin_section
+            .admin_section__container
+              .admin_panel__title Блок "Работы"
+              .rewiews_edit.admin_edit__block
+                .rewiews_edit__title.admin_edit__title Новый отзыв
+                .rewiews_edit__content.admin_edit__content
+                  .rewiews_edit__download
+                    .rewiews_edit__download-img
+                    .rewiews_edit__download-title Добавить фото  
+
+                  form.rewiews_form
+                    .rewiews__author
+                      label.rewiews_form__row.admin_form__row
+                        .works_form__row-title.admin_form__row-title Имя Автора
+                        input.works_form__row-input.admin_form__row-input(value="Ковальчук Дмитрий")
+                      label.rewiews_form__row.admin_form__row
+                        .works_form__row-title.admin_form__row-title Титул автора
+                        input.works_form__row-input.admin_form__row-input(value="Основатель LoftSchool")
+                    label.rewiews_form__row.admin_form__row
+                      .rewiews_form__row-title.admin_form__row-title Описание
+                      textarea.rewiews_form__row-input.rewiews_form__row-textarea.admin_form__row-textarea.admin_form__row-input(placeholder="Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!")
+                    .rewiews_form__btns.admin_form__btns
+                      button.admin_edit__button.form__reset(type="reset") Отмена
+                      button.admin_edit__button.form__save(type="submit") Сохранить
+              ul.admin_rewiews__list.admin_block__list
+                li.add_rewiew.add_block.admin_rewiews__item.admin_block__item
+                  a(href="#").add_block__btn
+                  .add_block__text Добавить отзыв
+                - for(let i =0; i < 4; i++)
+                  li.add_rewiew.admin_rewiew__item.admin_block__item
+                    .add_rewiew__author
+                      .add_rewiew__img
+                        img(src="../images/content/rewiews-1.png").add_rewiew__pic
+                      .add_rewiew__init
+                        .add_rewiew__name Владимир Сабанцев
+                        .add_rewiew__title Преподователь
+                    .add_rewiew__inf
+                      .add_rewiew__description Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
+                      .admin__item_btns
+                          button(type="button").admin__item_change.admin__item_btn Править
+                          button(type="button").admin__item_remove.admin__item_btn Удалить 
+      
+</template>
+
+
 <style lang="postcss">
 @import "normalize.css";
 @import "../styles/mixins";
@@ -777,153 +920,5 @@ body {
   
 }
 </style>
-
-
-
-<template lang="pug">
-  .wrapper
-    .maincontent
-      header.admin_header
-        .container.header_admin__container
-          .avatar
-            img(src="../images/content/user.jpg").avatar_pic
-          .header_admin__content
-            .header_admin__name Константин Бульба
-            a.header__admin_btn Выйти
-      .admin_panel
-        .container.admin_panel__container
-          nav.admin_menu
-            ul.admin_menu__list
-              - var menuItems = ['Обо мне', 'Работы', 'Отзывы']
-              each item, ndx in menuItems
-                li(class='admin_menu__item' + ((ndx===0) ? ' admin_menu__item--active': ''))
-                  a.admin_menu__link= item
-          section#admin_about.admin_section
-            .admin_section__container.admin_about__container
-              .admin_about__head.admin_panel__title
-                .admin_about__title  Блок "Обо мне"
-                .admin_about__add
-                  button.add_btn.admin_about__add_btn
-                  .add__text Добавить группу
-              .admin_about__content
-                - for(let i =0; i < 3; i++)
-                  form.admin_about__about_form
-                    label.about_form__row.about_form__name.form_row--active
-                      input.name_input.about_form__input(placeholder="Название новой группы")
-                      .form_buttons
-                        button.about_form__buttons.change.about_form__btn(type="button")
-                      .form_buttons--active.about_form__btns
-                        button.about_form__buttons.accept.about_form__btn(type="button")
-                        button.about_form__buttons.decline.about_form__btn(type="button")
-                    ul.about_form__skills
-                      -for(let i=0; i< 4; i++)
-                        li.about_form__skill
-                          label.skill_wrap.about_form__row
-                            input.skill_input.skill_name.about_form__input(placeholder="Git")
-                            .percent_wrap.skill__percent_wrap
-                              input.skill_input.skill_percent.about_form__percent.about_form__input(type="number" min="0" max="100")
-                            .form_buttons
-                              button.about_form__buttons.change.about_form__btn(type="button")
-                              button.about_form__buttons.remove.about_form__btn(type="button")
-                            .form_buttons--active.about_form__btns
-                              button.about_form__buttons.accept.about_form__btn(type="button")
-                              button.about_form__buttons.decline.about_form__btn(type="button")
-                    label.about_form__description.about_form__row
-                      input.description_input.description_name.about_form__input(placeholder="Новый навык")
-                      .percent_wrap.description__percent_wrap
-                        input.description_input.description_percent.about_form__input.about_form__percent(type="number" min="0" max="100")
-                      button.description__add_btn.admin_about__add_btn
-          section#admin_works.admin_section
-            .admin_section__container
-              .admin_panel__title Блок "Работы"
-              .works_edit.admin_edit__block
-                .works_edit__title.admin_edit__title Редактирование работы
-                .works_edit__content.admin_edit__content
-                  .works_edit__download.works_edit__content_block
-                    .works_edit__download_text Перетащите или загрузите для загрузки изображения
-                    button(type="button").admin_edit__button.works_edit__download_button Загрузить
-                  form.works_form.works_edit__content_block
-                    label.works_form__row.admin_form__row
-                      .works_form__row-title.admin_form__row-title Название
-                      input.works_form__row-input.admin_form__row-input(value="Дизайн сайта для авто салона Porsche")
-                    label.works_form__row.admin_form__row
-                      .works_form__row-title.admin_form__row-title ССылка
-                      input.works_form__row-input.admin_form__row-input(value="https://www.porsche-pulkovo.ru")
-                    label.works_form__row.admin_form__row
-                      .works_form__row-title.admin_form__row-title Описание
-                      textarea.works_form__row-input.works_form__row-textarea.admin_form__row-textarea.admin_form__row-input(placeholder="Порше Центр Пулково - является официальным дилером марки Порше в Санкт-Петербурге и предоставляет полный цикл услуг по продаже и сервисному обслуживанию автомобилей")
-                    label.works_form__row.admin_form__row
-                      .works_form__row-title.admin_form__row-title Добавление тэга
-                      input.works_form__row-input.admin_form__row-input(value="Jquery, Vue.js, HTML5")
-                    ul.works_form__tag_list
-                      -for(i=0; i < 3; i++)
-                        li.works_form__tag_item
-                          .div HTML5
-                          .tag_item__btn
-                    .works_form__btns.admin_form__btns
-                      button.admin_edit__button.form__reset(type="reset") Отмена
-                      button.admin_edit__button.form__save(type="submit") Сохранить
-              ul.admin_works__list.admin_block__list
-                li.add_works.add_block.admin_works__item.admin_block__item
-                  a(href="#").add_block__btn
-                  .add_block__text Добавить Работу
-                - for(let i =0;i <4; i++)  
-                  li.admin_works__item
-                    .admin_works__item_img
-                      img(src="../images/content/2.jpg").admin_works__item_pic
-                    .admin_works_item_inf
-                      .admin_works__item_title Сайт школы образования
-                      .admin_works__item_description Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                      a.admin_works__item_link(href="http://loftschool.ru") http://loftschool.ru
-                      .admin__item_btns
-                        button(type="button").admin__item_change.admin__item_btn Править
-                        button(type="button").admin__item_remove.admin__item_btn Удалить
-          section#admin_rewiews.admin_section
-            .admin_section__container
-              .admin_panel__title Блок "Работы"
-              .rewiews_edit.admin_edit__block
-                .rewiews_edit__title.admin_edit__title Новый отзыв
-                .rewiews_edit__content.admin_edit__content
-                  .rewiews_edit__download
-                    .rewiews_edit__download-img
-                    .rewiews_edit__download-title Добавить фото  
-
-                  form.rewiews_form
-                    .rewiews__author
-                      label.rewiews_form__row.admin_form__row
-                        .works_form__row-title.admin_form__row-title Имя Автора
-                        input.works_form__row-input.admin_form__row-input(value="Ковальчук Дмитрий")
-                      label.rewiews_form__row.admin_form__row
-                        .works_form__row-title.admin_form__row-title Титул автора
-                        input.works_form__row-input.admin_form__row-input(value="Основатель LoftSchool")
-                    label.rewiews_form__row.admin_form__row
-                      .rewiews_form__row-title.admin_form__row-title Описание
-                      textarea.rewiews_form__row-input.rewiews_form__row-textarea.admin_form__row-textarea.admin_form__row-input(placeholder="Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!")
-                    .rewiews_form__btns.admin_form__btns
-                      button.admin_edit__button.form__reset(type="reset") Отмена
-                      button.admin_edit__button.form__save(type="submit") Сохранить
-              ul.admin_rewiews__list.admin_block__list
-                li.add_rewiew.add_block.admin_rewiews__item.admin_block__item
-                  a(href="#").add_block__btn
-                  .add_block__text Добавить отзыв
-                - for(let i =0; i < 4; i++)
-                  li.add_rewiew.admin_rewiew__item.admin_block__item
-                    .add_rewiew__author
-                      .add_rewiew__img
-                        img(src="../images/content/rewiews-1.png").add_rewiew__pic
-                      .add_rewiew__init
-                        .add_rewiew__name Владимир Сабанцев
-                        .add_rewiew__title Преподователь
-                    .add_rewiew__inf
-                      .add_rewiew__description Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
-                      .admin__item_btns
-                          button(type="button").admin__item_change.admin__item_btn Править
-                          button(type="button").admin__item_remove.admin__item_btn Удалить 
-      
-</template>
-
-
-<script>
-</script>
 
 
