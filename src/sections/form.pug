@@ -1,20 +1,31 @@
 .form__wrapper
-    form.form
+    form.form(@submit.prevent="submitForm")
         .form__row_above
-            label.form__label.form__label_name
+            label.form__label.form__label_name(:class="{form_error: !nameValid}")
                 .form__label_title Введите ваше имя
                 .form__input_wrapper.form__input_wrapper-name
-                    input(class="form__input form__input_name" name="name" type="text" required placeholder="Ковальчук Дмитрий")
-                .error
-            label.form__label.form__label_email
+                    input(class="form__input form__input_name" name="name" type="text" required placeholder="Бульба Константин"
+                    @input="validateName"
+                    onFocus='this.placeholder=""')
+                .error_alert {{nameError}}
+            label.form__label.form__label_email(:class="{form_error: !emailValid}")
                 .form__label_title Введите ваш email
                 .form__input_wrapper.form__input_wrapper-email
-                    input(class="form__input form__input_email" name="email" type="email" required value="loftschool@study.com")
-                .error
+                    input(class="form__input form__input_email" name="email" type="email" required placeholder="ironypk@gmail.com"
+                    @input="validateEmail"
+                    value="ironypk@gmail.com"
+                    onFocus='this.placeholder=""')
+                .error_alert {{emailError}}
         .form__row_under
-            label.form__label.form__label_email
+            label.form__label.form__label_email(:class="{form_error: !messageValid}")
                 .form__label_title Сообщение к письму
                 .form__input_wrapper.form__input_wrapper-textarea
-                    textarea(class="form__input form__input_textarea" name="textarea" type="text" required placeholder="Требуется ваша помощь в создании сайта.Интересуют сроки и цена вопроса")
-                .error
-        button.button.form__button ОТПРАВИТЬ
+                    textarea(class="form__input form__input_textarea" name="textarea" placeholder="Требуется ваша помощь в создании сайта.Интересуют сроки и цена вопроса" type="text" required
+                    @input="validateMessage"
+                    onFocus='this.placeholder=""')
+                .error_alert {{messageError}}
+        button.button.form__button(@click.prevent = "submitForm") ОТПРАВИТЬ
+    .form__overlay(:class="{disabled: overlayHidden}")
+        .form__modal
+            .form__modal_text {{resultMessage}}
+            button.button.form__button.form__overlay_button(@click="hideOverlay") ЗАКРЫТЬ

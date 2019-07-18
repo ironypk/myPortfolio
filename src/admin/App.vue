@@ -781,7 +781,6 @@ body {
 
 
 <template lang="pug">
-  
   .wrapper
     .maincontent
       header.admin_header
@@ -822,7 +821,7 @@ body {
                           label.skill_wrap.about_form__row
                             input.skill_input.skill_name.about_form__input(placeholder="Git")
                             .percent_wrap.skill__percent_wrap
-                              input.skill_input.skill_percent.about_form__percent.about_form__input(placeholder="100")
+                              input.skill_input.skill_percent.about_form__percent.about_form__input(type="number" min="0" max="100")
                             .form_buttons
                               button.about_form__buttons.change.about_form__btn(type="button")
                               button.about_form__buttons.remove.about_form__btn(type="button")
@@ -832,7 +831,7 @@ body {
                     label.about_form__description.about_form__row
                       input.description_input.description_name.about_form__input(placeholder="Новый навык")
                       .percent_wrap.description__percent_wrap
-                        input.description_input.description_percent.about_form__input.about_form__percent(placeholder="100")
+                        input.description_input.description_percent.about_form__input.about_form__percent(type="number" min="0" max="100")
                       button.description__add_btn.admin_about__add_btn
           section#admin_works.admin_section
             .admin_section__container
@@ -919,22 +918,7 @@ body {
                       .add_rewiew__description Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
                       .admin__item_btns
                           button(type="button").admin__item_change.admin__item_btn Править
-                          button(type="button").admin__item_remove.admin__item_btn Удалить
-
-
-
-
-
-                
-                
-
-
-
-
-                
-
-            
-        
+                          button(type="button").admin__item_remove.admin__item_btn Удалить 
       
 </template>
 
