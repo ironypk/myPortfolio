@@ -71,7 +71,8 @@ new Vue ({
                     email: this.email,
                     message:this.message
                 }
-                this.axios.get('http://localhost:8080', {
+                    fetch('..data/*.txt', {
+                    method:'POST',
                     headers:{'Cotent-Type': 'application/json'},
                     body:JSON.stringify(userData)
                 }).then((response) =>{
