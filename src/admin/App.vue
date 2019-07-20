@@ -1118,127 +1118,12 @@ body {
     }
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-}
-</style>
-
-
-
-<template lang="pug">
-  
-  .wrapper
-    .maincontent
-      header.admin_header
-        .container.header_admin__container
-          .avatar
-            img(src="../images/content/user.jpg").avatar_pic
-          .header_admin__content
-            .header_admin__name Константин Бульба
-            a.header__admin_btn Выйти
-      .admin_panel
-        .container.admin_panel__container
-          nav.admin_menu
-            ul.admin_menu__list
-              - var menuItems = ['Обо мне', 'Работы', 'Отзывы']
-              each item, ndx in menuItems
-                li(class='admin_menu__item' + ((ndx===0) ? ' admin_menu__item--active': ''))
-                  a.admin_menu__link= item
-          section#admin_about
-            .container.admin_section__container.admin_about__container
-              .admin_about__head
-                h2.admin_about__title.admin_panel__title  Блок "Обо мне"
-                .admin_about__add
-                  button.add_btn.admin_about__add_btn
-                  .add__text Добавить группу
-              .admin_about__content
-                - for(let i =0; i < 3; i++)
-                  form.admin_about__about_form
-                    label.about_form__row.about_form__name.form_row--active
-                      input.name_input.about_form__input(placeholder="Название новой группы")
-                      .form_buttons
-                        button.about_form__buttons.change.about_form__btn(type="button")
-                      .form_buttons--active.about_form__btns
-                        button.about_form__buttons.accept.about_form__btn(type="button")
-                        button.about_form__buttons.decline.about_form__btn(type="button")
-                    ul.about_form__skills
-                      -for(let i=0; i< 4; i++)
-                        li.about_form__skill
-                          label.skill_wrap.about_form__row
-                            input.skill_input.skill_name.about_form__input(placeholder="Git")
-                            .percent_wrap.skill__percent_wrap
-                              input.skill_input.skill_percent.about_form__percent.about_form__input(placeholder="100")
-                            .form_buttons
-                              button.about_form__buttons.change.about_form__btn(type="button")
-                              button.about_form__buttons.remove.about_form__btn(type="button")
-                            .form_buttons--active.about_form__btns
-                              button.about_form__buttons.accept.about_form__btn(type="button")
-                              button.about_form__buttons.decline.about_form__btn(type="button")
-                    label.about_form__description.about_form__row
-                      input.description_input.description_name.about_form__input(placeholder="Новый навык")
-                      .percent_wrap.description__percent_wrap
-                        input.description_input.description_percent.about_form__input.about_form__percent(placeholder="100")
-                      button.description__add_btn.admin_about__add_btn
-          section#admin_works
-            .admin_section__container
-              .admin_panel__title.ad Блок "Работы"
-              .works_edit
-                .works_edit__title Редактирование работы
-                .works_edit__content
-                  .works_edit__download.works_edit__content_block
-                    .works_edit__download_text Перетащите или загрузите для загрузки изображения
-                    button(type="button").works_edit__button.works_edit__download_button Загрузить
-                  form.works_form.works_edit__content_block
-                    label.works_form__row
-                      .works_form__row-title Название
-                      input.works_form__row-input(value="Дизайн сайта для авто салона Porsche")
-                    label.works_form__row
-                      .works_form__row-title ССылка
-                      input.works_form__row-input(value="https://www.porsche-pulkovo.ru")
-                    label.works_form__row
-                      .works_form__row-title Описание
-                      textarea.works_form__row-input.works_form__row-textarea(placeholder="Порше Центр Пулково - является официальным дилером марки Порше в Санкт-Петербурге и предоставляет полный цикл услуг по продаже и сервисному обслуживанию автомобилей")
-                    label.works_form__row
-                      .works_form__row-title Добавление тэга
-                      input.works_form__row-input(value="Jquery, Vue.js, HTML5")
-                    ul.works_form__tag_list
-                      -for(i=0; i < 3; i++)
-                        li.works_form__tag_item
-                          .div HTML5
-                          .tag_item__btn
-                    .works_form_btns
-                      button.works_edit__button.works_form__reset(type="reset") Отмена
-                      button.works_edit__button.works_form__save(type="submit") Сохранить
-              ul.admin_works__list
-                li.add_works.add_block.admin_works__item
-                  a(href="#").add_works__btn
-                  .add_works__text Добавить Работу
-                - for(let i =0;i <4; i++)  
-                  li.admin_works__item
-                    .admin_works__item_img
-                      img(src="../images/content/2.jpg").admin_works__item_pic
-                    .admin_works_item_inf
-                      .admin_works__item_title Сайт школы образования
-                      .admin_works__item_description Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                      a.admin_works__item_link(href="http://loftschool.ru") http://loftschool.ru
-                      .admin_works__item_btns
-                        button(type="button").admin_works__item_change.admin_works__item_btn Править
-                        button(type="button").admin_works__item_remove.admin_works__item_btn Удалить
-
-
-=======
-=======
->>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
   .rewiews_form__row:first-child {
     margin: 0 30px 0 0;
     @include tablets {
       margin: 0 0 40px 0;
     }
   }
-<<<<<<< HEAD
->>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
-=======
->>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
 
   .rewiews_form__row-textarea {
     padding-right: 20px;
@@ -1281,15 +1166,6 @@ body {
     margin-bottom: 5px;
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-            
-        
-      
-</template>
-=======
-=======
->>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
   .add_rewiew__title {
     color: $admin-gray;
   }
@@ -1297,10 +1173,6 @@ body {
   .add_rewiew__inf {
     padding: 0px 30px;
   }
-<<<<<<< HEAD
->>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
-=======
->>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
 
   .add_rewiew__description {
     line-height: 1.88;
