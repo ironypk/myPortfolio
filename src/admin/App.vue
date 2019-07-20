@@ -1119,6 +1119,7 @@ body {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 </style>
 
@@ -1226,12 +1227,17 @@ body {
 
 
 =======
+=======
+>>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
   .rewiews_form__row:first-child {
     margin: 0 30px 0 0;
     @include tablets {
       margin: 0 0 40px 0;
     }
   }
+<<<<<<< HEAD
+>>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
+=======
 >>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
 
   .rewiews_form__row-textarea {
@@ -1276,11 +1282,14 @@ body {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             
         
       
 </template>
 =======
+=======
+>>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
   .add_rewiew__title {
     color: $admin-gray;
   }
@@ -1288,6 +1297,9 @@ body {
   .add_rewiew__inf {
     padding: 0px 30px;
   }
+<<<<<<< HEAD
+>>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
+=======
 >>>>>>> 54ad1197c73018c3825fba3787aa2f70fea8c8ac
 
   .add_rewiew__description {
