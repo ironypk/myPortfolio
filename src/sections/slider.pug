@@ -1,13 +1,15 @@
 
 
-script(type="text/x-template")#slider
+script(type="text/x-template" v:slot="default")#slider
     .slider
         display(
             :works="works"
             :currentWork="currentWork"
-            @slide="clickSlide"
+            @slide="clickArrowSlide"
+            @currentSlideClick="currentSlideClick"
         )                
         info(
+
             :currentWork="currentWork"
         )
 
@@ -16,25 +18,31 @@ script(type="text/x-template")#slider_display
         .slider__img_content
             slides(
                 :currentWork="currentWork"
+
             )
             controls(
                 :works="works"
                 :currentWork="currentWork"
+
                 @slide="direction => $emit('slide', direction)"
+                @currentSlideClick="workId => $emit('currentSlideClick', workId)"
             )
 
 script(type="text/x-template")#slider_main
     .slider__pic_container
         img(:src="currentWork.photo").slider__pic
+        .img_num {{currentWork.id}}
 
 script(type="text/x-template")#slider_controls
     div.slider__controls
         .slider__wrapper
             ul(class='slider__controls_list' ref="list")
-                li(class='slider__controls_item' v-for="(work, index) in works" :class="{slider__controls_item_active: work.id === activeSlide, slider__controls_item_first_visible :work.id === firstVisible }" ref="item")
+                li(class='slider__controls_item' v-for="(work, index) in works" @click="$emit('currentSlideClick', work.id) , currentSlideClick(work.id)" :class="{slider__controls_item_active: work.id === currentWork.id, slider__controls_item_first_visible :work.id === firstVisible }" ref="item")
                     img(:src="work.photo" alt="").slider__controls_pic
             btns(
                 :works="works"
+                :currentWork="currentWork"
+
                 @slide="direction => $emit('slide', direction)"
                 @secondSlide='handleSlide'
             )
@@ -42,8 +50,8 @@ script(type="text/x-template")#slider_controls
 
 script(type="text/x-template")#slider_btns
     .slider__buttons
-        button(@click="$emit('slide', 'next'), secondSlide('next')" type="button" class="slider__button slider__next" :disabled='false' ref="nextButton")
-        button(@click="$emit('slide', 'prev'), secondSlide('prev')" type="button" class="slider__button slider__prev" :disabled='true' ref="prevButton")
+        button(@click="$emit('slide', 'next'), secondSlide('next')" type="button" class="slider__button slider__next" :class='{slider__button_disabled: $parent.activeSlide === works.length}' ref="nextButton")
+        button(@click="$emit('slide', 'prev'), secondSlide('prev')" type="button" class="slider__button slider__prev" :class='{slider__button_disabled: $parent.activeSlide === 1}' ref="prevButton")
 
 script(type="text/x-template")#slider_info
     .slider__description.slider_block
