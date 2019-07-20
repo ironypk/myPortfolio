@@ -41,10 +41,11 @@
 }
 
 .form__input_wrapper {
-    position: relative;
+  position: relative;
   border-bottom: 2px solid $text-white;
-   &:hover, &:focus-within{
-      border-color:$blue;
+  &:hover,
+  &:focus-within {
+    border-color: $blue;
   }
   &::before {
     position: absolute;
@@ -91,14 +92,10 @@
       )
       center / contain no-repeat;
   }
-   &:hover::before, &:focus-within::before{
-        background: svg-load(
-        "user.svg",
-        fill=$blue,
-        width=100%,
-        height=100%
-      )
-      center / contain no-repeat;
+  &:hover::before,
+  &:focus-within::before {
+    background: svg-load("user.svg", fill=$blue, width=100%, height=100%) center /
+      contain no-repeat;
   }
 }
 
@@ -112,13 +109,9 @@
       )
       center / contain no-repeat;
   }
-     &:hover::before, &:focus-within::before{
-        background: svg-load(
-        "envelope.svg",
-        fill=$blue,
-        width=100%,
-        height=100%
-      )
+  &:hover::before,
+  &:focus-within::before {
+    background: svg-load("envelope.svg", fill=$blue, width=100%, height=100%)
       center / contain no-repeat;
   }
 }
@@ -134,15 +127,11 @@
       )
       center / contain no-repeat;
   }
-     &:hover::before, &:focus-within::before{
-        background: svg-load(
-        "message.svg",
-        fill=$blue,
-        width=100%,
-        height=100%
-      )
+  &:hover::before,
+  &:focus-within::before {
+    background: svg-load("message.svg", fill=$blue, width=100%, height=100%)
       center / contain no-repeat;
-  } 
+  }
 }
 
 .form__input_textarea {
@@ -162,11 +151,66 @@
   padding: 30px 120px;
   border: none;
   border-radius: 60px;
-  background-image: linear-gradient( 0deg, rgb(0,93,255) 0%, rgb(0,119,255) 48%, rgb(0,145,255) 100%);
-  &:hover{
-    background-image:linear-gradient( 0deg, rgb(0,86,237) 0%, rgb(0,112,240) 48%, rgb(0,137,242) 100%);
+  background-image: linear-gradient(
+    0deg,
+    rgb(0, 93, 255) 0%,
+    rgb(0, 119, 255) 48%,
+    rgb(0, 145, 255) 100%
+  );
+  &:hover {
+    background-image: linear-gradient(
+      0deg,
+      rgb(0, 86, 237) 0%,
+      rgb(0, 112, 240) 48%,
+      rgb(0, 137, 242) 100%
+    );
   }
   @include tablets {
     margin: 0 auto;
   }
+}
+
+.error_alert {
+  content: "";
+  position: relative;
+  width: 155px;
+  height: 50px;
+  background-color: #cd1515;
+  margin-left: 45px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  &::after {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 15px;
+    background-color: #cd1515;
+    transform: rotate(45deg);
+    top: -5px;
+  }
+}
+
+.form_error .form__input_wrapper-name::before {
+    background: svg-load("user.svg", fill=red, width=100%, height=100%) center /
+      contain no-repeat;
+  }
+
+
+.form_error .form__input_wrapper-email::before {
+  background: svg-load("envelope.svg", fill=red, width=100%, height=100%) center /
+    contain no-repeat;
+}
+
+.form_error .form__input_wrapper-textarea::before {
+  background: svg-load("message.svg", fill=red, width=100%, height=100%) center /
+    contain no-repeat;
+}
+
+.form_error .form__input_wrapper {
+  border-color: red;
+}
+
+.form_error .error_alert {
+  display: flex;
 }

@@ -8,20 +8,7 @@ const btns = {
   methods: {
     secondSlide(direction) {
       this.$emit("secondSlide", direction);  
-      this.checkArrows()
-    },
-    checkArrows(){
-      let prevButton = this.$refs["prevButton"];
-      let nextButton = this.$refs["nextButton"];
-      if (this.$parent.activeSlide == 1) {
-        prevButton.disabled = true;
-      } else if (this.$parent.activeSlide == this.works.length) {
-        nextButton.disabled = true;
-      } else {
-        prevButton.disabled = false;
-        nextButton.disabled = false;
-      }
-  }
+    }
 }
 };
 
@@ -51,12 +38,13 @@ const controls = {
     handleSlide(direction) {
       const list = this.$refs["list"];
       const worksLength = this.works.length;
-      const item = this.$refs.item[0];
-      const listWidth = parseInt(getComputedStyle(list).width);
-      const slideWidth = parseInt(getComputedStyle(item).width);
-      const slideStep = parseInt(getComputedStyle(list).left);
+      const item = this.$refs.item[1];
+      const listWidth = parseFloat(getComputedStyle(list).width);
+      const slideWidth = parseFloat(getComputedStyle(item).width);
+      const slideStep = parseFloat(getComputedStyle(list).left);
       switch (direction) {
         case "next":
+          console.log(slideWidth);
           if (this.activeSlide < worksLength) {
             this.activeSlide++;
           }
@@ -78,6 +66,9 @@ const controls = {
           }
           break;
       }
+    },
+    currentSlideClick(id){
+      this.activeSlide = id
     }
   }
 };
@@ -142,7 +133,7 @@ new Vue({
         return item;
       });
     },
-    clickSlide(direction) {
+    clickArrowSlide(direction) {
       switch (direction) {
         case "next":
           if (this.currentIndex < this.works.length - 1) {
@@ -154,6 +145,9 @@ new Vue({
             this.currentIndex--;
           }
       }
+    },
+    currentSlideClick(id){
+      this.currentIndex = id - 1
     }
   },
   created() {
