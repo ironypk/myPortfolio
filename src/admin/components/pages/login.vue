@@ -21,8 +21,8 @@ export default {
   data() {
     return {
       user: {
-        name: "irony",
-        password: "1rfyrehj15"
+        name: "",
+        password: ""
       }
     };
   },
@@ -35,10 +35,6 @@ export default {
         localStorage.setItem("token", token);
         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
         this.$router.replace("/");
-
-        const { data :{ user } } = await $axios('/user');
-        localStorage.setItem("id", user.id);
-        
       } catch (error) {
         //error handling
       }

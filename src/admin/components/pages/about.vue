@@ -4,13 +4,14 @@
         .admin_about__head.admin_panel__title
             .admin_about__title  Блок "Обо мне"
             .admin_about__add
-                button.add_btn.admin_about__add_btn(@click='pushCategory')
+                button.add_btn.admin_about__add_btn(@click='addNewCategory' :disabled='disabled')
                 .add__text Добавить группу
         .admin_about__content
           ul.skill__list
             li.skill__item(v-for="category in categories")
               aboutSkills(
                 :category='category'
+                :key="category.id"
                 :skills='filterSkillsByCategoryId(category.id)'
               )
 </template>
@@ -24,6 +25,8 @@ export default {
   },
   data() {
     return {
+      disabled: false,
+      categoryTitle : 'New category'
     };
   },
   computed: {
@@ -35,24 +38,32 @@ export default {
     })
   },
   methods: {
-    ...mapActions("categories", ["fetchCategories"]),
+    ...mapActions("categories", ["addCategory", "fetchCategories"]),
     ...mapActions("skills", ["fetchSkills"]),
-    pushCategory() {
-      this.categories.push({});
+    async addNewCategory() {
+      this.disabled =!this.disabled;
+      try {
+        await this.addCategory(this.categoryTitle);
+      } catch (error) {
+        alert(error.message);
+      } finally{
+        this.disabled = !this.disabled
+      }
     },
     filterSkillsByCategoryId(categoryId){
       return this.skills.filter(skill => skill.category === categoryId);
     }
   },
   async created() {
+
     try {
-      this.fetchCategories();
+      await this.fetchCategories();
     } catch (error) {
       alert('Ошибка при загрузке категорий')
     }
 
     try {
-      this.fetchSkills();
+      await this.fetchSkills();
     } catch (error) {
       alert('Ошибка при загрузке скиллов')
     }
@@ -142,8 +153,14 @@ export default {
     border: none;
     outline: none;
     color: black;
+    border-bottom: 1px solid rgba(#000, 0.9);
+    &:focus-within {
+        border-color: $blue;
+      }
     &:disabled {
+      border-bottom: 1px solid trasparent;
       background-color: #fff;
+      border-bottom: none;
     }
   }
 
@@ -240,28 +257,34 @@ export default {
     margin-bottom: 10px;
   }
 
-  .skill_wrap {
+  .about_form__skill {
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 0 10px;
     @include phones {
       padding: 0;
     }
   }
 
-  .skill_name {
-    width: 60%;
+   .skill_name {
+    width: 100px;
     margin-right: 30px;
     padding: 10px 1px;
   }
+
+
+    .skill_percent {
+    padding: 10px 25px 10px 10px;
+  }
+
+ 
 
   .about_form__percent {
     width: 80px;
   }
 
-  .skill_percent {
-    padding: 10px 25px 10px 10px;
-  }
 
   .percent_wrap {
     position: relative;
@@ -305,22 +328,7 @@ export default {
   ////ABOUT FORM ROW ACTIVE
 
   .form_buttons--active {
-    display: none;
-  }
-
-  .form_row--active {
-    input {
-      border-bottom: 1px solid rgba(#000, 0.9);
-      &:focus-within {
-        border-color: $blue;
-      }
-    }
-    .form_buttons {
-      display: none;
-    }
-    .form_buttons--active {
-      display: flex;
-    }
+    display: flex;
   }
 }
 </style>

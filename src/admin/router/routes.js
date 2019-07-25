@@ -2,23 +2,23 @@ export default [
     {
       path: "/",
       component: () => import("components/pages/about.vue"),
-      // meta: {
-      //   title: "Блок «Обо мне»"
-      // }
+      meta: {
+        title: "Блок «Обо мне»"
+      }
     },
     {
       path: "/works",
       component: () => import("components/pages/works.vue"),
-      // meta: {
-      //   title: "Блок «Работы»"
-      // }
+      meta: {
+        title: "Блок «Работы»"
+      }
     },
     {
       path: "/rewiews",
       component: () => import("components/pages/rewiews.vue"),
-      // meta: {
-      //   title: "Блок «Отзывы»"
-      // }
+      meta: {
+        title: "Блок «Отзывы»"
+      }
     },
     {
       path: "/login",

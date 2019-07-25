@@ -1,13 +1,19 @@
 <template lang="pug">
-    form(@submit.prevent='addNewSkill').admin_about__about_form
-        label(class="about_form__row about_form__name"  :class="{'form_row--active' : changed}")
-            h2(v-if="changed === false") {{category.category}}
-            input.name_input.about_form__input(v-else="changed=== true" :placeholder="'Название новой группы'" v-model='groupTitle' :disabled="disabled")
-            .form_buttons
-                button.about_form__buttons.change.about_form__btn(type="button" @click="changeTitle")
-            .form_buttons--active.about_form__btns
-                button.about_form__buttons.accept.about_form__btn(type="button" @click="addSkillGroup")
-                button.about_form__buttons.decline.about_form__btn(type="button")
+    form(
+      ).admin_about__about_form
+        label.about_form__row.about_form__name
+          input(
+            name="categoryName"
+            type="text"
+            v-model="editedCategory.category"
+            :disabled="categoryDisabled"
+            ).name_input.about_form__input
+          .form_buttons(v-if='categoryDisabled')
+              button(@click.prevent='toggleCategory').about_form__buttons.change.about_form__btn
+              button(@click.prevent='removeCurrentCategory').about_form__buttons.remove.about_form__btn
+          .form_buttons--active.about_form__btns(v-else)
+              button.about_form__buttons.accept.about_form__btn(@click.prevent="editCurrentCategory")
+              button.about_form__buttons.decline.about_form__btn(@click.prevent='toggleCategory')
         ul.about_form__skills
             aboutSkillsItem(
                 v-for= "skill in skills"
@@ -15,10 +21,23 @@
                 :skill="skill"
                 )
         label.about_form__description.about_form__row
-            input.description_input.description_name.about_form__input(:disabled='disabled' placeholder="Новый навык" v-model='skill.title')
+            input(
+              name="skillName"
+              type="text"
+              placeholder="Новый навык"
+              :disabled='skillDisabled'
+              v-model='skill.title'
+              ).description_input.description_name.about_form__input
             .percent_wrap.description__percent_wrap
-                input.description_input.description_percent.about_form__input.about_form__percent(:disabled='disabled' type="number" maxlength="3" v-model='skill.percent')
-            button.description__add_btn.admin_about__add_btn(:disabled='disabled')
+                input(
+                  name="skillPercent"
+                  type="number"
+                  min="0"
+                  max="100"
+                  :disabled='skillDisabled'
+                  v-model='skill.percent'
+                  ).description_input.description_percent.about_form__input.about_form__percent
+            button(@click.prevent='addNewSkill' :disabled='skillDisabled').description__add_btn.admin_about__add_btn
     
 </template>
 
@@ -35,9 +54,10 @@ export default {
   },
   data() {
     return {
+      editedCategory: {...this.category},
       groupTitle: "",
-      changed: false,
-      disabled: false,
+      categoryDisabled: true,
+      skillDisabled : false,
       skill: {
         category: this.category.id,
         title: "",
@@ -46,20 +66,25 @@ export default {
     };
   },
   methods: {
-    ...mapActions("categories", ["addNewSkillGroup"]),
+    ...mapActions("categories", ["removeCategory", "editCategory"]),
     ...mapActions("skills", ["addSkill"]),
-    async addSkillGroup() {
-      try {
-        this.changed = !this.changed;
-        this.disabled = !this.disabled;
-        await this.addNewSkillGroup(this.groupTitle);
-        this.skillTitle = "";
-      } catch (error) {
-        alert(error.message);
+    async editCurrentCategory(){
+      try{
+        await this.editCategory(this.editedCategory);
+        this.toggleCategory()
+      }catch(error){
+
+      }
+    },
+    async removeCurrentCategory(){
+      try{
+        await this.removeCategory(this.category.id)
+      }catch(error){
+
       }
     },
     async addNewSkill() {
-    this.disabled =!this.disabled;
+    this.skillDisabled =!this.skillDisabled;
       try {
         await this.addSkill(this.skill);
         this.skill.title = '';
@@ -68,16 +93,14 @@ export default {
       } catch (error) {
         alert(error.message); //mdn Error прочитать
       } finally {
-          this.disabled = !this.disabled
+          this.skillDisabled = !this.skillDisabled
       }
     },
-    setupTitle() {
-      this.changed = !this.changed;
-      this.disabled = !this.disabled;
-    },
-    changeTitle() {
-      this.changed = !this.changed;
-      this.disabled = !this.disabled;
+    toggleCategory() {
+      if(!this.categoryDisabled){
+        this.editedCategory = {...this.category}
+      }
+      this.categoryDisabled = !this.categoryDisabled;
     }
   }
 };
