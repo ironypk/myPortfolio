@@ -26,7 +26,12 @@ export default {
           title : groupTitle
         })
         commit('ADD_CATEGORY', category);
-      } catch(error){}
+        return category;
+      } catch(error){
+        throw new Error (
+          error.response.data.error || error.response.data.message
+      )
+      }
     },
     async editCategory({commit}, category){
       try{
@@ -34,9 +39,12 @@ export default {
           title : category.category
         });
         commit("EDIT_CATEGORY", category)
+        return response;
 
       }catch(error){
-
+        throw new Error (
+          error.response.data.error || error.response.data.message
+      )
       }
     },
     async removeCategory({ commit }, categoryId){
@@ -44,17 +52,25 @@ export default {
 
         const response = await this.$axios.delete(`/categories/${categoryId}`);
         commit("REMOVE_CATEGORY", categoryId)
+        return response;
 
 
       }catch(error){
-
+        throw new Error (
+          error.response.data.error || error.response.data.message
+      )
       }
     },
     async fetchCategories({ commit }) {
       try {
         const {data : categories} = await this.$axios("/categories");
         commit("SET_CATEGORY", categories.reverse()); 
-      } catch (error) {}
+        return categories
+      } catch (error) {
+        throw new Error (
+          error.response.data.error || error.response.data.message
+      )
+      }
     }
   }
 };

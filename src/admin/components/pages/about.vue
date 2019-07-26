@@ -26,12 +26,12 @@ export default {
   data() {
     return {
       disabled: false,
-      categoryTitle : 'New category'
+      categoryTitle: "New category"
     };
   },
   computed: {
-    ...mapState('categories', {
-      categories:state => state.categories
+    ...mapState("categories", {
+      categories: state => state.categories
     }),
     ...mapState("skills", {
       skills: state => state.skills
@@ -40,32 +40,53 @@ export default {
   methods: {
     ...mapActions("categories", ["addCategory", "fetchCategories"]),
     ...mapActions("skills", ["fetchSkills"]),
+    ...mapActions("tooltips", ["showTooltip"]),
     async addNewCategory() {
-      this.disabled =!this.disabled;
+      this.disabled = !this.disabled;
       try {
-        await this.addCategory(this.categoryTitle);
+        const response = await this.addCategory(this.categoryTitle);
+        this.showTooltip({
+          type: "success",
+          text: "Категория успешно добалена"
+        });
       } catch (error) {
-        alert(error.message);
-      } finally{
-        this.disabled = !this.disabled
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        });
+      } finally {
+        this.disabled = !this.disabled;
       }
     },
-    filterSkillsByCategoryId(categoryId){
+    filterSkillsByCategoryId(categoryId) {
       return this.skills.filter(skill => skill.category === categoryId);
     }
   },
   async created() {
-
     try {
-      await this.fetchCategories();
+     await this.fetchCategories();
+      this.showTooltip({
+        type: "success",
+        text: 'Категории добавлены'
+      });
     } catch (error) {
-      alert('Ошибка при загрузке категорий')
+      this.showTooltip({
+        type: "error",
+        text: error.message
+      });
     }
 
     try {
       await this.fetchSkills();
+      this.showTooltip({
+        type: "success",
+        text: 'Записи добавлены'
+      });
     } catch (error) {
-      alert('Ошибка при загрузке скиллов')
+      this.showTooltip({
+        type: "error",
+        text: error.message
+      });
     }
   }
 };
@@ -155,8 +176,8 @@ export default {
     color: black;
     border-bottom: 1px solid rgba(#000, 0.9);
     &:focus-within {
-        border-color: $blue;
-      }
+      border-color: $blue;
+    }
     &:disabled {
       border-bottom: 1px solid trasparent;
       background-color: #fff;
@@ -268,23 +289,19 @@ export default {
     }
   }
 
-   .skill_name {
+  .skill_name {
     width: 100px;
     margin-right: 30px;
     padding: 10px 1px;
   }
 
-
-    .skill_percent {
+  .skill_percent {
     padding: 10px 25px 10px 10px;
   }
-
- 
 
   .about_form__percent {
     width: 80px;
   }
-
 
   .percent_wrap {
     position: relative;

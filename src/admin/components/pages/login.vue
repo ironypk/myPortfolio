@@ -17,6 +17,7 @@
 
 <script>
 import $axios from "admin/requests";
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
@@ -27,6 +28,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions('tooltips', ['showTooltip']),
     async login() {
       try {
         const {
@@ -36,7 +38,10 @@ export default {
         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
         this.$router.replace("/");
       } catch (error) {
-        //error handling
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        });
       }
     }
   }

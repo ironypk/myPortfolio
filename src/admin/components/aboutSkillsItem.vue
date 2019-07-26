@@ -34,29 +34,44 @@ export default {
   data() {
     return {
       inputDisabled: true,
-      editedSkill: {...this.skill}
+      editedSkill: { ...this.skill }
     };
   },
   methods: {
     ...mapActions("skills", ["removeSkill", "editSkill"]),
+    ...mapActions("tooltips", ["showTooltip"]),
     async removeExistedSkill() {
       try {
-        await this.removeSkill(this.skill.id);
+        const response = await this.removeSkill(this.skill.id);
+        this.showTooltip({
+          type: "success",
+          text: response.data.message
+        });
       } catch (error) {
-        alert("Ошибка при удалении скилла");
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        });
       }
     },
-    async editCurrentSkill(){
-      try{
-        const respose = await this.editSkill(this.editedSkill);
+    async editCurrentSkill() {
+      try {
+        const response = await this.editSkill(this.editedSkill);
         this.toggleSkill();
-      }catch(error){
-
+        this.showTooltip({
+          type: "success",
+          text: response.data.message
+        });
+      } catch (error) {
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        });
       }
     },
     toggleSkill() {
-      if(!this.inputDisabled){
-        this.editedSkill = {...this.skill}
+      if (!this.inputDisabled) {
+        this.editedSkill = { ...this.skill };
       }
       this.inputDisabled = !this.inputDisabled;
     }
@@ -68,7 +83,5 @@ export default {
 
 <style lang="postcss">
 @import "../../styles/mixins";
-
-
 </style>
 

@@ -5,10 +5,17 @@
                 img(src="~images/content/user.jpg").avatar_pic
             .header_admin__content
                 .header_admin__name Константин Бульба
-                a.header__admin_btn Выйти
+                a.header__admin_btn(@click='logout') Выйти
 </template>
 
-
+<script>
+import {mapActions} from 'vuex';
+export default {
+  methods:{
+    ...mapActions('user', ['logout'])
+  }
+}
+</script>
 
 <style lang="postcss" scoped>
 @import "../../styles/mixins";

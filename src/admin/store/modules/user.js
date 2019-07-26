@@ -16,6 +16,12 @@ export default {
   
         return userObjectIsEmpty === false;
       }
+    },
+    actions:{
+      logout(){
+          localStorage.removeItem('token');
+          location.href = '/admin';
+      }
     }
   };
   

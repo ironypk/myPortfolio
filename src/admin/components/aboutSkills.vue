@@ -47,17 +47,17 @@ import { mapActions, mapState } from "vuex";
 export default {
   props: {
     category: Object,
-    skills :Array
+    skills: Array
   },
   components: {
     aboutSkillsItem: () => import("./aboutSkillsItem")
   },
   data() {
     return {
-      editedCategory: {...this.category},
+      editedCategory: { ...this.category },
       groupTitle: "",
       categoryDisabled: true,
-      skillDisabled : false,
+      skillDisabled: false,
       skill: {
         category: this.category.id,
         title: "",
@@ -68,37 +68,58 @@ export default {
   methods: {
     ...mapActions("categories", ["removeCategory", "editCategory"]),
     ...mapActions("skills", ["addSkill"]),
-    async editCurrentCategory(){
-      try{
-        await this.editCategory(this.editedCategory);
-        this.toggleCategory()
-      }catch(error){
-
+    ...mapActions("tooltips", ["showTooltip"]),
+    async editCurrentCategory() {
+      try {
+        const response = await this.editCategory(this.editedCategory);
+        this.toggleCategory();
+        this.showTooltip({
+          type: "success",
+          text: response.data.message
+        });
+      } catch (error) {
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        });
       }
     },
-    async removeCurrentCategory(){
-      try{
-        await this.removeCategory(this.category.id)
-      }catch(error){
-
+    async removeCurrentCategory() {
+      try {
+        const response = await this.removeCategory(this.category.id);
+        this.showTooltip({
+          type: "success",
+          text: response.data.message
+        });
+      } catch (error) {
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        });
       }
     },
     async addNewSkill() {
-    this.skillDisabled =!this.skillDisabled;
+      this.skillDisabled = !this.skillDisabled;
       try {
-        await this.addSkill(this.skill);
-        this.skill.title = '';
-        this.skill.percent = '';
-        //тултип
+        const response = await this.addSkill(this.skill);
+        this.skill.title = "";
+        this.skill.percent = "";
+        this.showTooltip({
+          type: "success",
+          text: 'Запись добавлена'
+        });
       } catch (error) {
-        alert(error.message); //mdn Error прочитать
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        });
       } finally {
-          this.skillDisabled = !this.skillDisabled
+        this.skillDisabled = !this.skillDisabled;
       }
     },
     toggleCategory() {
-      if(!this.categoryDisabled){
-        this.editedCategory = {...this.category}
+      if (!this.categoryDisabled) {
+        this.editedCategory = { ...this.category };
       }
       this.categoryDisabled = !this.categoryDisabled;
     }

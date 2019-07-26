@@ -7,6 +7,7 @@
         main.admin_panel
           .admin_panel__container
             router-view
+        alert(:class="{'visible' : visible}")
 
 </template>
 
@@ -14,11 +15,32 @@
 
 
 <script>
+
+import {mapState, mapActions, mapGetters} from 'vuex';
 export default {
   components: {
     appHeader:() => import('./components/header.vue'),
-    appMenu:() => import('./components/menu.vue')
-  }
+    appMenu:() => import('./components/menu.vue'),
+    alert:() => import('./components/alert.vue')
+  },
+  computed:{
+    ...mapState('tooltips', { visible: state => state.visible })
+  },
+  methods:{
+    ...mapActions('tooltips', ['closeTooltip'])
+  },
+  watch:{
+    visible(value){
+      if (value === true){
+        let timeout;
+        clearTimeout(timeout);
+
+        timeout = setTimeout(() => {
+          this.closeTooltip();
+        }, 3000);
+      }
+    }
+  } 
 };
 </script>
 
@@ -37,6 +59,10 @@ body {
 
 ///Общие стили блоков
 
+
+.maincontent{
+  position: relative;
+}
 //КНОПКА КРЕСТИК
 .button__close {
   width: 30px;
