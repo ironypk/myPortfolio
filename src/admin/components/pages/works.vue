@@ -1,61 +1,75 @@
 <template lang="pug">
     section#admin_works.admin_section
-        .admin_section__container
-            .admin_panel__title Блок "Работы"
-            .works_edit.admin_edit__block
-                .works_edit__title.admin_edit__title Редактирование работы
-                .works_edit__content.admin_edit__content
-                    .works_edit__download.works_edit__content_block
-                        .works_edit__download_text Перетащите или загрузите для загрузки изображения
-                        button(type="button").admin_edit__button.works_edit__download_button Загрузить
-                    form.works_form.works_edit__content_block
-                        label.works_form__row.admin_form__row
-                            .works_form__row-title.admin_form__row-title Название
-                            input.works_form__row-input.admin_form__row-input(value="Дизайн сайта для авто салона Porsche")
-                        label.works_form__row.admin_form__row
-                            .works_form__row-title.admin_form__row-title ССылка
-                            input.works_form__row-input.admin_form__row-input(value="https://www.porsche-pulkovo.ru")
-                        label.works_form__row.admin_form__row
-                            .works_form__row-title.admin_form__row-title Описание
-                            textarea.works_form__row-input.works_form__row-textarea.admin_form__row-textarea.admin_form__row-input(placeholder="Порше Центр Пулково - является официальным дилером марки Порше в Санкт-Петербурге и предоставляет полный цикл услуг по продаже и сервисному обслуживанию автомобилей")
-                        label.works_form__row.admin_form__row
-                            .works_form__row-title.admin_form__row-title Добавление тэга
-                            input.works_form__row-input.admin_form__row-input(value="Jquery, Vue.js, HTML5")
-                        ul.works_form__tag_list
-                            -for(i=0; i < 3; i++)
-                                li.works_form__tag_item
-                                    .div HTML5
-                                    .tag_item__btn
-                        .works_form__btns.admin_form__btns
-                            button.admin_edit__button.form__reset(type="reset") Отмена
-                            button.admin_edit__button.form__save(type="submit") Сохранить
-            .admin_works__list.admin_block__list
-                .add_works.add_block.admin_works__item.admin_block__item
-                    a(href="#").add_block__btn
-                    .add_block__text Добавить Работу
-                - for(let i =0;i <4; i++)  
-                    div(class="admin_works__item" + ((i===0) ? ' admin_works__item--active' : ''))
-                        .admin_works__item_img
-                            img(src="~images/content/2.jpg").admin_works__item_pic
-                            ul.admin_works__item_list
-                                - for(let i =0; i <3; i++)
-                                    li.admin_works__item_item HTML
-                        .admin_works_item_inf
-                            .admin_works__item_title Сайт школы образования
-                            .admin_works__item_description Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                            a.admin_works__item_link(href="http://loftschool.ru") http://loftschool.ru
-                            .admin__item_btns
-                                button(type="button").admin__item_change.admin__item_btn Править
-                                button(type="button").admin__item_remove.admin__item_btn Удалить
+      .admin_section__container
+          .admin_panel__title Блок "Работы"
+          worksAdd(
+            v-if='mode !== ""'
+            :mode='mode'
+            @closeAddForm='closeAddForm'
+          )
+          .admin_works__list.admin_block__list
+              .add_works.add_block.admin_works__item.admin_block__item
+                  a(href="#" @click='addWork').add_block__btn
+                  .add_block__text Добавить Работу
+              worksList(
+                v-for="work in works"
+                :work='work'
+                :key="work.id"
+                :mode='mode'
+                @changemode='modeOn'
+                )
 </template>
 
 
 
 <script>
-export default {};
+import { mapState, mapActions } from "vuex";
+export default {
+  components: {
+    worksList: () => import("components/worksList"),
+    worksAdd: () => import("components/worksAdd")
+  },
+  data() {
+    return {
+      mode: ""
+    };
+  },
+  computed: {
+    ...mapState("works", {
+      works: state => state.works
+    })
+  },
+  methods: {
+    ...mapActions("works", ["fetchWorks"]),
+    ...mapActions("tooltips", ["showTooltip"]),
+    modeOn(mode) {
+      this.mode = mode;
+    },
+    addWork(){
+      this.mode = 'new'
+    },
+    closeAddForm(value){
+      this.mode = '';
+    }
+  },
+  async created() {
+    try {
+      const response = await this.fetchWorks();
+      this.showTooltip({
+        type: "success",
+        text: "Работы добавлены"
+      });
+    } catch (error) {
+      this.showTooltip({
+        type: "error",
+        text: error.message
+      });
+    }
+  }
+};
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
 @import "../../../styles/mixins";
 #admin_works {
   font-weight: 600;
@@ -80,29 +94,56 @@ export default {};
   }
 
   .works_edit__download {
+    position: relative;
     border: 1px dashed $admin-gray;
     height: 280px;
+    background-color: #dee4ed;
+    margin: 0 30px 0 0;
+    @include tablets {
+      margin: 0 0 100px 0;
+    }
+  }
+  .works_edit_image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .works_edit__download_text {
+    color: $admin-gray;
+    line-height: 2.12;
+    margin-bottom: 25px;
+    z-index: 10;
+  }
+  .works_edit__download_text_existed{
+    position:absolute;
+    bottom:-50px;
+    color:$blue;
+  }
+  
+
+  .works_edit__download_button {
+    z-index: 10;
+  }
+
+  .works_form__row(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  .works_edit__file_label {
     display: flex;
     padding: 0 80px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #dee4ed;
-    margin: 0 30px 0 0;
-    @include tablets {
-      margin: 0 0 55px 0;
-    }
+    width: 100%;
+    height: 100%;
   }
 
-  .works_edit__download_text {
-    color: $admin-gray;
-    line-height: 2.12;
-    margin-bottom: 25px;
-  }
-
-  .works_form__row(:last-child) {
-    margin-bottom: 20px;
+  .works_edit__add_input {
+    display: none;
   }
 
   .works_form__tag_list {
@@ -154,8 +195,9 @@ export default {};
   }
 
   .admin_works__item_pic {
-    max-width: 100%;
+    width: 100%;
     max-height: 100%;
+    min-height: 190px;
   }
 
   .admin_works__item_list {

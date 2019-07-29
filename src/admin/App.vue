@@ -210,6 +210,7 @@ body {
 .admin_form__row-input {
   width: 100%;
   border: none;
+  outline: none;
   border-bottom: 1px solid $admin-black;
   padding-bottom: 20px;
 }

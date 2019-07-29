@@ -2,59 +2,83 @@
     section#admin_rewiews.admin_section
         .admin_section__container
             .admin_panel__title Блок "Отзывы"
-            .rewiews_edit.admin_edit__block
-                .rewiews_edit__title.admin_edit__title Новый отзыв
-                .rewiews_edit__content.admin_edit__content
-                    .rewiews_edit__download
-                        .rewiews_edit__download-img
-                        .rewiews_edit__download-title Добавить фото  
-
-                    form.rewiews_form
-                        .rewiews__author
-                            label.rewiews_form__row.admin_form__row
-                                .works_form__row-title.admin_form__row-title Имя Автора
-                                input.works_form__row-input.admin_form__row-input(value="Ковальчук Дмитрий")
-                            label.rewiews_form__row.admin_form__row
-                                .works_form__row-title.admin_form__row-title Титул автора
-                                input.works_form__row-input.admin_form__row-input(value="Основатель LoftSchool")
-                        label.rewiews_form__row.admin_form__row
-                            .rewiews_form__row-title.admin_form__row-title Описание
-                            textarea.rewiews_form__row-input.rewiews_form__row-textarea.admin_form__row-textarea.admin_form__row-input(placeholder="Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!")
-                        .rewiews_form__btns.admin_form__btns
-                            button.admin_edit__button.form__reset(type="reset") Отмена
-                            button.admin_edit__button.form__save(type="submit") Сохранить
+            rewiewsAdd(
+              v-if='mode !== "" '
+              :mode='mode'
+              @closeAddForm='closeAddForm'
+              )
             .admin_rewiews__list.admin_block__list
                 .add_rewiew.add_block.admin_rewiews__item.admin_block__item
-                    a(href="#").add_block__btn
+                    a(href="#" @click='addRewiew').add_block__btn
                     .add_block__text Добавить отзыв
-                - for(let i =0; i < 4; i++)
-                    .add_rewiew.admin_rewiew__item.admin_block__item
-                        .add_rewiew__author
-                          .add_rewiew__img
-                              img(src="../../../images/content/rewiews-1.png").add_rewiew__pic
-                          .add_rewiew__init
-                            .add_rewiew__name Владимир Сабанцев
-                            .add_rewiew__title Преподователь
-                        .add_rewiew__inf
-                          .add_rewiew__description Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
-                          .admin__item_btns
-                              button(type="button").admin__item_change.admin__item_btn Править
-                              button(type="button").admin__item_remove.admin__item_btn Удалить 
+                rewiewsList(
+                  v-for='rewiew in rewiews'
+                  :rewiew='rewiew'
+                  :key='rewiew.id'
+                  :mode='mode'
+                  @changemode='changemode'
+                )
 </template>
 
 
 <script>
-export default {};
+import { mapState, mapActions } from "vuex";
+export default {
+  components: {
+    rewiewsAdd: () => import('components/rewiewsAdd.vue'),
+    rewiewsList: () => import('components/rewiewsList.vue')
+  },
+  data(){
+    return{
+      mode:''
+    }
+  },
+  computed: {
+    ...mapState("rewiews", {
+      rewiews: state => state.rewiews
+    })
+  },
+  methods:{
+    ...mapActions('rewiews', ['fetchRewiews']),
+    ...mapActions('tooltips',['showTooltip']),
+    changemode(value){
+      this.mode = value
+    },
+    addRewiew(){
+      this.mode = 'new';
+    },
+    closeAddForm(){
+      this.mode = '';
+    }
+  },
+  async created() {
+    try {
+      const response = await this.fetchRewiews();
+      this.showTooltip({
+        type: "success",
+        text: "Отзывы добавлены"
+      });
+    } catch (error) {
+      this.showTooltip({
+        type: "error",
+        text: error.message
+      });
+    }
+  }
+
+};
 </script>
 
 
-<style lang="postcss" scoped>
+<style lang="postcss">
 @import "../../../styles/mixins";
 #admin_rewiews {
   .rewiews_edit__download {
+    position: relative;
     margin: 0 30px 0 0;
     text-align: center;
     color: $blue;
+    cursor:pointer;
     @include phones {
       margin: 0 0 40px 0;
     }
@@ -67,7 +91,7 @@ export default {};
     background-color: #dee4ed;
     margin-bottom: 30px;
     position: relative;
-    display: flex;
+    display: block;
     &::after {
       position: absolute;
       top: 50%;
@@ -81,7 +105,19 @@ export default {};
     }
   }
 
-  .rewiews_form {
+  .rewiews_edit__download-pic{
+    width:100%;
+    height:100%;
+  }
+
+  .rewiews_edit__download-input{
+    position: absolute;
+    width:100%;
+    height:100%;
+    display: none;
+  }
+
+  .rewiews_description{
     width: 50%;
     @include tablets {
       width: 100%;
