@@ -118,7 +118,7 @@ export default {
   }
   .works_edit__download_text_existed{
     position:absolute;
-    bottom:-50px;
+    bottom:-70px;
     color:$blue;
   }
   
@@ -132,6 +132,7 @@ export default {
   }
 
   .works_edit__file_label {
+    position: relative;
     display: flex;
     padding: 0 80px;
     flex-direction: column;
@@ -143,7 +144,10 @@ export default {
   }
 
   .works_edit__add_input {
-    display: none;
+    width:100%;
+    height:100%;
+    position:absolute;
+    opacity:0;
   }
 
   .works_form__tag_list {

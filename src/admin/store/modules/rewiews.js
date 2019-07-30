@@ -1,5 +1,4 @@
 import { wrapIntoFormData } from "admin/helpers/forms";
-import { async } from "q";
 export default {
   namespaced: true,
   state: {
@@ -20,7 +19,7 @@ export default {
       state.currentRewiew = rewiew
     },
     EDIT_REWIEW(state, editedRewiew){
-      state.rewiews = state.rewiews.map(rewiew=> {
+      state.rewiews = state.rewiews.map(rewiew => {
         return rewiew.id === editedRewiew.id ? editedRewiew : rewiew;
       })
     },
@@ -52,9 +51,9 @@ export default {
     async editRewiew({commit}, editedRewiew){
       const newDataEditRewiew = wrapIntoFormData(editedRewiew);
       try{
-        const {data: editRewiew } = await this.$axios.post(`/reviews/${editedRewiew.id}`, newDataEditRewiew);
-        commit("EDIT_REWIEW", editRewiew)
-        return editRewiew
+        const {data : rewiew} = await this.$axios.post(`/reviews/${editedRewiew.id}`, newDataEditRewiew);
+        commit("EDIT_REWIEW", rewiew.review)
+        return rewiew
       }catch(error){
         throw new Error(
           error.response.data.error || error.response.data.message
@@ -63,7 +62,7 @@ export default {
     },
     async fetchRewiews({ commit }) {
       try {
-        const { data: rewiews } = await this.$axios("/reviews/142");
+        const {data: rewiews} = await this.$axios("/reviews/142");
         commit("SET_REWIEW", rewiews.reverse());
         return rewiews;
       } catch (error) {

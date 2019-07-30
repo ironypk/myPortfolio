@@ -45,7 +45,7 @@ export default {
           `/works/${editedWork.id}`,
           newDataEditedWork
         );
-        commit("EDIT_WORK", work);
+        commit("EDIT_WORK", work.work);
         return work;
       } catch (error) {
         throw new Error(

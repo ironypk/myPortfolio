@@ -3,14 +3,12 @@
         .works_edit__title.admin_edit__title {{(mode === 'edit') ? 'Редактирование работы' : 'Добавить работу'}}
         .works_edit__content.admin_edit__content
             .works_edit__download.works_edit__content_block
-                label.works_edit__file_label(v-if='work.photo === null ')
-                  .works_edit__download_text Перетащите или загрузите для загрузки изображения
+                label.works_edit__file_label
+                  img.works_edit_image(v-if='work.photo !== null' :src='photoUrl')
+                  vue-dropzone(ref="myVueDropzone" :useCustomSlot='true' id="customdropzone" :options="dropzoneOptions")
                   input(name="image" type="file" @change='loadPhoto').works_edit__add_input
-                  button(type="button").admin_edit__button.works_edit__download_button Загрузить
-                label.works_edit__file_label(v-else)
-                  input(name="image" type="file" @change='loadPhoto').works_edit__add_input
-                  img.works_edit_image(:src='photoUrl')
-                  .works_edit__download_text_existed Изменить превью
+                  .works_edit__download_text(:class='{works_edit__download_text_existed: work.photo !== null}') {{(work.photo !== null) ? 'Изменить фото' : 'Перетащите или загрузите для загрузки изображения'}}
+                  button(v-if='work.photo === null' type="button").admin_edit__button.works_edit__download_button Загрузить
             form.works_form.works_edit__content_block
                 label.works_form__row.admin_form__row
                     .works_form__row-title.admin_form__row-title Название
@@ -51,11 +49,13 @@
 
 
 <script>
+import vue2Dropzone from 'vue2-dropzone'
 import { mapActions, mapState } from "vuex";
 import { getAbsoluteImgPath } from "admin/helpers/pictures";
 export default {
-  components:{
-    worksTechs: () => import("components/worksTechs")
+  components: {
+    worksTechs: () => import("components/worksTechs"),
+    vueDropzone: vue2Dropzone
   },
 
   props: {
@@ -63,7 +63,9 @@ export default {
   },
   data() {
     return {
-      baseUrl: "",
+      dropzoneOptions: {
+          url: 'https://httpbin.org/post'
+      },
       photoUrl: "",
       techString: "",
       work: {
@@ -88,8 +90,13 @@ export default {
       if (this.mode === "edit") {
         this.getCurrentWork();
       } else {
-        this.work = {};
-        this.work.techs = "";
+        this.work = {
+          title: "",
+          techs: "",
+          photo: null,
+          link: "",
+          description: ""
+        };
         this.photoUrl = "";
       }
     }
@@ -101,16 +108,15 @@ export default {
       try {
         const response = await this.addWork(this.work);
         this.work = {};
-        this.$emit('closeAddForm');
+        this.$emit("closeAddForm");
         this.showTooltip({
           type: "success",
-          text: 'Новая работа добавлена'
+          text: "Новая работа добавлена"
         });
-      } catch(error){
+      } catch (error) {
         this.showTooltip({
           type: "error",
           text: error.message
-          
         });
       }
     },
@@ -118,7 +124,7 @@ export default {
       try {
         const response = await this.editWork(this.work);
         this.work = {};
-        this.$emit('closeAddForm');
+        this.$emit("closeAddForm");
         this.showTooltip({
           type: "success",
           text: response.message
@@ -142,16 +148,29 @@ export default {
       } catch (error) {}
     },
     getCurrentWork() {
-      this.work = { ...this.currentWork};
+      this.work = { ...this.currentWork };
       this.photoUrl = getAbsoluteImgPath(this.work.photo);
       this.work.photo = "";
     },
     defineTagsString(value) {
       this.work.techs = value;
-		}
+    }
   },
   created() {
     if (this.mode === "edit") this.getCurrentWork();
   }
 };
 </script>
+
+<style lang="postcss">
+#customdropzone {
+    width:100%;
+    height:100%;
+    position: absolute;
+    opacity: 0;
+  }
+#customdropzone .dz-hidden-input{
+  display: none;
+}
+</style>
+

@@ -1,17 +1,16 @@
 <template lang="pug">
     .rewiews_edit.admin_edit__block
-        .rewiews_edit__title.admin_edit__title Новый отзыв
-        pre {{ rewiew}}
+        .rewiews_edit__title.admin_edit__title {{(mode === 'edit') ? 'Редактировать отзыв' : 'Новый отзыв'}}
         form.rewiews_edit__content.admin_edit__content
             label.rewiews_edit__download
                 .rewiews_edit__download-img
-                    img.rewiews_edit__download-pic(:src='photoUrl')
+                    img.rewiews_edit__download-pic(v-if='rewiew.photo !== null' :src='photoUrl')
                 input(
                     name="photo"
                     type='file'
                     @change='loadPhoto'
                     ).rewiews_edit__download-input
-                .rewiews_edit__download-title Добавить фото
+                .rewiews_edit__download-title {{(mode === 'edit') ? 'Изменить фото' : 'Добавить фото'}}
             .rewiews_description
                 .rewiews__author
                     label.rewiews_form__row.admin_form__row
@@ -53,7 +52,6 @@ export default {
   },
   data() {
     return {
-      baseUrl: "",
       photoUrl: "",
       rewiew: {
         photo: null,
@@ -71,7 +69,12 @@ export default {
       if (this.mode === "edit") {
         this.getCurrentRewiew();
       } else {
-        this.rewiew = {};
+        this.rewiew = {
+          photo: null,
+          author: "",
+          occ: "",
+          text: ""
+        };
         this.photoUrl = "";
       }
     }
@@ -82,13 +85,21 @@ export default {
     loadPhoto(e) {
       const file = e.target.files[0];
       this.rewiew.photo = file;
+      this.getPhoto(file);
+    },
+    getPhoto(file) {
       const reader = new FileReader();
       try {
         reader.readAsDataURL(file);
         reader.onload = () => {
           this.photoUrl = reader.result;
         };
-      } catch (error) {}
+      } catch (e) {
+        this.showTooltip({
+          type: "error",
+          text: e.message
+        });
+      }
     },
     async addNewRewiew() {
       try {
@@ -106,19 +117,24 @@ export default {
         });
       }
     },
-    getCurrentRewiew() {
+    async getCurrentRewiew() {
       this.rewiew = { ...this.currentRewiew };
       this.photoUrl = getAbsoluteImgPath(this.rewiew.photo);
-      this.rewiew.photo = "";
+      this.rewiew.photo= "";
     },
     async editExistedRewiew() {
       try {
         const response = await this.editRewiew(this.rewiew);
-        this.rewiew = {};
+        this.rewiew = {
+          photo: null,
+          author: "",
+          occ: "",
+          text: ""
+        };
         this.$emit("closeAddForm");
         this.showTooltip({
           type: "success",
-          text: 'Отзыв успешно обновлен'
+          text: "Отзыв успешно обновлен"
         });
       } catch (error) {
         this.showTooltip({

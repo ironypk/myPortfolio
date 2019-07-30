@@ -56,10 +56,8 @@ export default {
       }
     }
   },
-  async created() {
-    try {
+  created() {
       this.photoUrl = getAbsoluteImgPath(this.rewiew.photo);
-    } catch (error) {}
   }
 };
 </script>

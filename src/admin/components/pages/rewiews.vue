@@ -69,7 +69,6 @@ export default {
 };
 </script>
 
-
 <style lang="postcss">
 @import "../../../styles/mixins";
 #admin_rewiews {
@@ -85,9 +84,10 @@ export default {
   }
 
   .rewiews_edit__download-img {
+    border-radius: 50%;
     width: 200px;
     height: 200px;
-    border-radius: 50%;
+    overflow: hidden;
     background-color: #dee4ed;
     margin-bottom: 30px;
     position: relative;
@@ -96,6 +96,7 @@ export default {
       position: absolute;
       top: 50%;
       left: 50%;
+      z-index: 50;
       transform: translate(-50%, -50%);
       content: "";
       width: 100px;
@@ -106,11 +107,15 @@ export default {
   }
 
   .rewiews_edit__download-pic{
-    width:100%;
-    height:100%;
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
   }
 
   .rewiews_edit__download-input{
+    outline: none;
+    border:none;
     position: absolute;
     width:100%;
     height:100%;
@@ -176,7 +181,6 @@ export default {
   .add_rewiew__pic {
     width: 100%;
     height: 100%;
-    object-fit: cover;
   }
 
   .add_rewiew__name {
