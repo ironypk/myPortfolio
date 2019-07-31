@@ -26,20 +26,25 @@ export default {
       photoUrl: ""
     };
   },
+  watch:{
+    rewiew(){
+      this.getPhoto(this.rewiew.photo);
+    }
+  },
   methods: {
     ...mapActions("rewiews", ["removeRewiew"]),
     ...mapActions("tooltips", ["showTooltip"]),
-    ...mapMutations('rewiews', ['CURRENT_REWIEW']),
-    async changeCurrentRewiew(){
-        try{
+    ...mapMutations("rewiews", ["CURRENT_REWIEW"]),
+    async changeCurrentRewiew() {
+      try {
         this.CURRENT_REWIEW(this.rewiew);
-        this.$emit('changemode', 'edit');
-        }catch(error){
-            this.showTooltip({
+        this.$emit("changemode", "edit");
+      } catch (error) {
+        this.showTooltip({
           type: "error",
           text: error.message
         });
-        }
+      }
     },
     async currentRewiewRemove() {
       try {
@@ -54,10 +59,13 @@ export default {
           text: error.message
         });
       }
+    },
+    getPhoto() {
+      this.photoUrl = getAbsoluteImgPath(this.rewiew.photo);
     }
   },
   created() {
-      this.photoUrl = getAbsoluteImgPath(this.rewiew.photo);
+    this.getPhoto()
   }
 };
 </script>

@@ -21,7 +21,7 @@ new Vue ({
     methods:{
         validateName(){
             this.name = this.$el.querySelector('.form__input_name').value;
-            if(this.name.length < 3){
+            if(this.name.length < 1){
                 this.nameValid = false;
                 this.nameError = 'Слишком короткое имя';
             } else{

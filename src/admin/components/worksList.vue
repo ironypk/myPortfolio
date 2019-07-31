@@ -21,54 +21,59 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from "vuex";
-import { getAbsoluteImgPath } from 'admin/helpers/pictures';
+import { getAbsoluteImgPath } from "admin/helpers/pictures";
 export default {
   props: {
     mode: String,
     work: Object
   },
-  data(){
-      return{
-          tags:[],
-          photoUrl: ''
-      }
+  data() {
+    return {
+      tags: [],
+      photoUrl: ""
+    };
   },
   computed: {
     ...mapState("works", {
       currentWork: state => state.currentWork
     })
   },
-  methods: {
-    ...mapActions("works", ["removeWork"]),
-    ...mapActions("tooltips", ["showTooltip"]),
-    ...mapMutations('works', ['CHANGE_WORK']),
-    async currentWorkRemove() {
-      try {
-        const response = await this.removeWork(this.work.id);
-        this.showTooltip({
-          type: "success",
-          text: response.data.message
-        });
-      } catch (error) {
-        this.showTooltip({
-          type: "error",
-          text: error.message
-        });
-      }
-    },
-
-    changeCurrentWork(){
-        this.CHANGE_WORK(this.work);
-        this.$emit('changemode', 'edit');
+  watch: {
+    work() {
+      this.getPhoto(this.work.photo);
     }
   },
-  async created(){
-    try{
-      this.photoUrl = getAbsoluteImgPath(this.work.photo)
-      this.tags = this.work.techs.split(', ');
-    }catch(error){
-    }
-    
+    methods: {
+      ...mapActions("works", ["removeWork"]),
+      ...mapActions("tooltips", ["showTooltip"]),
+      ...mapMutations("works", ["CHANGE_WORK"]),
+      async currentWorkRemove() {
+        try {
+          const response = await this.removeWork(this.work.id);
+          this.showTooltip({
+            type: "success",
+            text: response.data.message
+          });
+        } catch (error) {
+          this.showTooltip({
+            type: "error",
+            text: error.message
+          });
+        }
+      },
+      changeCurrentWork() {
+        this.CHANGE_WORK(this.work);
+        this.$emit("changemode", "edit");
+      },
+      getPhoto(value) {
+        this.photoUrl = getAbsoluteImgPath(value);
+      }
+    },
+  async created() {
+    try {
+      this.photoUrl = getAbsoluteImgPath(this.work.photo);
+      this.tags = this.work.techs.split(", ");
+    } catch (error) {}
   }
 };
 </script>

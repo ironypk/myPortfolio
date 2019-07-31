@@ -3,41 +3,55 @@
         .works_edit__title.admin_edit__title {{(mode === 'edit') ? 'Редактирование работы' : 'Добавить работу'}}
         .works_edit__content.admin_edit__content
             .works_edit__download.works_edit__content_block
-                label.works_edit__file_label
+                label.works_edit__file_label(:class="{form_error: !photoValid}")
                   img.works_edit_image(v-if='work.photo !== null' :src='photoUrl')
                   vue-dropzone(ref="myVueDropzone" :useCustomSlot='true' id="customdropzone" :options="dropzoneOptions")
-                  input(name="image" type="file" @change='loadPhoto').works_edit__add_input
+                  input(
+                    name="image"
+                    type="file"
+                    @change='loadPhoto'
+                    ).works_edit__add_input
                   .works_edit__download_text(:class='{works_edit__download_text_existed: work.photo !== null}') {{(work.photo !== null) ? 'Изменить фото' : 'Перетащите или загрузите для загрузки изображения'}}
                   button(v-if='work.photo === null' type="button").admin_edit__button.works_edit__download_button Загрузить
+                  .error_alert {{ photoError }}
+                  
             form.works_form.works_edit__content_block
-                label.works_form__row.admin_form__row
+                label.works_form__row.admin_form__row(:class="{form_error: !titleValid}")
                     .works_form__row-title.admin_form__row-title Название
                     input(
                       name="title"
                       type="text"
                       v-model="work.title"
+                      @input="validateTitle"
                     ).works_form__row-input.admin_form__row-input
-                label.works_form__row.admin_form__row
+                    .error_alert {{ titleError }}
+                label.works_form__row.admin_form__row(:class="{form_error: !linkValid}")
                     .works_form__row-title.admin_form__row-title ССылка
                     input(
                       name="link"
                       type="text"
                       v-model='work.link'
+                      @input="validateLink"
                       ).works_form__row-input.admin_form__row-input
-                label.works_form__row.admin_form__row
+                    .error_alert {{ linkError }}
+                label.works_form__row.admin_form__row(:class="{form_error: !descriptionValid}")
                     .works_form__row-title.admin_form__row-title Описание
                     textarea(
                       name="description"
                       type="text"
                       v-model='work.description'
+                      @input="validateDescription"
                     ).works_form__row-input.works_form__row-textarea.admin_form__row-textarea.admin_form__row-input
-                label.works_form__row.admin_form__row
+                    .error_alert {{ descriptionError }}
+                label.works_form__row.admin_form__row(:class="{form_error: !techsValid}")
                     .works_form__row-title.admin_form__row-title Добавление тэга
                     input(
                       name='techs'
                       type="text"
                       v-model='work.techs'
+                      @input="validateTechs"
                     ).works_form__row-input.admin_form__row-input
+                    .error_alert {{ techsError }}
                 worksTechs(
                     :tags='work.techs'
                     @defineTagsString='defineTagsString'
@@ -49,7 +63,7 @@
 
 
 <script>
-import vue2Dropzone from 'vue2-dropzone'
+import vue2Dropzone from "vue2-dropzone";
 import { mapActions, mapState } from "vuex";
 import { getAbsoluteImgPath } from "admin/helpers/pictures";
 export default {
@@ -64,7 +78,7 @@ export default {
   data() {
     return {
       dropzoneOptions: {
-          url: 'https://httpbin.org/post'
+        url: "https://httpbin.org/post"
       },
       photoUrl: "",
       techString: "",
@@ -74,7 +88,17 @@ export default {
         photo: null,
         link: "",
         description: ""
-      }
+      },
+      photoValid: true,
+      titleValid: true,
+      linkValid: true,
+      descriptionValid: true,
+      techsValid: true,
+      descriptionError: "",
+      titleError: "",
+      linkError: "",
+      techsError: "",
+      photoError: ""
     };
   },
   computed: {
@@ -105,35 +129,57 @@ export default {
     ...mapActions("works", ["editWork", "addWork"]),
     ...mapActions("tooltips", ["showTooltip"]),
     async addNewWork() {
-      try {
-        const response = await this.addWork(this.work);
-        this.work = {};
-        this.$emit("closeAddForm");
-        this.showTooltip({
-          type: "success",
-          text: "Новая работа добавлена"
-        });
-      } catch (error) {
-        this.showTooltip({
-          type: "error",
-          text: error.message
-        });
+      let titleValid = this.validateTitle();
+      let techsValid = this.validateTechs();
+      let linklValid = this.validateLink();
+      let descriptionValid = this.validateDescription();
+      if (
+        titleValid &&
+        techsValid &&
+        linklValid &&
+        descriptionValid
+      ) {
+        try {
+          const response = await this.addWork(this.work);
+          this.work = {};
+          this.$emit("closeAddForm");
+          this.showTooltip({
+            type: "success",
+            text: "Новая работа добавлена"
+          });
+        } catch (error) {
+          this.showTooltip({
+            type: "error",
+            text: error.message
+          });
+        }
       }
     },
     async editExistedWork() {
-      try {
-        const response = await this.editWork(this.work);
-        this.work = {};
-        this.$emit("closeAddForm");
-        this.showTooltip({
-          type: "success",
-          text: response.message
-        });
-      } catch (error) {
-        this.showTooltip({
-          type: "error",
-          text: error.message
-        });
+      let titleValid = this.validateTitle();
+      let techsValid = this.validateTechs();
+      let linklValid = this.validateLink();
+      let descriptionValid = this.validateDescription();
+      if (
+        titleValid &&
+        techsValid &&
+        linklValid &&
+        descriptionValid
+      ) {
+        try {
+          const response = await this.editWork(this.work);
+          this.work = {};
+          this.$emit("closeAddForm");
+          this.showTooltip({
+            type: "success",
+            text: response.message
+          });
+        } catch (error) {
+          this.showTooltip({
+            type: "error",
+            text: error.message
+          });
+        }
       }
     },
     loadPhoto(e) {
@@ -154,6 +200,66 @@ export default {
     },
     defineTagsString(value) {
       this.work.techs = value;
+    },
+
+    // validatePhoto() {
+    //   if (this.work.photo === null) {
+    //     this.photoValid = false;
+    //     this.photoError = "Вставьте фото";
+    //   } else {
+    //     this.techsValid = true;
+    //     this.techsError = "";
+    //   }
+    //   return this.photoValid;
+    // },
+    validateTitle() {
+      if (this.work.title.length < 1) {
+        this.titleValid = false;
+        this.titleError = "Введите Название";
+      } else {
+        this.titleValid = true;
+        this.titleError = "";
+      }
+      return this.titleValid;
+    },
+    validateLink() {
+      let regex = /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;
+      if (this.work.link.length < 8) {
+        this.linkValid = false;
+        this.linkError = "Слишком короткая ссылка";
+      } else if (!regex.test(this.work.link)) {
+        this.linklValid = false;
+        this.linkError = "Неверная ссылка";
+      } else {
+        this.linkValid = true;
+        this.linkError = "";
+      }
+      return this.linkValid;
+    },
+    validateDescription() {
+      if (this.work.description.length === 0) {
+        this.descriptionValid = false;
+        this.descriptionError = "Введите описание";
+      } else if (
+        this.work.description.length < 10
+      ) {
+        this.descriptionlValid = false;
+        this.descriptionError = "Слишком короткое описание";
+      } else {
+        this.descriptionValid = true;
+        this.descriptionError = "";
+      }
+      return this.descriptionValid;
+    },
+    validateTechs() {
+      if (this.work.techs.length === 0) {
+        this.techsValid = false;
+        this.techsError = "Введите Тэг";
+      } else {
+        this.techsValid = true;
+        this.techsError = "";
+      }
+      return this.techsValid;
     }
   },
   created() {
@@ -164,12 +270,12 @@ export default {
 
 <style lang="postcss">
 #customdropzone {
-    width:100%;
-    height:100%;
-    position: absolute;
-    opacity: 0;
-  }
-#customdropzone .dz-hidden-input{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+}
+#customdropzone .dz-hidden-input {
   display: none;
 }
 </style>

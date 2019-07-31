@@ -195,6 +195,7 @@ body {
   }
 }
 .admin_form__row {
+  position: relative;
   width: 100%;
   display: block;
 }
@@ -289,6 +290,50 @@ body {
     grid-template-columns: auto;
   }
 }
+
+.error_alert {
+  content: "";
+  position: absolute;
+  z-index: 100;
+  bottom: -50px;
+  left: 0;
+  width: 155px;
+  height: 50px;
+  background-color: #cd1515;
+  margin-left: 100px;
+  display: none;
+  color:$text-white;
+  justify-content: center;
+  align-items: center;
+  text-align:center;
+  &::after {
+    z-index: 50;
+    position: absolute;
+    content: "";
+    width: 0;
+height: 0;
+border-style: solid;
+border-width: 0 7.5px 7.0px 7.5px;
+border-color: transparent transparent #cd1515 transparent;
+    top: -7px;
+  }
+}
+
+
+.form_error .error_alert {
+  display: flex;
+}
+
+
+.form_error .admin_form__row-input {
+    border-bottom: 1px solid red;
+}
+
+.admin_form__row .error_alert{
+  margin-left:0;
+}
+
+
 </style>
 
 

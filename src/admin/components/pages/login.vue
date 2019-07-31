@@ -3,46 +3,83 @@
       .authorization
         .authorization__title Авторизация
         form(@submit.prevent='login').authorization__form
-          label.athorization__row.athorization__login
+          label.athorization__row.athorization__login(:class="{form_error: !nameValid}")
             .login__title.athorization__row_title Логин
             .athorization__input_wrap.login__input_wrap
-              input.login__input.athorization__input(v-model='user.name')
-          label.athorization__row.athorization__pass
-            .pass__title.athorization__row_title  Логин
+              input(
+                v-model='user.name'
+                @input="validateName"
+                ).login__input.athorization__input
+            .error_alert {{ nameError }}
+          label.athorization__row.athorization__pass(:class="{form_error: !passwordValid}")
+            .pass__title.athorization__row_title  Пароль
             .athorization__input_wrap.pass__input_wrap
-              input.login__input.athorization__input(type="password" v-model='user.password')
+              input(
+                type="password"
+                v-model='user.password'
+                @input="validatePassword"
+                ).login__input.athorization__input
+            .error_alert {{ passwordError }}
           button.admin_edit__button.authorization__btn ВОЙТИ
         button(type="button").athorization__close    
 </template>
 
 <script>
 import $axios from "admin/requests";
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
       user: {
         name: "",
         password: ""
-      }
+      },
+      nameValid: true,
+      passwordValid: true,
+      nameError: "",
+      passwordError: ""
     };
   },
   methods: {
-    ...mapActions('tooltips', ['showTooltip']),
+    ...mapActions("tooltips", ["showTooltip"]),
     async login() {
-      try {
-        const {
-          data: { token }
-        } = await $axios.post("/login", this.user);
-        localStorage.setItem("token", token);
-        $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
-        this.$router.replace("/");
-      } catch (error) {
-        this.showTooltip({
-          type: "error",
-          text: error.message
-        });
+      let nameValid = this.validateName();
+      let passwordValid = this.validatePassword();
+      if (nameValid && passwordValid) {
+        try {
+          const {
+            data: { token }
+          } = await $axios.post("/login", this.user);
+          localStorage.setItem("token", token);
+          $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+          this.$router.replace("/");
+        } catch (error) {
+          this.showTooltip({
+            type: "error",
+            text: 'Неверный логин или пароль'
+          });
+        }
       }
+    },
+    validateName() {
+      if (this.user.name.length < 1) {
+        this.nameValid = false;
+        this.nameError = "Введите Логин";
+      } else {
+        this.nameValid = true;
+        this.nameError = "";
+      }
+      return this.nameValid;
+    },
+    validatePassword() {
+      if (this.user.password.length < 1) {
+        this.passwordValid = false;
+        this.passwordError = "Введите пароль";
+      } else {
+        this.passwordValid = true;
+        this.passwordError = "";
+      }
+      return this.passwordValid;
     }
   }
 };
@@ -99,6 +136,7 @@ export default {
   }
 
   .athorization__row {
+    position: relative;
     width: 100%;
     display: block;
     margin-bottom: 40px;
@@ -187,6 +225,10 @@ export default {
         )
         center center no-repeat;
     }
+  }
+
+  .form_error {
+    border-bottom: 1px solid red;
   }
 }
 </style>

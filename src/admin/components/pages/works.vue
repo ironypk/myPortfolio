@@ -127,6 +127,10 @@ export default {
     z-index: 10;
   }
 
+  .works_form__row{
+    position: relative;
+  }
+
   .works_form__row(:last-child) {
     margin-bottom: 20px;
   }

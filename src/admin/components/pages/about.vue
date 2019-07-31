@@ -186,11 +186,13 @@ export default {
   }
 
   .about_form__row {
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
 
   .about_form__name {
     padding: 0 10px 15px 10px;
@@ -325,12 +327,24 @@ export default {
     }
   }
 
+  .about_form__description_wrap{
+    position: relative;
+  }
+
+  .description__skillname_wrap{
+    margin-right:10px;
+  }
+
   .description_input {
     border-bottom: 1px solid rgba(#000, 0.9);
   }
 
+    .form_error  .description_input {
+    border-bottom: 1px solid rgba(red, 0.9);
+  }
+
   .description_name {
-    width: 50%;
+    width: 100%;
     padding: 15px 20px;
     margin-right: 10px;
   }
@@ -347,6 +361,20 @@ export default {
   .form_buttons--active {
     display: flex;
   }
+
+
+.form_error.about_form__name {
+    border-bottom: 1px solid red;
+ }
+
+ .form_error .about_form__input {
+    border-bottom: 1px solid rgba(red, 0.9);
+ }
+ .about_form__skill_wrap{
+   position: relative;
+ }
+
+
 }
 </style>
 

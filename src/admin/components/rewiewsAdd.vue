@@ -13,27 +13,33 @@
                 .rewiews_edit__download-title {{(mode === 'edit') ? 'Изменить фото' : 'Добавить фото'}}
             .rewiews_description
                 .rewiews__author
-                    label.rewiews_form__row.admin_form__row
+                    label.rewiews_form__row.admin_form__row(:class="{form_error: !authorValid}")
                         .works_form__row-title.admin_form__row-title Имя Автора
                         input(
                             name='author'
                             type="text"
                             v-model='rewiew.author'
+                            @input="validateAuthor"
                         ).works_form__row-input.admin_form__row-input
-                    label.rewiews_form__row.admin_form__row
+                        .error_alert {{ authorError }}
+                    label.rewiews_form__row.admin_form__row(:class="{form_error: !occValid}")
                         .works_form__row-title.admin_form__row-title Титул автора
                         input(
                             name="occ"
                             type="text"
                             v-model="rewiew.occ"
+                            @input="validateOcc"
                         ).works_form__row-input.admin_form__row-input
-                label.rewiews_form__row.admin_form__row
+                        .error_alert {{ occError}}
+                label.rewiews_form__row.admin_form__row(:class="{form_error: !textValid}")
                     .rewiews_form__row-title.admin_form__row-title Описание
                     textarea(
                         name="text"
                         type="text"
                         v-model="rewiew.text"
+                        @input='validateText'
                         ).rewiews_form__row-input.rewiews_form__row-textarea.admin_form__row-textarea.admin_form__row-input
+                    .error_alert {{ textError}}
                 .rewiews_form__btns.admin_form__btns
                     button.admin_edit__button.form__reset(type="reset" @click.prevent="$emit('closeAddForm')") Отмена
                     button.admin_edit__button.form__save(type="submit" @click.prevent="mode === 'new' ? addNewRewiew() : editExistedRewiew()") Сохранить
@@ -58,7 +64,13 @@ export default {
         author: "",
         occ: "",
         text: ""
-      }
+      },
+      authorValid: true,
+      occValid: true,
+      textValid: true,
+      authorError: "",
+      occError: "",
+      textError: ""
     };
   },
   watch: {
@@ -102,25 +114,30 @@ export default {
       }
     },
     async addNewRewiew() {
-      try {
-        const response = await this.addRewiew(this.rewiew);
-        this.rewiew = {};
-        this.$emit("closeAddForm");
-        this.showTooltip({
-          type: "success",
-          text: "Отзыв, успешно добавлен"
-        });
-      } catch (error) {
-        this.showTooltip({
-          type: "error",
-          text: error.message
-        });
+      let authorValid = this.validateAuthor();
+      let occValid = this.validateOcc();
+      let textValid = this.validateText();
+      if (authorValid && occValid && textValid) {
+        try {
+          const response = await this.addRewiew(this.rewiew);
+          this.rewiew = {};
+          this.$emit("closeAddForm");
+          this.showTooltip({
+            type: "success",
+            text: "Отзыв, успешно добавлен"
+          });
+        } catch (error) {
+          this.showTooltip({
+            type: "error",
+            text: error.message
+          });
+        }
       }
     },
     async getCurrentRewiew() {
       this.rewiew = { ...this.currentRewiew };
       this.photoUrl = getAbsoluteImgPath(this.rewiew.photo);
-      this.rewiew.photo= "";
+      this.rewiew.photo = "";
     },
     async editExistedRewiew() {
       try {
@@ -142,6 +159,39 @@ export default {
           text: error.message
         });
       }
+    },
+    validateAuthor() {
+      if (this.rewiew.author.length === 0) {
+        this.authorValid = false;
+        this.authorError = "Введите имя автора";
+      } else {
+        this.authorValid = true;
+        this.authorError = "";
+      }
+      return this.authorValid;
+    },
+    validateOcc() {
+      if (this.rewiew.occ.length === 0) {
+        this.occValid = false;
+        this.occError = "Введите титул автора";
+      } else {
+        this.occValid = true;
+        this.occError = "";
+      }
+      return this.occValid;
+    },
+    validateText() {
+      if (this.rewiew.text.length === 0) {
+        this.textValid = false;
+        this.textError = "Введите описание";
+      } else if (this.rewiew.text.length < 10) {
+        this.textValid = false;
+        this.textError = "Слишком короткое описание";
+      } else {
+        this.textValid = true;
+        this.textError = "";
+      }
+      return this.textValid;
     }
   },
   created() {
