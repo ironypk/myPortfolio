@@ -140,24 +140,29 @@ export default {
       this.rewiew.photo = "";
     },
     async editExistedRewiew() {
-      try {
-        const response = await this.editRewiew(this.rewiew);
-        this.rewiew = {
-          photo: null,
-          author: "",
-          occ: "",
-          text: ""
-        };
-        this.$emit("closeAddForm");
-        this.showTooltip({
-          type: "success",
-          text: "Отзыв успешно обновлен"
-        });
-      } catch (error) {
-        this.showTooltip({
-          type: "error",
-          text: error.message
-        });
+      let authorValid = this.validateAuthor();
+      let occValid = this.validateOcc();
+      let textValid = this.validateText();
+      if (authorValid && occValid && textValid) {
+        try {
+          const response = await this.editRewiew(this.rewiew);
+          this.rewiew = {
+            photo: null,
+            author: "",
+            occ: "",
+            text: ""
+          };
+          this.$emit("closeAddForm");
+          this.showTooltip({
+            type: "success",
+            text: "Отзыв успешно обновлен"
+          });
+        } catch (error) {
+          this.showTooltip({
+            type: "error",
+            text: error.message
+          });
+        }
       }
     },
     validateAuthor() {
