@@ -107,6 +107,12 @@ export default {
     })
   },
   watch: {
+    photoUrl(){
+      if(this.photoUrl !== ''){
+        this.photoValid = true;
+        this.photoError = "";
+      }
+    },
     currentWork() {
       if (this.mode === "edit") this.getCurrentWork();
     },
@@ -129,11 +135,13 @@ export default {
     ...mapActions("works", ["editWork", "addWork"]),
     ...mapActions("tooltips", ["showTooltip"]),
     async addNewWork() {
+      let photoValid = this.validatePhoto();
       let titleValid = this.validateTitle();
       let techsValid = this.validateTechs();
       let linklValid = this.validateLink();
       let descriptionValid = this.validateDescription();
       if (
+        photoValid &&
         titleValid &&
         techsValid &&
         linklValid &&
@@ -156,11 +164,13 @@ export default {
       }
     },
     async editExistedWork() {
+      let photoValid = this.validatePhoto();
       let titleValid = this.validateTitle();
       let techsValid = this.validateTechs();
       let linklValid = this.validateLink();
       let descriptionValid = this.validateDescription();
       if (
+        photoValid &&
         titleValid &&
         techsValid &&
         linklValid &&
@@ -202,16 +212,17 @@ export default {
       this.work.techs = value;
     },
 
-    // validatePhoto() {
-    //   if (this.work.photo === null) {
-    //     this.photoValid = false;
-    //     this.photoError = "Вставьте фото";
-    //   } else {
-    //     this.techsValid = true;
-    //     this.techsError = "";
-    //   }
-    //   return this.photoValid;
-    // },
+    validatePhoto() {
+      if (this.work.photo === null || this.photoUrl === '') {
+        this.photoValid = false;
+        this.photoError = "Вставьте фото";
+      } else {
+        this.techsValid = true;
+        this.techsError = "";
+      }
+      return this.photoValid;
+    },
+
     validateTitle() {
       if (this.work.title.length < 1) {
         this.titleValid = false;

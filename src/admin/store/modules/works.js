@@ -1,4 +1,5 @@
 import { wrapIntoFormData } from "admin/helpers/forms";
+import { userId } from 'admin/helpers/userId';
 export default {
   namespaced: true,
   state: {
@@ -62,7 +63,7 @@ export default {
     },
     async fetchWorks({ commit }) {
       try {
-        const { data: works } = await this.$axios("/works/142");
+        const { data: works } = await this.$axios(`/works/${userId}`);
         commit("SET_WORK", works.reverse());
         return works;
       } catch (error) {

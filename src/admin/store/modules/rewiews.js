@@ -1,4 +1,5 @@
 import { wrapIntoFormData } from "admin/helpers/forms";
+import { userId } from 'admin/helpers/userId';
 export default {
   namespaced: true,
   state: {
@@ -62,7 +63,7 @@ export default {
     },
     async fetchRewiews({ commit }) {
       try {
-        const {data: rewiews} = await this.$axios("/reviews/142");
+        const {data: rewiews} = await this.$axios(`/reviews/${userId}`);
         commit("SET_REWIEW", rewiews.reverse());
         return rewiews;
       } catch (error) {

@@ -2,7 +2,7 @@
     .rewiews_edit.admin_edit__block
         .rewiews_edit__title.admin_edit__title {{(mode === 'edit') ? 'Редактировать отзыв' : 'Новый отзыв'}}
         form.rewiews_edit__content.admin_edit__content
-            label.rewiews_edit__download
+            label.rewiews_edit__download(:class="{form_error: !photoValid}")
                 .rewiews_edit__download-img
                     img.rewiews_edit__download-pic(v-if='rewiew.photo !== null' :src='photoUrl')
                 input(
@@ -11,6 +11,7 @@
                     @change='loadPhoto'
                     ).rewiews_edit__download-input
                 .rewiews_edit__download-title {{(mode === 'edit') ? 'Изменить фото' : 'Добавить фото'}}
+                .error_alert {{ photoError }}
             .rewiews_description
                 .rewiews__author
                     label.rewiews_form__row.admin_form__row(:class="{form_error: !authorValid}")
@@ -65,15 +66,23 @@ export default {
         occ: "",
         text: ""
       },
+      photoValid: true,
       authorValid: true,
       occValid: true,
       textValid: true,
+      photoError: "",
       authorError: "",
       occError: "",
       textError: ""
     };
   },
   watch: {
+    photoUrl() {
+      if (this.photoUrl !== "") {
+        this.photoValid = true;
+        this.photoError = "";
+      }
+    },
     currentRewiew() {
       if (this.mode === "edit") this.getCurrentRewiew();
     },
@@ -114,10 +123,11 @@ export default {
       }
     },
     async addNewRewiew() {
+      let photoValid = this.validatePhoto();
       let authorValid = this.validateAuthor();
       let occValid = this.validateOcc();
       let textValid = this.validateText();
-      if (authorValid && occValid && textValid) {
+      if (photoValid && authorValid && occValid && textValid) {
         try {
           const response = await this.addRewiew(this.rewiew);
           this.rewiew = {};
@@ -140,10 +150,11 @@ export default {
       this.rewiew.photo = "";
     },
     async editExistedRewiew() {
+      let photoValid = this.validatePhoto();
       let authorValid = this.validateAuthor();
       let occValid = this.validateOcc();
       let textValid = this.validateText();
-      if (authorValid && occValid && textValid) {
+      if (photoValid && authorValid && occValid && textValid) {
         try {
           const response = await this.editRewiew(this.rewiew);
           this.rewiew = {
@@ -164,6 +175,17 @@ export default {
           });
         }
       }
+    },
+
+    validatePhoto() {
+      if (this.rewiew.photo === null || this.photoUrl === "") {
+        this.photoValid = false;
+        this.photoError = "Вставьте фото";
+      } else {
+        this.techsValid = true;
+        this.techsError = "";
+      }
+      return this.photoValid;
     },
     validateAuthor() {
       if (this.rewiew.author.length === 0) {

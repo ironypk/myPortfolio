@@ -63,31 +63,8 @@ export default {
     }
   },
   async created() {
-    try {
-     await this.fetchCategories();
-      this.showTooltip({
-        type: "success",
-        text: 'Категории добавлены'
-      });
-    } catch (error) {
-      this.showTooltip({
-        type: "error",
-        text: error.message
-      });
-    }
-
-    try {
-      await this.fetchSkills();
-      this.showTooltip({
-        type: "success",
-        text: 'Записи добавлены'
-      });
-    } catch (error) {
-      this.showTooltip({
-        type: "error",
-        text: error.message
-      });
-    }
+    await this.fetchCategories();
+    await this.fetchSkills();
   }
 };
 </script>

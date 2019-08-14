@@ -2,6 +2,7 @@ import axios from "axios";
 
 const token = localStorage.getItem("token");
 
+
 const baseUrl = axios.defaults.baseURL = "https://webdev-api.loftschool.com";
 axios.defaults.headers["Authorization"] = `Bearer ${token}`;
 

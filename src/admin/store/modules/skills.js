@@ -1,3 +1,4 @@
+import { userId } from 'admin/helpers/userId';
 export default {
   namespaced: true,
   state: {
@@ -57,7 +58,7 @@ export default {
     },
     async fetchSkills({ commit }){
       try{
-        const {data : skills} = await this.$axios('/skills/142');
+        const {data : skills} = await this.$axios(`/skills/${userId}`);
         commit("SET_SKILLS", skills);
         return skills;
       } catch(error){

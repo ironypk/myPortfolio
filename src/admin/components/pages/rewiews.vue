@@ -52,18 +52,7 @@ export default {
     }
   },
   async created() {
-    try {
-      const response = await this.fetchRewiews();
-      this.showTooltip({
-        type: "success",
-        text: "Отзывы добавлены"
-      });
-    } catch (error) {
-      this.showTooltip({
-        type: "error",
-        text: error.message
-      });
-    }
+    await this.fetchRewiews();
   }
 
 };

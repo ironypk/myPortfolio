@@ -333,6 +333,11 @@ border-color: transparent transparent #cd1515 transparent;
   margin-left:0;
 }
 
+.rewiews_edit__download .error_alert{
+  margin-left:0;
+  bottom: 30px;
+}
+
 
 </style>
 

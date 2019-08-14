@@ -19,6 +19,7 @@ export default {
     },
     actions:{
       logout(){
+          localStorage.removeItem('user');
           localStorage.removeItem('token');
           location.href = '/admin';
       }

@@ -53,18 +53,7 @@ export default {
     }
   },
   async created() {
-    try {
-      const response = await this.fetchWorks();
-      this.showTooltip({
-        type: "success",
-        text: "Работы добавлены"
-      });
-    } catch (error) {
-      this.showTooltip({
-        type: "error",
-        text: error.message
-      });
-    }
+    await this.fetchWorks();
   }
 };
 </script>
