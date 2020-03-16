@@ -21,7 +21,10 @@
                 ).login__input.athorization__input
             .error_alert {{ passwordError }}
           button.admin_edit__button.authorization__btn ВОЙТИ
-        button(type="button").athorization__close    
+        button(type="button").athorization__close   
+      .login_data
+        .login_data__name Логин - Irony
+        .login_data_password Пароль - 1rfyrehj15
 </template>
 
 <script>
@@ -103,6 +106,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .login_data {
+    margin-left:50px;
+    background-color:#fff;
+    width:200px;
+  }
 
   .authorization {
     position: relative;
